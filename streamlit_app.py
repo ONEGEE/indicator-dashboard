@@ -9,7 +9,6 @@ from __future__ import annotations
 from pathlib import Path
 
 import streamlit as st
-import streamlit.components.v1 as components
 
 STATIC_INDEX = Path(__file__).resolve().parent / "static" / "index.html"
 
@@ -38,4 +37,4 @@ if not STATIC_INDEX.is_file():
     st.error("未找到 static/index.html。请先构建前端：cd web && npm ci && npm run build")
     st.stop()
 
-components.iframe("/app/static/index.html", height=980, scrolling=True)
+st.iframe("/app/static/index.html", height=980, scrolling=True)
