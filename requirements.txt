@@ -1,2 +1,2 @@
-# Streamlit Community Cloud 运行时依赖
-streamlit>=1.36.0
+# Streamlit Community Cloud 运行时依赖（需含 st.iframe，约 1.56+）
+streamlit>=1.56.0

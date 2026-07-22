@@ -37,4 +37,4 @@ if not STATIC_INDEX.is_file():
     st.error("未找到 static/index.html。请先构建前端：cd web && npm ci && npm run build")
     st.stop()
 
-st.iframe("/app/static/index.html", height=980, scrolling=True)
+st.iframe("/app/static/index.html", height=980)
