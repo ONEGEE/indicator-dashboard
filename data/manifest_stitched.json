@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "columns_simple": ["date", "value"],
+  "series": [
+    {
+      "id": "us_sp500_monthly",
+      "name": "标普500(月度长历史)",
+      "name_en": "S&P 500 Monthly (Stitched)",
+      "category": "index",
+      "region": "US",
+      "csv": "csv/us_sp500_monthly.csv",
+      "source": "stitched",
+      "symbol": "shiller+yfinance",
+      "frequency": "monthly",
+      "tier": "longrun",
+      "notes": "Shiller 1871-2023 + yfinance 月末收盘；日频见 us_sp500"
+    }
+  ]
+}

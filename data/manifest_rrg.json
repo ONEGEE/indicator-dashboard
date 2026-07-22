@@ -1,0 +1,201 @@
+{
+  "title": "大类资产轮动",
+  "description": "跨大类资产相对收益轮动（JdK RRG）：股/债/商品/外汇混绘。基于可交易 ETF/基金/期货代理；不使用市值。",
+  "rrg": {
+    "method": "jdk",
+    "base_frequency": "daily",
+    "frequency_options": [
+      "daily",
+      "weekly",
+      "monthly",
+      "yearly"
+    ],
+    "window": 14,
+    "roc_period": 10,
+    "trail_default": {
+      "daily": 20,
+      "weekly": 26,
+      "monthly": 12,
+      "yearly": 5
+    },
+    "notes": "跨大类相对动量仪表盘。前端按采样频率自动匹配 JdK 参数（周 14/10、月 12/3、年 6/2）；RS-Momentum 由 RS-Ratio 变化率推导。股债商汇驱动不同，不必期待行业式顺时针弧线。",
+    "default_cycle": "nber"
+  },
+  "benchmarks": [
+    {
+      "id": "us_sp500",
+      "label": "标普500 (SPY)"
+    },
+    {
+      "id": "cn_csi300",
+      "label": "沪深300 (510300)"
+    },
+    {
+      "id": "us_nasdaq",
+      "label": "纳斯达克 (QQQ)"
+    },
+    {
+      "id": "em_equity",
+      "label": "新兴市场 (EEM)"
+    }
+  ],
+  "assets": [
+    {
+      "id": "us_treasury_10y",
+      "name": "美国十年期国债",
+      "name_en": "US 7-10Y Treasury",
+      "group": "bond",
+      "symbol": "IEF",
+      "source": "yfinance",
+      "vehicle": "ETF",
+      "notes": "iShares 7-10 Year Treasury Bond ETF，可交易、规模大、久期贴近十年期国债"
+    },
+    {
+      "id": "cn_treasury_10y",
+      "name": "中国十年期国债",
+      "name_en": "China Treasury ETF",
+      "group": "bond",
+      "symbol": "511010.SS",
+      "source": "yfinance",
+      "vehicle": "ETF",
+      "notes": "国债 ETF，可交易代理中国利率债久期暴露"
+    },
+    {
+      "id": "us_sp500",
+      "name": "标普500",
+      "name_en": "S&P 500",
+      "group": "equity",
+      "symbol": "SPY",
+      "source": "yfinance",
+      "vehicle": "ETF",
+      "benchmark_candidate": true
+    },
+    {
+      "id": "cn_csi300",
+      "name": "沪深300",
+      "name_en": "CSI 300",
+      "group": "equity",
+      "symbol": "510300.SS",
+      "source": "yfinance",
+      "vehicle": "ETF",
+      "benchmark_candidate": true
+    },
+    {
+      "id": "us_nasdaq",
+      "name": "纳斯达克",
+      "name_en": "Nasdaq-100",
+      "group": "equity",
+      "symbol": "QQQ",
+      "source": "yfinance",
+      "vehicle": "ETF",
+      "benchmark_candidate": true
+    },
+    {
+      "id": "cn_star50",
+      "name": "科创板",
+      "name_en": "STAR 50",
+      "group": "equity",
+      "symbol": "588000.SS",
+      "source": "yfinance",
+      "vehicle": "ETF",
+      "notes": "科创50 ETF"
+    },
+    {
+      "id": "us_russell2000",
+      "name": "罗素2000",
+      "name_en": "Russell 2000",
+      "group": "equity",
+      "symbol": "IWM",
+      "source": "yfinance",
+      "vehicle": "ETF"
+    },
+    {
+      "id": "cn_csi500",
+      "name": "中证500",
+      "name_en": "CSI 500",
+      "group": "equity",
+      "symbol": "510500.SS",
+      "source": "yfinance",
+      "vehicle": "ETF"
+    },
+    {
+      "id": "oil",
+      "name": "原油",
+      "name_en": "Crude Oil",
+      "group": "commodity",
+      "symbol": "USO",
+      "source": "yfinance",
+      "vehicle": "ETF",
+      "notes": "United States Oil Fund，跟踪近月原油期货的可交易基金"
+    },
+    {
+      "id": "gold",
+      "name": "黄金",
+      "name_en": "Gold",
+      "group": "commodity",
+      "symbol": "GLD",
+      "source": "yfinance",
+      "vehicle": "ETF"
+    },
+    {
+      "id": "hk_hsi",
+      "name": "恒生指数",
+      "name_en": "Hang Seng",
+      "group": "equity",
+      "symbol": "2800.HK",
+      "source": "yfinance",
+      "vehicle": "ETF",
+      "notes": "盈富基金 Tracker Fund"
+    },
+    {
+      "id": "hk_hstech",
+      "name": "恒生科技",
+      "name_en": "Hang Seng TECH",
+      "group": "equity",
+      "symbol": "3067.HK",
+      "source": "yfinance",
+      "vehicle": "ETF"
+    },
+    {
+      "id": "cny_mmf",
+      "name": "人民币货币基金",
+      "name_en": "CNY Money Market",
+      "group": "cash",
+      "symbol": "511990.SS",
+      "source": "yfinance",
+      "vehicle": "ETF",
+      "notes": "华宝添益货币 ETF，可交易、规模大"
+    },
+    {
+      "id": "usd_mmf",
+      "name": "美元货币基金",
+      "name_en": "USD Money Market",
+      "group": "cash",
+      "symbol": "BIL",
+      "source": "yfinance",
+      "vehicle": "ETF",
+      "notes": "SPDR 1-3 Month T-Bill ETF"
+    },
+    {
+      "id": "usdcny",
+      "name": "美元/人民币",
+      "name_en": "USD/CNY",
+      "group": "fx",
+      "symbol": "CNY=X",
+      "source": "yfinance",
+      "vehicle": "FX",
+      "notes": "即期汇率（可交易外汇对代理）；上升表示美元相对人民币走强"
+    },
+    {
+      "id": "em_equity",
+      "name": "新兴市场股市",
+      "name_en": "Emerging Markets",
+      "group": "equity",
+      "symbol": "EEM",
+      "source": "yfinance",
+      "vehicle": "ETF",
+      "benchmark_candidate": true
+    }
+  ],
+  "mode": "cross_asset"
+}

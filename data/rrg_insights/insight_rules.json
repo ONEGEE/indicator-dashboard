@@ -1,0 +1,30 @@
+{
+  "generated_note": "Pre-registered H1–H6 monthly tests (US GICS L1, CN SW L1, country, cross-asset). Relative excess vs benchmark.",
+  "jdk": { "window": 12, "roc_period": 3 },
+  "findings_summary": [
+    "H6 动量领先 Ratio：唯一跨模式强支持（约 10–17% vs 对照 6–10% 的 3 月内 Ratio 上穿概率）。",
+    "H1/H3 东北朝向买入：不支持；多宇宙 NE 后续超额偏负。",
+    "H2 领先+西南卖出：不支持；领先侧短期相对超额仍常为正（延续性）。",
+    "H4 远距均值回归：不支持；远距强弱更像趋势延续。",
+    "H5 长尾波动：申万/大类部分支持，美股不稳，仅作波动提示。"
+  ],
+  "feature_confidence": {
+    "heading_NE": "low",
+    "heading_SW": "low",
+    "transition_improving_leading": "low",
+    "distance_extreme": "low",
+    "velocity_path": "low",
+    "momentum_leads_ratio": "high",
+    "leading_persistence": "medium"
+  },
+  "narrative_policy": {
+    "use_heading_as_description_only": true,
+    "use_heading_as_alpha_signal": false,
+    "use_transition_il_as_alpha": false,
+    "use_distance_mean_reversion": false,
+    "use_velocity_as_vol_hint": true,
+    "use_mom_lead_early_watch": true,
+    "use_leading_persistence_soft": true,
+    "tone": "relative_allocation_only"
+  }
+}

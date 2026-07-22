@@ -1,0 +1,7464 @@
+{
+  "generated_at": "2026-07-20T15:56:21",
+  "framework": {
+    "title": "全球大类资产配置数据台",
+    "reference": "中金《资产配置手册：全球资产100年》",
+    "reference_url": "https://caifuhao.eastmoney.com/news/20260508081446026335040",
+    "summary": "以权益承载增长，以债券平滑波动，以地产、商品及黄金对冲宏观与地缘风险，并根据市场形势动态调整配置权重。",
+    "pillars": [
+      {
+        "id": "equity",
+        "name": "股票",
+        "name_en": "Equity",
+        "role": "承载增长",
+        "description": "全球主要股指。中金观点：美股长期质量突出，但并非任何十年都最优；需跟踪非美市场边际变化。"
+      },
+      {
+        "id": "bond",
+        "name": "债券",
+        "name_en": "Bond",
+        "role": "平滑波动",
+        "description": "国债收益率与债券ETF。中金观点：债券并非无条件安全，核心价值在于与股票的动态对冲。"
+      },
+      {
+        "id": "real_estate",
+        "name": "地产",
+        "name_en": "Real Estate",
+        "role": "稳定回报与分散",
+        "description": "房价指数与地产相关宏观。中金观点：百年尺度上地产风险收益接近股票，不宜仅因老龄化线性外推。"
+      },
+      {
+        "id": "commodity",
+        "name": "商品",
+        "name_en": "Commodity",
+        "role": "通胀与供给冲击对冲",
+        "description": "综合商品与能源/工业金属。中金观点：长期回报接近通胀，价值在于周期窗口中的对冲而非被动持有。"
+      },
+      {
+        "id": "precious_metal",
+        "name": "贵金属",
+        "name_en": "Precious Metal",
+        "role": "货币信用与极端风险对冲",
+        "description": "黄金等贵金属。中金观点：法币时代有长期回报，但非线性释放，既不宜矮化也不宜神化。"
+      },
+      {
+        "id": "macro",
+        "name": "宏观",
+        "name_en": "Macro",
+        "role": "定价环境",
+        "description": "CPI、利率、增长、就业等宏观变量，用于解释大类资产轮动的宏观情境。"
+      }
+    ],
+    "longrun_sources": {
+      "jst": {
+        "name": "Jordà-Schularick-Taylor Macrohistory Database R6",
+        "url": "https://www.macrohistory.net/database/",
+        "coverage": "18国 · 1870-2020 · 年度",
+        "license": "CC BY-NC-SA 4.0"
+      },
+      "jacks": {
+        "name": "David Jacks Real Commodity Prices",
+        "url": "https://davidjacks.org/from-boom-to-bust/",
+        "coverage": "42商品 · 1850-2025 · 年度(实际价格)",
+        "license": "Academic use with citation"
+      },
+      "shiller": {
+        "name": "Robert Shiller Irrational Exuberance Data",
+        "url": "http://www.econ.yale.edu/~shiller/data.htm",
+        "coverage": "美国标普综合 · 1871-2023 · 月度",
+        "license": "Public research data"
+      },
+      "fred_extended": {
+        "name": "FRED (St. Louis Fed)",
+        "url": "https://fred.stlouisfed.org/",
+        "coverage": "美国宏观 · 1913+ · 日/月/年",
+        "license": "Public domain"
+      }
+    }
+  },
+  "validation": {
+    "generated_at": "2026-07-20T14:37:17",
+    "pairs": [
+      {
+        "id": "validate_us_cpi_jst_fred",
+        "name": "美国CPI: JST vs FRED",
+        "method": "annual_mean",
+        "overlap_start": "1947-01-01",
+        "overlap_end": "2020-01-01",
+        "rows": 74,
+        "correlation": 0.9998,
+        "mean_abs_diff": 27.1716,
+        "csv": "csv/validate/validate_us_cpi_jst_fred.csv"
+      },
+      {
+        "id": "validate_us_10y_jst_fred",
+        "name": "美国10Y: JST vs FRED GS10",
+        "method": "annual_mean",
+        "overlap_start": "1953-01-01",
+        "overlap_end": "2020-01-01",
+        "rows": 68,
+        "correlation": 0.9999,
+        "mean_abs_diff": 0.0039,
+        "csv": "csv/validate/validate_us_10y_jst_fred.csv"
+      },
+      {
+        "id": "validate_us_cpi_fred_1913_1947",
+        "name": "美国CPI: CPIAUCNS vs CPIAUCSL",
+        "method": "monthly_overlap",
+        "overlap_start": "1947-01-01",
+        "overlap_end": "2026-06-01",
+        "rows": 953,
+        "correlation": 1.0,
+        "mean_abs_diff": 0.2703,
+        "csv": "csv/validate/validate_us_cpi_fred_1913_1947.csv"
+      },
+      {
+        "id": "validate_us_ppi_fred_jacks",
+        "name": "商品: Jacks综合 vs FRED PPI(年)",
+        "method": "annual_rebase_1975",
+        "overlap_start": "1913-01-01",
+        "overlap_end": "2025-01-01",
+        "rows": 113,
+        "correlation": 0.5436,
+        "mean_abs_diff": 85.8397,
+        "csv": "csv/validate/validate_us_ppi_fred_jacks.csv"
+      }
+    ]
+  },
+  "series_rules": {
+    "deprecated": [
+      {
+        "id": "us_cpi_1913",
+        "reason": "已拼接进 us_cpi，仅保留组件文件",
+        "keep_file": "csv/longrun/us_cpi_1913.csv"
+      },
+      {
+        "id": "us_yield_10y_spot",
+        "reason": "与 us_treasury_10y (FRED DGS10) 重复，已删除",
+        "keep_file": null
+      },
+      {
+        "id": "us_sp500_shiller",
+        "reason": "已拼接进 us_sp500_monthly，仅保留组件文件",
+        "keep_file": "csv/longrun/us_sp500_shiller.csv"
+      },
+      {
+        "id": "us_gs10_monthly",
+        "reason": "已拼接进 us_bond_10y_monthly，仅保留组件文件",
+        "keep_file": "csv/longrun/us_gs10_monthly.csv"
+      }
+    ],
+    "stitched": [
+      {
+        "id": "us_cpi",
+        "name": "美国CPI",
+        "output": "csv/macro/us_cpi.csv",
+        "method": "stitch_us_cpi",
+        "components": [
+          "csv/longrun/us_cpi_1913.csv (<1947, CPIAUCNS)",
+          "fred CPIAUCSL (>=1947)"
+        ],
+        "notes": "1913年起完整月度 CPI；1947年后以 CPIAUCSL 为准"
+      },
+      {
+        "id": "us_sp500_monthly",
+        "name": "标普500(月度长历史)",
+        "output": "csv/us_sp500_monthly.csv",
+        "method": "stitch_us_sp500_monthly",
+        "components": [
+          "csv/longrun/us_sp500_shiller.csv (<2023-10)",
+          "csv/us_sp500.csv 月末收盘 (>=2023-10)"
+        ],
+        "notes": "1871年起月度价格；日频交易请用 us_sp500"
+      },
+      {
+        "id": "us_bond_10y_monthly",
+        "name": "美国10年期国债收益率(月度长历史)",
+        "output": "csv/macro/us_bond_10y_monthly.csv",
+        "method": "stitch_us_bond_10y_monthly",
+        "components": [
+          "csv/longrun/jst_usa_ltrate.csv (<1953-04, 年度)",
+          "csv/longrun/us_gs10_monthly.csv (>=1953-04)"
+        ],
+        "notes": "1870年起；日频请用 us_treasury_10y (DGS10, 1962+)"
+      }
+    ],
+    "kept_overlap_notes": [
+      {
+        "ids": [
+          "jst_usa_cpi",
+          "us_cpi"
+        ],
+        "reason": "JST 为 18 国年度面板；us_cpi 为美国月度官方序列，用途不同，均保留"
+      },
+      {
+        "ids": [
+          "commodity_gold_real",
+          "metal_gold"
+        ],
+        "reason": "Jacks 年度实际价格 vs 期货日频，口径不同，均保留"
+      },
+      {
+        "ids": [
+          "us_treasury_10y",
+          "us_bond_10y_monthly"
+        ],
+        "reason": "日频 DGS10(1962+) vs 月度长历史(1870+)，互补而非重复"
+      }
+    ]
+  },
+  "counts": {
+    "total": 245,
+    "with_data": 245,
+    "by_pillar": {
+      "equity": 66,
+      "macro": 34,
+      "real_estate": 45,
+      "bond": 79,
+      "commodity": 15,
+      "precious_metal": 6
+    },
+    "by_tier": {
+      "market": 61,
+      "longrun": 184
+    }
+  },
+  "series": [
+    {
+      "id": "us_sp500",
+      "name": "标普500",
+      "name_en": "S&P 500",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "US",
+      "source": "yfinance",
+      "symbol": "^GSPC",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/us_sp500.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 24752,
+        "start": "1927-12-30",
+        "end": "2026-07-17",
+        "last_value": 7457.6899,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "us_dji",
+      "name": "道琼斯",
+      "name_en": "Dow Jones Industrial Average",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "US",
+      "source": "yfinance",
+      "symbol": "^DJI",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/us_dji.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 8696,
+        "start": "1992-01-02",
+        "end": "2026-07-17",
+        "last_value": 52146.4219,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "us_nasdaq",
+      "name": "纳斯达克",
+      "name_en": "Nasdaq Composite",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "US",
+      "source": "yfinance",
+      "symbol": "^IXIC",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/us_nasdaq.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 13978,
+        "start": "1971-02-05",
+        "end": "2026-07-17",
+        "last_value": 25520.2402,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "cn_sse",
+      "name": "上证指数",
+      "name_en": "SSE Composite",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "CN",
+      "source": "akshare",
+      "symbol": "000001",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/cn_sse.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 8685,
+        "start": "1990-12-19",
+        "end": "2026-07-20",
+        "last_value": 3824.16,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "cn_csi300",
+      "name": "沪深300",
+      "name_en": "CSI 300",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "CN",
+      "source": "akshare",
+      "symbol": "000300",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/cn_csi300.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 5231,
+        "start": "2005-01-04",
+        "end": "2026-07-20",
+        "last_value": 4623.24,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "cn_csi500",
+      "name": "中证500",
+      "name_en": "CSI 500",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "CN",
+      "source": "akshare",
+      "symbol": "000905",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/cn_csi500.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 5231,
+        "start": "2005-01-04",
+        "end": "2026-07-20",
+        "last_value": 7567.93,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "cn_star50",
+      "name": "科创50",
+      "name_en": "STAR 50",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "CN",
+      "source": "akshare",
+      "symbol": "000688",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/cn_star50.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 1586,
+        "start": "2019-12-31",
+        "end": "2026-07-20",
+        "last_value": 1744.32,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "cn_chinext",
+      "name": "创业板指",
+      "name_en": "ChiNext",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "CN",
+      "source": "akshare",
+      "symbol": "399006",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/cn_chinext.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 3917,
+        "start": "2010-06-01",
+        "end": "2026-07-20",
+        "last_value": 3511.77,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "hk_hsi",
+      "name": "恒生指数",
+      "name_en": "Hang Seng Index",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "HK",
+      "source": "yfinance",
+      "symbol": "^HSI",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/hk_hsi.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 9758,
+        "start": "1986-12-31",
+        "end": "2026-07-20",
+        "last_value": 25079.9102,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "hk_hstech",
+      "name": "恒生科技",
+      "name_en": "Hang Seng Tech",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "HK",
+      "source": "akshare_hk",
+      "symbol": "HSTECH",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/hk_hstech.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 2839,
+        "start": "2014-12-31",
+        "end": "2026-07-20",
+        "last_value": 4769.26,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "kr_kospi",
+      "name": "韩国综合",
+      "name_en": "KOSPI",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "KR",
+      "source": "yfinance",
+      "symbol": "^KS11",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/kr_kospi.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 7286,
+        "start": "1996-12-11",
+        "end": "2026-07-20",
+        "last_value": 6599.6401,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "kr_kosdaq",
+      "name": "韩国科斯达克",
+      "name_en": "KOSDAQ",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "KR",
+      "source": "yfinance",
+      "symbol": "^KQ11",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/kr_kosdaq.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6346,
+        "start": "2000-10-16",
+        "end": "2026-07-20",
+        "last_value": 754.61,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "jp_nikkei",
+      "name": "日经225",
+      "name_en": "Nikkei 225",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "JP",
+      "source": "yfinance",
+      "symbol": "^N225",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/jp_nikkei.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 15128,
+        "start": "1965-01-05",
+        "end": "2026-07-17",
+        "last_value": 64141.1211,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "jp_topix",
+      "name": "东证指数(ETF代理)",
+      "name_en": "TOPIX ETF Proxy",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "JP",
+      "source": "yfinance",
+      "symbol": "1306.T",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/jp_topix.csv",
+      "notes": "Yahoo 无免费 TOPIX 指数代码，使用 NEXT FUNDS TOPIX ETF(1306.T) 作代理",
+      "stats": {
+        "exists": true,
+        "rows": 4307,
+        "start": "2009-01-05",
+        "end": "2026-07-17",
+        "last_value": 407.9,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "eu_dax",
+      "name": "德国DAX",
+      "name_en": "DAX",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "EU",
+      "source": "yfinance",
+      "symbol": "^GDAXI",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/eu_dax.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 9747,
+        "start": "1987-12-30",
+        "end": "2026-07-17",
+        "last_value": 24830.9805,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "eu_stoxx50",
+      "name": "欧洲斯托克50",
+      "name_en": "EURO STOXX 50",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "EU",
+      "source": "yfinance",
+      "symbol": "^STOXX50E",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/eu_stoxx50.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 4836,
+        "start": "2007-03-30",
+        "end": "2026-07-17",
+        "last_value": 6230.8701,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "uk_ftse",
+      "name": "英国富时100",
+      "name_en": "FTSE 100",
+      "pillar": "equity",
+      "origin": "index",
+      "tier": "market",
+      "category": "index",
+      "subcategory": null,
+      "region": "UK",
+      "source": "yfinance",
+      "symbol": "^FTSE",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/uk_ftse.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 10746,
+        "start": "1984-01-03",
+        "end": "2026-07-17",
+        "last_value": 10600.4004,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "us_cpi",
+      "name": "美国CPI",
+      "name_en": "US CPI",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "prices",
+      "region": "US",
+      "source": "stitched",
+      "symbol": "CPIAUCNS+CPIAUCSL",
+      "frequency": "monthly",
+      "unit": "index_1982_84=100",
+      "csv": "csv/macro/us_cpi.csv",
+      "notes": "1913起；CPIAUCNS(至1946) + CPIAUCSL(1947+)，由 stitch_series.py 拼接",
+      "stats": {
+        "exists": true,
+        "rows": 1361,
+        "start": "1913-01-01",
+        "end": "2026-06-01",
+        "last_value": 332.568,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_bond_10y_monthly",
+      "name": "美国10年期国债收益率(月度长历史)",
+      "name_en": "US 10Y Treasury Yield Monthly (Stitched)",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "rates",
+      "region": "US",
+      "source": "stitched",
+      "symbol": "JST_ltrate+GS10",
+      "frequency": "monthly",
+      "unit": "percent",
+      "csv": "csv/macro/us_bond_10y_monthly.csv",
+      "notes": "1870起；JST ltrate(至1953) + FRED GS10(1953+)；日频见 us_treasury_10y",
+      "stats": {
+        "exists": true,
+        "rows": 963,
+        "start": "1870-01-01",
+        "end": "2026-06-01",
+        "last_value": 4.47,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_core_cpi",
+      "name": "美国核心CPI",
+      "name_en": "US Core CPI",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "prices",
+      "region": "US",
+      "source": "fred",
+      "symbol": "CPILFESL",
+      "frequency": "monthly",
+      "unit": "index_1982_84=100",
+      "csv": "csv/macro/us_core_cpi.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 833,
+        "start": "1957-01-01",
+        "end": "2026-06-01",
+        "last_value": 336.065,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_ppi",
+      "name": "美国PPI",
+      "name_en": "US PPI All Commodities",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "prices",
+      "region": "US",
+      "source": "fred",
+      "symbol": "PPIACO",
+      "frequency": "monthly",
+      "unit": "index_1982=100",
+      "csv": "csv/macro/us_ppi.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 1362,
+        "start": "1913-01-01",
+        "end": "2026-06-01",
+        "last_value": 286.827,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_unemployment",
+      "name": "美国失业率",
+      "name_en": "US Unemployment Rate",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "labor",
+      "region": "US",
+      "source": "fred",
+      "symbol": "UNRATE",
+      "frequency": "monthly",
+      "unit": "percent",
+      "csv": "csv/macro/us_unemployment.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 941,
+        "start": "1948-01-01",
+        "end": "2026-06-01",
+        "last_value": 4.2,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_fed_funds",
+      "name": "联邦基金利率",
+      "name_en": "Federal Funds Rate",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "rates",
+      "region": "US",
+      "source": "fred",
+      "symbol": "FEDFUNDS",
+      "frequency": "monthly",
+      "unit": "percent",
+      "csv": "csv/macro/us_fed_funds.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 864,
+        "start": "1954-07-01",
+        "end": "2026-06-01",
+        "last_value": 3.63,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_mortgage_30y",
+      "name": "美国30年房贷利率",
+      "name_en": "US 30-Year Mortgage Rate",
+      "pillar": "real_estate",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "housing",
+      "region": "US",
+      "source": "fred",
+      "symbol": "MORTGAGE30US",
+      "frequency": "weekly",
+      "unit": "percent",
+      "csv": "csv/macro/us_mortgage_30y.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 2886,
+        "start": "1971-04-02",
+        "end": "2026-07-16",
+        "last_value": 6.55,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_case_shiller",
+      "name": "Case-Shiller房价指数",
+      "name_en": "S&P/Case-Shiller US National HPI (SA)",
+      "pillar": "real_estate",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "housing",
+      "region": "US",
+      "source": "fred",
+      "symbol": "CSUSHPISA",
+      "frequency": "monthly",
+      "unit": "index_Jan2000=100",
+      "csv": "csv/macro/us_case_shiller.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 472,
+        "start": "1987-01-01",
+        "end": "2026-04-01",
+        "last_value": 330.873,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_fhfa_hpi",
+      "name": "FHFA房价指数",
+      "name_en": "FHFA Purchase-Only HPI",
+      "pillar": "real_estate",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "housing",
+      "region": "US",
+      "source": "fred",
+      "symbol": "HPIPONM226S",
+      "frequency": "monthly",
+      "unit": "index_Jan1991=100",
+      "csv": "csv/macro/us_fhfa_hpi.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 424,
+        "start": "1991-01-01",
+        "end": "2026-04-01",
+        "last_value": 441.4,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_housing_starts",
+      "name": "美国新屋开工",
+      "name_en": "US Housing Starts",
+      "pillar": "real_estate",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "housing",
+      "region": "US",
+      "source": "fred",
+      "symbol": "HOUST",
+      "frequency": "monthly",
+      "unit": "thousands_saar",
+      "csv": "csv/macro/us_housing_starts.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 810,
+        "start": "1959-01-01",
+        "end": "2026-06-01",
+        "last_value": 1427.0,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_building_permits",
+      "name": "美国营建许可",
+      "name_en": "US Building Permits",
+      "pillar": "real_estate",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "housing",
+      "region": "US",
+      "source": "fred",
+      "symbol": "PERMIT",
+      "frequency": "monthly",
+      "unit": "thousands_saar",
+      "csv": "csv/macro/us_building_permits.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 798,
+        "start": "1960-01-01",
+        "end": "2026-06-01",
+        "last_value": 1367.0,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_new_home_sales",
+      "name": "美国新屋销售",
+      "name_en": "US New Home Sales",
+      "pillar": "real_estate",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "housing",
+      "region": "US",
+      "source": "fred",
+      "symbol": "HSN1F",
+      "frequency": "monthly",
+      "unit": "thousands_saar",
+      "csv": "csv/macro/us_new_home_sales.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 761,
+        "start": "1963-01-01",
+        "end": "2026-05-01",
+        "last_value": 580.0,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_months_supply",
+      "name": "美国新屋库存月数",
+      "name_en": "US Months' Supply of New Homes",
+      "pillar": "real_estate",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "housing",
+      "region": "US",
+      "source": "fred",
+      "symbol": "MSACSR",
+      "frequency": "monthly",
+      "unit": "months",
+      "csv": "csv/macro/us_months_supply.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 761,
+        "start": "1963-01-01",
+        "end": "2026-05-01",
+        "last_value": 10.3,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_median_home_price",
+      "name": "美国成屋中位价",
+      "name_en": "US Median Sales Price of Houses Sold",
+      "pillar": "real_estate",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "housing",
+      "region": "US",
+      "source": "fred",
+      "symbol": "MSPUS",
+      "frequency": "quarterly",
+      "unit": "usd",
+      "csv": "csv/macro/us_median_home_price.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 253,
+        "start": "1963-01-01",
+        "end": "2026-01-01",
+        "last_value": 403200.0,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_avg_home_price",
+      "name": "美国成屋均价",
+      "name_en": "US Average Sales Price of Houses Sold",
+      "pillar": "real_estate",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "housing",
+      "region": "US",
+      "source": "fred",
+      "symbol": "ASPUS",
+      "frequency": "quarterly",
+      "unit": "usd",
+      "csv": "csv/macro/us_avg_home_price.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 253,
+        "start": "1963-01-01",
+        "end": "2026-01-01",
+        "last_value": 514600.0,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_gdp",
+      "name": "美国名义GDP",
+      "name_en": "US Nominal GDP",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "growth",
+      "region": "US",
+      "source": "fred",
+      "symbol": "GDP",
+      "frequency": "quarterly",
+      "unit": "billion_usd_saar",
+      "csv": "csv/macro/us_gdp.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 317,
+        "start": "1947-01-01",
+        "end": "2026-01-01",
+        "last_value": 31865.721,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_real_gdp",
+      "name": "美国实际GDP",
+      "name_en": "US Real GDP",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "growth",
+      "region": "US",
+      "source": "fred",
+      "symbol": "GDPC1",
+      "frequency": "quarterly",
+      "unit": "billion_chained_2017_usd",
+      "csv": "csv/macro/us_real_gdp.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 317,
+        "start": "1947-01-01",
+        "end": "2026-01-01",
+        "last_value": 24180.419,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_m2",
+      "name": "美国M2",
+      "name_en": "US M2 Money Stock",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "money",
+      "region": "US",
+      "source": "fred",
+      "symbol": "M2SL",
+      "frequency": "monthly",
+      "unit": "billion_usd",
+      "csv": "csv/macro/us_m2.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 809,
+        "start": "1959-01-01",
+        "end": "2026-05-01",
+        "last_value": 23052.3,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_treasury_10y",
+      "name": "美国10年期国债收益率",
+      "name_en": "US 10-Year Treasury Yield",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "rates",
+      "region": "US",
+      "source": "fred",
+      "symbol": "DGS10",
+      "frequency": "daily",
+      "unit": "percent",
+      "csv": "csv/macro/us_treasury_10y.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 16119,
+        "start": "1962-01-02",
+        "end": "2026-07-16",
+        "last_value": 4.57,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_yield_curve_10y2y",
+      "name": "美债10Y-2Y利差",
+      "name_en": "US 10Y-2Y Treasury Spread",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "rates",
+      "region": "US",
+      "source": "fred",
+      "symbol": "T10Y2Y",
+      "frequency": "daily",
+      "unit": "percent",
+      "csv": "csv/macro/us_yield_curve_10y2y.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 12528,
+        "start": "1976-06-01",
+        "end": "2026-07-17",
+        "last_value": 0.37,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "cn_cpi_yoy",
+      "name": "中国CPI同比",
+      "name_en": "China CPI YoY",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "prices",
+      "region": "CN",
+      "source": "akshare_china_cpi",
+      "symbol": "macro_china_cpi",
+      "frequency": "monthly",
+      "unit": "percent",
+      "csv": "csv/macro/cn_cpi_yoy.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 222,
+        "start": "2008-01-01",
+        "end": "2026-06-01",
+        "last_value": 1.0,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "cn_ppi_yoy",
+      "name": "中国PPI同比",
+      "name_en": "China PPI YoY",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "prices",
+      "region": "CN",
+      "source": "akshare_china_ppi",
+      "symbol": "macro_china_ppi",
+      "frequency": "monthly",
+      "unit": "percent",
+      "csv": "csv/macro/cn_ppi_yoy.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 246,
+        "start": "2006-01-01",
+        "end": "2026-06-01",
+        "last_value": 4.1,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "cn_m2_yoy",
+      "name": "中国M2同比",
+      "name_en": "China M2 YoY",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "money",
+      "region": "CN",
+      "source": "akshare_china_m2",
+      "symbol": "macro_china_money_supply",
+      "frequency": "monthly",
+      "unit": "percent",
+      "csv": "csv/macro/cn_m2_yoy.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 222,
+        "start": "2008-01-01",
+        "end": "2026-06-01",
+        "last_value": 8.0,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "cn_gdp_yoy",
+      "name": "中国GDP同比",
+      "name_en": "China GDP YoY",
+      "pillar": "macro",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "growth",
+      "region": "CN",
+      "source": "akshare_china_gdp",
+      "symbol": "macro_china_gdp",
+      "frequency": "quarterly",
+      "unit": "percent",
+      "csv": "csv/macro/cn_gdp_yoy.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 82,
+        "start": "2006-01-01",
+        "end": "2026-04-01",
+        "last_value": 4.7,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "cn_lpr",
+      "name": "中国LPR",
+      "name_en": "China Loan Prime Rate",
+      "pillar": "real_estate",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "housing",
+      "region": "CN",
+      "source": "akshare_china_lpr",
+      "symbol": "macro_china_lpr",
+      "frequency": "irregular",
+      "unit": "percent",
+      "csv": "csv/macro/cn_lpr.csv",
+      "notes": "房贷定价参考，重点看 LPR5Y",
+      "stats": {
+        "exists": true,
+        "rows": 1536,
+        "start": "2013-10-25",
+        "end": "2026-07-20",
+        "last_value": 3.5,
+        "value_field": "lpr_5y",
+        "schema": [
+          "date",
+          "lpr_1y",
+          "lpr_5y"
+        ]
+      }
+    },
+    {
+      "id": "cn_house_price",
+      "name": "中国房价指数(城市)",
+      "name_en": "China New/Resale House Price Index by City",
+      "pillar": "real_estate",
+      "origin": "macro",
+      "tier": "market",
+      "category": "macro",
+      "subcategory": "housing",
+      "region": "CN",
+      "source": "akshare_china_house",
+      "symbol": "macro_china_new_house_price",
+      "frequency": "monthly",
+      "unit": "index_prev_year=100",
+      "csv": "csv/macro/cn_house_price.csv",
+      "notes": "当前接口返回北京/上海新建与二手住宅价格指数",
+      "stats": {
+        "exists": true,
+        "rows": 372,
+        "start": "2011-01-01",
+        "end": "2026-06-01",
+        "last_value": 97.9,
+        "value_field": "new_yoy",
+        "schema": [
+          "date",
+          "city",
+          "new_yoy",
+          "new_mom",
+          "new_base",
+          "resale_yoy",
+          "resale_mom",
+          "resale_base"
+        ]
+      }
+    },
+    {
+      "id": "us_yield_2y",
+      "name": "美国2年期国债收益率",
+      "name_en": "US 2Y Treasury Yield",
+      "pillar": "bond",
+      "origin": "asset",
+      "tier": "market",
+      "category": "bond",
+      "subcategory": null,
+      "region": "US",
+      "source": "akshare_zh_us_rate",
+      "symbol": "美国国债收益率2年",
+      "frequency": "daily",
+      "unit": "percent",
+      "csv": "csv/assets/us_yield_2y.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 8899,
+        "start": "1990-12-19",
+        "end": "2026-07-17",
+        "last_value": 4.18,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_yield_30y",
+      "name": "美国30年期国债收益率",
+      "name_en": "US 30Y Treasury Yield",
+      "pillar": "bond",
+      "origin": "asset",
+      "tier": "market",
+      "category": "bond",
+      "subcategory": null,
+      "region": "US",
+      "source": "yfinance",
+      "symbol": "^TYX",
+      "frequency": "daily",
+      "unit": "percent",
+      "csv": "csv/assets/us_yield_30y.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 12380,
+        "start": "1977-02-15",
+        "end": "2026-07-17",
+        "last_value": 5.064,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "us_tlt",
+      "name": "美国长期国债ETF",
+      "name_en": "iShares 20+ Year Treasury Bond ETF",
+      "pillar": "bond",
+      "origin": "asset",
+      "tier": "market",
+      "category": "bond",
+      "subcategory": null,
+      "region": "US",
+      "source": "yfinance",
+      "symbol": "TLT",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/us_tlt.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6030,
+        "start": "2002-07-30",
+        "end": "2026-07-17",
+        "last_value": 84.519997,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "us_ief",
+      "name": "美国中期国债ETF",
+      "name_en": "iShares 7-10 Year Treasury Bond ETF",
+      "pillar": "bond",
+      "origin": "asset",
+      "tier": "market",
+      "category": "bond",
+      "subcategory": null,
+      "region": "US",
+      "source": "yfinance",
+      "symbol": "IEF",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/us_ief.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6030,
+        "start": "2002-07-30",
+        "end": "2026-07-17",
+        "last_value": 93.839996,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "us_agg",
+      "name": "美国综合债券ETF",
+      "name_en": "iShares Core US Aggregate Bond ETF",
+      "pillar": "bond",
+      "origin": "asset",
+      "tier": "market",
+      "category": "bond",
+      "subcategory": null,
+      "region": "US",
+      "source": "yfinance",
+      "symbol": "AGG",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/us_agg.csv",
+      "notes": "对标 Bloomberg US Aggregate，中金文中美债夏普分析常用指数代理",
+      "stats": {
+        "exists": true,
+        "rows": 5736,
+        "start": "2003-09-29",
+        "end": "2026-07-17",
+        "last_value": 98.199997,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "cn_yield_2y",
+      "name": "中国2年期国债收益率",
+      "name_en": "China 2Y Treasury Yield",
+      "pillar": "bond",
+      "origin": "asset",
+      "tier": "market",
+      "category": "bond",
+      "subcategory": null,
+      "region": "CN",
+      "source": "akshare_zh_us_rate",
+      "symbol": "中国国债收益率2年",
+      "frequency": "daily",
+      "unit": "percent",
+      "csv": "csv/assets/cn_yield_2y.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6129,
+        "start": "2002-01-04",
+        "end": "2026-07-17",
+        "last_value": 1.2645,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "cn_yield_10y",
+      "name": "中国10年期国债收益率",
+      "name_en": "China 10Y Treasury Yield",
+      "pillar": "bond",
+      "origin": "asset",
+      "tier": "market",
+      "category": "bond",
+      "subcategory": null,
+      "region": "CN",
+      "source": "akshare_zh_us_rate",
+      "symbol": "中国国债收益率10年",
+      "frequency": "daily",
+      "unit": "percent",
+      "csv": "csv/assets/cn_yield_10y.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6129,
+        "start": "2002-01-04",
+        "end": "2026-07-17",
+        "last_value": 1.7404,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "cn_yield_30y",
+      "name": "中国30年期国债收益率",
+      "name_en": "China 30Y Treasury Yield",
+      "pillar": "bond",
+      "origin": "asset",
+      "tier": "market",
+      "category": "bond",
+      "subcategory": null,
+      "region": "CN",
+      "source": "akshare_zh_us_rate",
+      "symbol": "中国国债收益率30年",
+      "frequency": "daily",
+      "unit": "percent",
+      "csv": "csv/assets/cn_yield_30y.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6129,
+        "start": "2002-01-04",
+        "end": "2026-07-17",
+        "last_value": 2.2425,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "cn_bond_etf",
+      "name": "国债ETF(511010)",
+      "name_en": "China Treasury Bond ETF",
+      "pillar": "bond",
+      "origin": "asset",
+      "tier": "market",
+      "category": "bond",
+      "subcategory": null,
+      "region": "CN",
+      "source": "yfinance",
+      "symbol": "511010.SS",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/cn_bond_etf.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 3237,
+        "start": "2013-03-05",
+        "end": "2026-07-20",
+        "last_value": 140.798996,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "commodity_dbc",
+      "name": "综合商品ETF(DBC)",
+      "name_en": "Invesco DB Commodity Index Tracking Fund",
+      "pillar": "commodity",
+      "origin": "asset",
+      "tier": "market",
+      "category": "commodity",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "yfinance",
+      "symbol": "DBC",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/commodity_dbc.csv",
+      "notes": "广义商品期货总回报代理，对应中金文中商品配置口径",
+      "stats": {
+        "exists": true,
+        "rows": 5143,
+        "start": "2006-02-06",
+        "end": "2026-07-17",
+        "last_value": 28.98,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "commodity_gsg",
+      "name": "标普高盛商品ETF(GSG)",
+      "name_en": "iShares S&P GSCI Commodity ETF",
+      "pillar": "commodity",
+      "origin": "asset",
+      "tier": "market",
+      "category": "commodity",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "yfinance",
+      "symbol": "GSG",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/commodity_gsg.csv",
+      "notes": "接近中金文中 SPGS / S&P GSCI 商品指数",
+      "stats": {
+        "exists": true,
+        "rows": 5028,
+        "start": "2006-07-21",
+        "end": "2026-07-17",
+        "last_value": 31.4,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "commodity_oil",
+      "name": "WTI原油期货",
+      "name_en": "WTI Crude Oil Futures",
+      "pillar": "commodity",
+      "origin": "asset",
+      "tier": "market",
+      "category": "commodity",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "yfinance",
+      "symbol": "CL=F",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/commodity_oil.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6503,
+        "start": "2000-08-23",
+        "end": "2026-07-20",
+        "last_value": 83.919998,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "commodity_copper",
+      "name": "铜期货",
+      "name_en": "Copper Futures",
+      "pillar": "commodity",
+      "origin": "asset",
+      "tier": "market",
+      "category": "commodity",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "yfinance",
+      "symbol": "HG=F",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/commodity_copper.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6499,
+        "start": "2000-08-30",
+        "end": "2026-07-20",
+        "last_value": 6.2755,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "commodity_natgas",
+      "name": "天然气期货",
+      "name_en": "Natural Gas Futures",
+      "pillar": "commodity",
+      "origin": "asset",
+      "tier": "market",
+      "category": "commodity",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "yfinance",
+      "symbol": "NG=F",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/commodity_natgas.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6500,
+        "start": "2000-08-30",
+        "end": "2026-07-20",
+        "last_value": 2.882,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "metal_gold",
+      "name": "黄金期货",
+      "name_en": "Gold Futures",
+      "pillar": "precious_metal",
+      "origin": "asset",
+      "tier": "market",
+      "category": "precious_metal",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "yfinance",
+      "symbol": "GC=F",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/metal_gold.csv",
+      "notes": "中金文中黄金配置核心标的",
+      "stats": {
+        "exists": true,
+        "rows": 6494,
+        "start": "2000-08-30",
+        "end": "2026-07-20",
+        "last_value": 4015.699951,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "metal_silver",
+      "name": "白银期货",
+      "name_en": "Silver Futures",
+      "pillar": "precious_metal",
+      "origin": "asset",
+      "tier": "market",
+      "category": "precious_metal",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "yfinance",
+      "symbol": "SI=F",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/metal_silver.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6496,
+        "start": "2000-08-30",
+        "end": "2026-07-20",
+        "last_value": 56.919998,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "metal_platinum",
+      "name": "铂金期货",
+      "name_en": "Platinum Futures",
+      "pillar": "precious_metal",
+      "origin": "asset",
+      "tier": "market",
+      "category": "precious_metal",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "yfinance",
+      "symbol": "PL=F",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/metal_platinum.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6522,
+        "start": "1997-10-29",
+        "end": "2026-07-20",
+        "last_value": 1598.599976,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "metal_palladium",
+      "name": "钯金期货",
+      "name_en": "Palladium Futures",
+      "pillar": "precious_metal",
+      "origin": "asset",
+      "tier": "market",
+      "category": "precious_metal",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "yfinance",
+      "symbol": "PA=F",
+      "frequency": "daily",
+      "unit": null,
+      "csv": "csv/assets/metal_palladium.csv",
+      "notes": null,
+      "stats": {
+        "exists": true,
+        "rows": 6533,
+        "start": "1998-09-28",
+        "end": "2026-07-20",
+        "last_value": 1240.0,
+        "value_field": "close",
+        "schema": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ]
+      }
+    },
+    {
+      "id": "us_sp500_monthly",
+      "name": "标普500(月度长历史)",
+      "name_en": "S&P 500 Monthly (Stitched)",
+      "pillar": "equity",
+      "origin": "stitched",
+      "tier": "longrun",
+      "category": "index",
+      "subcategory": null,
+      "region": "US",
+      "source": "stitched",
+      "symbol": "shiller+yfinance",
+      "frequency": "monthly",
+      "unit": null,
+      "csv": "csv/us_sp500_monthly.csv",
+      "notes": "Shiller 1871-2023 + yfinance 月末收盘；日频见 us_sp500",
+      "stats": {
+        "exists": true,
+        "rows": 1867,
+        "start": "1871-01-01",
+        "end": "2026-07-01",
+        "last_value": 7457.6899,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_usa_eq_tr",
+      "name": "USA 股票总回报",
+      "name_en": "USA eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "USA",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_usa_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 149,
+        "start": "1872-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.125354,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_usa_housing_tr",
+      "name": "USA 住房总回报",
+      "name_en": "USA housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "USA",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_usa_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 130,
+        "start": "1891-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.124171,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_usa_bond_tr",
+      "name": "USA 债券总回报",
+      "name_en": "USA bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "USA",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_usa_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.118656,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_usa_risky_tr",
+      "name": "USA 风险资产总回报",
+      "name_en": "USA risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "USA",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_usa_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 130,
+        "start": "1891-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.124902,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_usa_safe_tr",
+      "name": "USA 安全资产总回报",
+      "name_en": "USA safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "USA",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_usa_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.061228,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_usa_capital_tr",
+      "name": "USA 资本利得回报",
+      "name_en": "USA capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "USA",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_usa_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 130,
+        "start": "1891-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.106476,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_usa_ltrate",
+      "name": "USA 长期利率",
+      "name_en": "USA ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "USA",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_usa_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.894167,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_usa_bill_rate",
+      "name": "USA 短期利率",
+      "name_en": "USA bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "USA",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_usa_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.0038,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_usa_cpi",
+      "name": "USA CPI",
+      "name_en": "USA cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "USA",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_usa_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 192.622537,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_usa_hpnom",
+      "name": "USA 名义房价指数",
+      "name_en": "USA hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "USA",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_usa_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 131,
+        "start": "1890-01-01",
+        "end": "2020-01-01",
+        "last_value": 305.221503,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_uk_eq_tr",
+      "name": "UK 股票总回报",
+      "name_en": "UK eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "UK",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_uk_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.0944,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_uk_housing_tr",
+      "name": "UK 住房总回报",
+      "name_en": "UK housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "UK",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_uk_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 118,
+        "start": "1896-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.051146,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_uk_bond_tr",
+      "name": "UK 债券总回报",
+      "name_en": "UK bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "UK",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_uk_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.057524,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_uk_risky_tr",
+      "name": "UK 风险资产总回报",
+      "name_en": "UK risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "UK",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_uk_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 117,
+        "start": "1896-01-01",
+        "end": "2019-01-01",
+        "last_value": 0.115673,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_uk_safe_tr",
+      "name": "UK 安全资产总回报",
+      "name_en": "UK safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "UK",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_uk_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.028959,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_uk_capital_tr",
+      "name": "UK 资本利得回报",
+      "name_en": "UK capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "UK",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_uk_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 117,
+        "start": "1896-01-01",
+        "end": "2019-01-01",
+        "last_value": 0.088431,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_uk_ltrate",
+      "name": "UK 长期利率",
+      "name_en": "UK ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "UK",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_uk_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.7393,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_uk_bill_rate",
+      "name": "UK 短期利率",
+      "name_en": "UK bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "UK",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_uk_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.000394,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_uk_cpi",
+      "name": "UK CPI",
+      "name_en": "UK cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "UK",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_uk_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 194.847983,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_uk_hpnom",
+      "name": "UK 名义房价指数",
+      "name_en": "UK hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "UK",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_uk_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 115,
+        "start": "1899-01-01",
+        "end": "2020-01-01",
+        "last_value": 354.340002,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_germany_eq_tr",
+      "name": "Germany 股票总回报",
+      "name_en": "Germany eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Germany",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_germany_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.0759,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_germany_housing_tr",
+      "name": "Germany 住房总回报",
+      "name_en": "Germany housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Germany",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_germany_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 116,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.113185,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_germany_bond_tr",
+      "name": "Germany 债券总回报",
+      "name_en": "Germany bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Germany",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_germany_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 146,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.03208,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_germany_risky_tr",
+      "name": "Germany 风险资产总回报",
+      "name_en": "Germany risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Germany",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_germany_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 116,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.103755,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_germany_safe_tr",
+      "name": "Germany 安全资产总回报",
+      "name_en": "Germany safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Germany",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_germany_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 144,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.013914,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_germany_capital_tr",
+      "name": "Germany 资本利得回报",
+      "name_en": "Germany capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Germany",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_germany_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 116,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.083412,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_germany_ltrate",
+      "name": "Germany 长期利率",
+      "name_en": "Germany ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Germany",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_germany_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 145,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.511024,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_germany_bill_rate",
+      "name": "Germany 短期利率",
+      "name_en": "Germany bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Germany",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_germany_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 145,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.004252,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_germany_cpi",
+      "name": "Germany CPI",
+      "name_en": "Germany cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Germany",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_germany_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 168.789036,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_germany_hpnom",
+      "name": "Germany 名义房价指数",
+      "name_en": "Germany hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Germany",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_germany_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 127,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 216.322217,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_france_eq_tr",
+      "name": "France 股票总回报",
+      "name_en": "France eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "France",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_france_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.0084,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_france_housing_tr",
+      "name": "France 住房总回报",
+      "name_en": "France housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "France",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_france_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.082069,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_france_bond_tr",
+      "name": "France 债券总回报",
+      "name_en": "France bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "France",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_france_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.0393,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_france_risky_tr",
+      "name": "France 风险资产总回报",
+      "name_en": "France risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "France",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_france_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.052727,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_france_safe_tr",
+      "name": "France 安全资产总回报",
+      "name_en": "France safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "France",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_france_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 144,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.017169,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_france_capital_tr",
+      "name": "France 资本利得回报",
+      "name_en": "France capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "France",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_france_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 143,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.043122,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_france_ltrate",
+      "name": "France 长期利率",
+      "name_en": "France ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "France",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_france_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.145267,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_france_bill_rate",
+      "name": "France 短期利率",
+      "name_en": "France bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "France",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_france_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 144,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.004963,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_france_cpi",
+      "name": "France CPI",
+      "name_en": "France cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "France",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_france_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 155.324987,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_france_hpnom",
+      "name": "France 名义房价指数",
+      "name_en": "France hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "France",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_france_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 284.250897,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_japan_eq_tr",
+      "name": "Japan 股票总回报",
+      "name_en": "Japan eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Japan",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_japan_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 133,
+        "start": "1886-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.0783,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_japan_housing_tr",
+      "name": "Japan 住房总回报",
+      "name_en": "Japan housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Japan",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_japan_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 75,
+        "start": "1931-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.047987,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_japan_bond_tr",
+      "name": "Japan 债券总回报",
+      "name_en": "Japan bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Japan",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_japan_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 140,
+        "start": "1881-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.004445,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_japan_risky_tr",
+      "name": "Japan 风险资产总回报",
+      "name_en": "Japan risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Japan",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_japan_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 75,
+        "start": "1931-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.066978,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_japan_safe_tr",
+      "name": "Japan 安全资产总回报",
+      "name_en": "Japan safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Japan",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_japan_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 140,
+        "start": "1881-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.002057,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_japan_capital_tr",
+      "name": "Japan 资本利得回报",
+      "name_en": "Japan capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Japan",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_japan_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 75,
+        "start": "1931-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.031599,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_japan_ltrate",
+      "name": "Japan 长期利率",
+      "name_en": "Japan ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Japan",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_japan_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.005417,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_japan_bill_rate",
+      "name": "Japan 短期利率",
+      "name_en": "Japan bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Japan",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_japan_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 145,
+        "start": "1876-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.00033,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_japan_cpi",
+      "name": "Japan CPI",
+      "name_en": "Japan cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Japan",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_japan_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 111.576957,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_japan_hpnom",
+      "name": "Japan 名义房价指数",
+      "name_en": "Japan hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Japan",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_japan_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 103,
+        "start": "1913-01-01",
+        "end": "2020-01-01",
+        "last_value": 70.609642,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_australia_eq_tr",
+      "name": "Australia 股票总回报",
+      "name_en": "Australia eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Australia",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_australia_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.0492,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_australia_housing_tr",
+      "name": "Australia 住房总回报",
+      "name_en": "Australia housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Australia",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_australia_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 120,
+        "start": "1901-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.071343,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_australia_bond_tr",
+      "name": "Australia 债券总回报",
+      "name_en": "Australia bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Australia",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_australia_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 121,
+        "start": "1900-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.009823,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_australia_risky_tr",
+      "name": "Australia 风险资产总回报",
+      "name_en": "Australia risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Australia",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_australia_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 120,
+        "start": "1901-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.059715,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_australia_safe_tr",
+      "name": "Australia 安全资产总回报",
+      "name_en": "Australia safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Australia",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_australia_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 118,
+        "start": "1900-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.006195,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_australia_capital_tr",
+      "name": "Australia 资本利得回报",
+      "name_en": "Australia capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Australia",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_australia_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 117,
+        "start": "1901-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.049625,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_australia_ltrate",
+      "name": "Australia 长期利率",
+      "name_en": "Australia ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Australia",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_australia_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.920833,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_australia_bill_rate",
+      "name": "Australia 短期利率",
+      "name_en": "Australia bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Australia",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_australia_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 148,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.002567,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_australia_cpi",
+      "name": "Australia CPI",
+      "name_en": "Australia cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Australia",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_australia_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 202.046014,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_australia_hpnom",
+      "name": "Australia 名义房价指数",
+      "name_en": "Australia hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Australia",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_australia_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 507.434705,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_canada_ltrate",
+      "name": "Canada 长期利率",
+      "name_en": "Canada ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Canada",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_canada_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 1.075833,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_canada_cpi",
+      "name": "Canada CPI",
+      "name_en": "Canada cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Canada",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_canada_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 174.814103,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_canada_hpnom",
+      "name": "Canada 名义房价指数",
+      "name_en": "Canada hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Canada",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_canada_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 94,
+        "start": "1921-01-01",
+        "end": "2020-01-01",
+        "last_value": 405.504436,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_italy_eq_tr",
+      "name": "Italy 股票总回报",
+      "name_en": "Italy eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Italy",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_italy_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.0418,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_italy_housing_tr",
+      "name": "Italy 住房总回报",
+      "name_en": "Italy housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Italy",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_italy_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 86,
+        "start": "1928-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.060965,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_italy_bond_tr",
+      "name": "Italy 债券总回报",
+      "name_en": "Italy bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Italy",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_italy_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.125602,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_italy_risky_tr",
+      "name": "Italy 风险资产总回报",
+      "name_en": "Italy risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Italy",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_italy_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 86,
+        "start": "1928-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.04547,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_italy_safe_tr",
+      "name": "Italy 安全资产总回报",
+      "name_en": "Italy safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Italy",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_italy_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 131,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.061801,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_italy_capital_tr",
+      "name": "Italy 资本利得回报",
+      "name_en": "Italy capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Italy",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_italy_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 86,
+        "start": "1928-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.052477,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_italy_ltrate",
+      "name": "Italy 长期利率",
+      "name_en": "Italy ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Italy",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_italy_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 1.167917,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_italy_bill_rate",
+      "name": "Italy 短期利率",
+      "name_en": "Italy bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Italy",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_italy_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 131,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.002,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_italy_cpi",
+      "name": "Italy CPI",
+      "name_en": "Italy cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Italy",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_italy_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 199.794073,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_italy_hpnom",
+      "name": "Italy 名义房价指数",
+      "name_en": "Italy hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Italy",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_italy_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 51,
+        "start": "1970-01-01",
+        "end": "2020-01-01",
+        "last_value": 165.084342,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_spain_eq_tr",
+      "name": "Spain 股票总回报",
+      "name_en": "Spain eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Spain",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_spain_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 121,
+        "start": "1900-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.0981,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_spain_housing_tr",
+      "name": "Spain 住房总回报",
+      "name_en": "Spain housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Spain",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_spain_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 120,
+        "start": "1901-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.042278,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_spain_bond_tr",
+      "name": "Spain 债券总回报",
+      "name_en": "Spain bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Spain",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_spain_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 117,
+        "start": "1900-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.050832,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_spain_risky_tr",
+      "name": "Spain 风险资产总回报",
+      "name_en": "Spain risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Spain",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_spain_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 118,
+        "start": "1901-01-01",
+        "end": "2018-01-01",
+        "last_value": 0.036929,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_spain_safe_tr",
+      "name": "Spain 安全资产总回报",
+      "name_en": "Spain safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Spain",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_spain_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 115,
+        "start": "1900-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.023616,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_spain_capital_tr",
+      "name": "Spain 资本利得回报",
+      "name_en": "Spain capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Spain",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_spain_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 112,
+        "start": "1901-01-01",
+        "end": "2017-01-01",
+        "last_value": 0.064919,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_spain_ltrate",
+      "name": "Spain 长期利率",
+      "name_en": "Spain ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Spain",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_spain_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 148,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.375,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_spain_bill_rate",
+      "name": "Spain 短期利率",
+      "name_en": "Spain bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Spain",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_spain_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 147,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.0036,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_spain_cpi",
+      "name": "Spain CPI",
+      "name_en": "Spain cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Spain",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_spain_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 212.895446,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_spain_hpnom",
+      "name": "Spain 名义房价指数",
+      "name_en": "Spain hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Spain",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_spain_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 50,
+        "start": "1971-01-01",
+        "end": "2020-01-01",
+        "last_value": 340.361007,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_netherlands_eq_tr",
+      "name": "Netherlands 股票总回报",
+      "name_en": "Netherlands eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Netherlands",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_netherlands_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 121,
+        "start": "1900-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.1633,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_netherlands_housing_tr",
+      "name": "Netherlands 住房总回报",
+      "name_en": "Netherlands housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Netherlands",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_netherlands_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.114178,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_netherlands_bond_tr",
+      "name": "Netherlands 债券总回报",
+      "name_en": "Netherlands bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Netherlands",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_netherlands_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.038075,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_netherlands_risky_tr",
+      "name": "Netherlands 风险资产总回报",
+      "name_en": "Netherlands risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Netherlands",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_netherlands_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 121,
+        "start": "1900-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.140567,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_netherlands_safe_tr",
+      "name": "Netherlands 安全资产总回报",
+      "name_en": "Netherlands safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Netherlands",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_netherlands_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.016912,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_netherlands_capital_tr",
+      "name": "Netherlands 资本利得回报",
+      "name_en": "Netherlands capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Netherlands",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_netherlands_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 121,
+        "start": "1900-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.120931,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_netherlands_ltrate",
+      "name": "Netherlands 长期利率",
+      "name_en": "Netherlands ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Netherlands",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_netherlands_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.376667,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_netherlands_bill_rate",
+      "name": "Netherlands 短期利率",
+      "name_en": "Netherlands bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Netherlands",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_netherlands_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.004252,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_netherlands_cpi",
+      "name": "Netherlands CPI",
+      "name_en": "Netherlands cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Netherlands",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_netherlands_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 181.424326,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_netherlands_hpnom",
+      "name": "Netherlands 名义房价指数",
+      "name_en": "Netherlands hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Netherlands",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_netherlands_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 494.45925,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_belgium_eq_tr",
+      "name": "Belgium 股票总回报",
+      "name_en": "Belgium eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Belgium",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_belgium_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.1031,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_belgium_housing_tr",
+      "name": "Belgium 住房总回报",
+      "name_en": "Belgium housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Belgium",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_belgium_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 120,
+        "start": "1890-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.073529,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_belgium_bond_tr",
+      "name": "Belgium 债券总回报",
+      "name_en": "Belgium bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Belgium",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_belgium_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 145,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.044372,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_belgium_risky_tr",
+      "name": "Belgium 风险资产总回报",
+      "name_en": "Belgium risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Belgium",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_belgium_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 120,
+        "start": "1890-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.016395,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_belgium_safe_tr",
+      "name": "Belgium 安全资产总回报",
+      "name_en": "Belgium safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Belgium",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_belgium_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 145,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.02006,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_belgium_capital_tr",
+      "name": "Belgium 资本利得回报",
+      "name_en": "Belgium capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Belgium",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_belgium_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 114,
+        "start": "1890-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.017646,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_belgium_ltrate",
+      "name": "Belgium 长期利率",
+      "name_en": "Belgium ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Belgium",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_belgium_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 144,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.148333,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_belgium_bill_rate",
+      "name": "Belgium 短期利率",
+      "name_en": "Belgium bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Belgium",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_belgium_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 147,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.004252,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_belgium_cpi",
+      "name": "Belgium CPI",
+      "name_en": "Belgium cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Belgium",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_belgium_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 176.865,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_belgium_hpnom",
+      "name": "Belgium 名义房价指数",
+      "name_en": "Belgium hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Belgium",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_belgium_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 138,
+        "start": "1878-01-01",
+        "end": "2020-01-01",
+        "last_value": 415.988075,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_sweden_eq_tr",
+      "name": "Sweden 股票总回报",
+      "name_en": "Sweden eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Sweden",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_sweden_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.1656,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_sweden_housing_tr",
+      "name": "Sweden 住房总回报",
+      "name_en": "Sweden housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Sweden",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_sweden_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 138,
+        "start": "1883-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.06365,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_sweden_bond_tr",
+      "name": "Sweden 债券总回报",
+      "name_en": "Sweden bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Sweden",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_sweden_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.017942,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_sweden_risky_tr",
+      "name": "Sweden 风险资产总回报",
+      "name_en": "Sweden risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Sweden",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_sweden_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 137,
+        "start": "1883-01-01",
+        "end": "2019-01-01",
+        "last_value": 0.202,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_sweden_safe_tr",
+      "name": "Sweden 安全资产总回报",
+      "name_en": "Sweden safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Sweden",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_sweden_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.008296,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_sweden_capital_tr",
+      "name": "Sweden 资本利得回报",
+      "name_en": "Sweden capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Sweden",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_sweden_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 137,
+        "start": "1883-01-01",
+        "end": "2019-01-01",
+        "last_value": 0.181669,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_sweden_ltrate",
+      "name": "Sweden 长期利率",
+      "name_en": "Sweden ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Sweden",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_sweden_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.038333,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_sweden_bill_rate",
+      "name": "Sweden 短期利率",
+      "name_en": "Sweden bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Sweden",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_sweden_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.00135,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_sweden_cpi",
+      "name": "Sweden CPI",
+      "name_en": "Sweden cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Sweden",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_sweden_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 161.660079,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_sweden_hpnom",
+      "name": "Sweden 名义房价指数",
+      "name_en": "Sweden hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Sweden",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_sweden_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 146,
+        "start": "1875-01-01",
+        "end": "2020-01-01",
+        "last_value": 446.102451,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_switzerland_eq_tr",
+      "name": "Switzerland 股票总回报",
+      "name_en": "Switzerland eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Switzerland",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_switzerland_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 121,
+        "start": "1900-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.04,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_switzerland_housing_tr",
+      "name": "Switzerland 住房总回报",
+      "name_en": "Switzerland housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Switzerland",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_switzerland_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 119,
+        "start": "1902-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.079775,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_switzerland_bond_tr",
+      "name": "Switzerland 债券总回报",
+      "name_en": "Switzerland bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Switzerland",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_switzerland_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 120,
+        "start": "1900-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.009036,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_switzerland_risky_tr",
+      "name": "Switzerland 风险资产总回报",
+      "name_en": "Switzerland risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Switzerland",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_switzerland_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 114,
+        "start": "1902-01-01",
+        "end": "2015-01-01",
+        "last_value": 0.046206,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_switzerland_safe_tr",
+      "name": "Switzerland 安全资产总回报",
+      "name_en": "Switzerland safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Switzerland",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_switzerland_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 120,
+        "start": "1900-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.008768,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_switzerland_capital_tr",
+      "name": "Switzerland 资本利得回报",
+      "name_en": "Switzerland capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Switzerland",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_switzerland_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 113,
+        "start": "1902-01-01",
+        "end": "2015-01-01",
+        "last_value": 0.043769,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_switzerland_ltrate",
+      "name": "Switzerland 长期利率",
+      "name_en": "Switzerland ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Switzerland",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_switzerland_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 141,
+        "start": "1880-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.525,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_switzerland_bill_rate",
+      "name": "Switzerland 短期利率",
+      "name_en": "Switzerland bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Switzerland",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_switzerland_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.0085,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_switzerland_cpi",
+      "name": "Switzerland CPI",
+      "name_en": "Switzerland cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Switzerland",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_switzerland_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 130.579245,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_switzerland_hpnom",
+      "name": "Switzerland 名义房价指数",
+      "name_en": "Switzerland hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Switzerland",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_switzerland_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 120,
+        "start": "1901-01-01",
+        "end": "2020-01-01",
+        "last_value": 173.053442,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_norway_eq_tr",
+      "name": "Norway 股票总回报",
+      "name_en": "Norway eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Norway",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_norway_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 140,
+        "start": "1881-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.0346,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_norway_housing_tr",
+      "name": "Norway 住房总回报",
+      "name_en": "Norway housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Norway",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_norway_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.072474,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_norway_bond_tr",
+      "name": "Norway 债券总回报",
+      "name_en": "Norway bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Norway",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_norway_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.040005,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_norway_risky_tr",
+      "name": "Norway 风险资产总回报",
+      "name_en": "Norway risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Norway",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_norway_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 139,
+        "start": "1881-01-01",
+        "end": "2019-01-01",
+        "last_value": 0.091595,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_norway_safe_tr",
+      "name": "Norway 安全资产总回报",
+      "name_en": "Norway safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Norway",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_norway_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.023002,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_norway_capital_tr",
+      "name": "Norway 资本利得回报",
+      "name_en": "Norway capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Norway",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_norway_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 139,
+        "start": "1881-01-01",
+        "end": "2019-01-01",
+        "last_value": 0.078522,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_norway_ltrate",
+      "name": "Norway 长期利率",
+      "name_en": "Norway ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Norway",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_norway_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.555833,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_norway_bill_rate",
+      "name": "Norway 短期利率",
+      "name_en": "Norway bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Norway",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_norway_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.006,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_norway_cpi",
+      "name": "Norway CPI",
+      "name_en": "Norway cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Norway",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_norway_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 187.737714,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_norway_hpnom",
+      "name": "Norway 名义房价指数",
+      "name_en": "Norway hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Norway",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_norway_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 645.910905,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_denmark_eq_tr",
+      "name": "Denmark 股票总回报",
+      "name_en": "Denmark eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Denmark",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_denmark_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 148,
+        "start": "1873-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.3057,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_denmark_housing_tr",
+      "name": "Denmark 住房总回报",
+      "name_en": "Denmark housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Denmark",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_denmark_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 145,
+        "start": "1876-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.081879,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_denmark_bond_tr",
+      "name": "Denmark 债券总回报",
+      "name_en": "Denmark bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Denmark",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_denmark_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.017344,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_denmark_risky_tr",
+      "name": "Denmark 风险资产总回报",
+      "name_en": "Denmark risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Denmark",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_denmark_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 141,
+        "start": "1880-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.168616,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_denmark_safe_tr",
+      "name": "Denmark 安全资产总回报",
+      "name_en": "Denmark safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Denmark",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_denmark_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 145,
+        "start": "1875-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.007922,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_denmark_capital_tr",
+      "name": "Denmark 资本利得回报",
+      "name_en": "Denmark capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Denmark",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_denmark_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 140,
+        "start": "1880-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.153783,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_denmark_ltrate",
+      "name": "Denmark 长期利率",
+      "name_en": "Denmark ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Denmark",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_denmark_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.358333,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_denmark_bill_rate",
+      "name": "Denmark 短期利率",
+      "name_en": "Denmark bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Denmark",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_denmark_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 146,
+        "start": "1875-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.0015,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_denmark_cpi",
+      "name": "Denmark CPI",
+      "name_en": "Denmark cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Denmark",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_denmark_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 161.815857,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_denmark_hpnom",
+      "name": "Denmark 名义房价指数",
+      "name_en": "Denmark hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Denmark",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_denmark_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 146,
+        "start": "1875-01-01",
+        "end": "2020-01-01",
+        "last_value": 388.536903,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_finland_eq_tr",
+      "name": "Finland 股票总回报",
+      "name_en": "Finland eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Finland",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_finland_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 125,
+        "start": "1896-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.1812,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_finland_housing_tr",
+      "name": "Finland 住房总回报",
+      "name_en": "Finland housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Finland",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_finland_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 99,
+        "start": "1920-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.077846,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_finland_bond_tr",
+      "name": "Finland 债券总回报",
+      "name_en": "Finland bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Finland",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_finland_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.001436,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_finland_risky_tr",
+      "name": "Finland 风险资产总回报",
+      "name_en": "Finland risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Finland",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_finland_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 98,
+        "start": "1920-01-01",
+        "end": "2019-01-01",
+        "last_value": 0.076607,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_finland_safe_tr",
+      "name": "Finland 安全资产总回报",
+      "name_en": "Finland safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Finland",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_finland_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.002844,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_finland_capital_tr",
+      "name": "Finland 资本利得回报",
+      "name_en": "Finland capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Finland",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_finland_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 98,
+        "start": "1920-01-01",
+        "end": "2019-01-01",
+        "last_value": 0.059235,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_finland_ltrate",
+      "name": "Finland 长期利率",
+      "name_en": "Finland ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Finland",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_finland_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 142,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.059872,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_finland_bill_rate",
+      "name": "Finland 短期利率",
+      "name_en": "Finland bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Finland",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_finland_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.004252,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_finland_cpi",
+      "name": "Finland CPI",
+      "name_en": "Finland cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Finland",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_finland_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 162.232694,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_finland_hpnom",
+      "name": "Finland 名义房价指数",
+      "name_en": "Finland hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Finland",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_finland_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 116,
+        "start": "1905-01-01",
+        "end": "2020-01-01",
+        "last_value": 197.089183,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_portugal_eq_tr",
+      "name": "Portugal 股票总回报",
+      "name_en": "Portugal eq_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Portugal",
+      "source": "jst",
+      "symbol": "eq_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_portugal_eq_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.001291,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_portugal_housing_tr",
+      "name": "Portugal 住房总回报",
+      "name_en": "Portugal housing_tr (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Portugal",
+      "source": "jst",
+      "symbol": "housing_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_portugal_housing_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 73,
+        "start": "1948-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.113053,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_portugal_bond_tr",
+      "name": "Portugal 债券总回报",
+      "name_en": "Portugal bond_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Portugal",
+      "source": "jst",
+      "symbol": "bond_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_portugal_bond_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 150,
+        "start": "1871-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.001965,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_portugal_risky_tr",
+      "name": "Portugal 风险资产总回报",
+      "name_en": "Portugal risky_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Portugal",
+      "source": "jst",
+      "symbol": "risky_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_portugal_risky_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 72,
+        "start": "1948-01-01",
+        "end": "2019-01-01",
+        "last_value": 0.108655,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_portugal_safe_tr",
+      "name": "Portugal 安全资产总回报",
+      "name_en": "Portugal safe_tr (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Portugal",
+      "source": "jst",
+      "symbol": "safe_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_portugal_safe_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 141,
+        "start": "1880-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.003109,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_portugal_capital_tr",
+      "name": "Portugal 资本利得回报",
+      "name_en": "Portugal capital_tr (JST)",
+      "pillar": "equity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Portugal",
+      "source": "jst",
+      "symbol": "capital_tr",
+      "frequency": "annual",
+      "unit": "total_return_index",
+      "csv": "csv/longrun/jst_portugal_capital_tr.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 72,
+        "start": "1948-01-01",
+        "end": "2019-01-01",
+        "last_value": 0.076318,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_portugal_ltrate",
+      "name": "Portugal 长期利率",
+      "name_en": "Portugal ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Portugal",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_portugal_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 0.416667,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_portugal_bill_rate",
+      "name": "Portugal 短期利率",
+      "name_en": "Portugal bill_rate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Portugal",
+      "source": "jst",
+      "symbol": "bill_rate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_portugal_bill_rate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 141,
+        "start": "1880-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.004252,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_portugal_cpi",
+      "name": "Portugal CPI",
+      "name_en": "Portugal cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Portugal",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_portugal_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 151,
+        "start": "1870-01-01",
+        "end": "2020-01-01",
+        "last_value": 226.549626,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_portugal_hpnom",
+      "name": "Portugal 名义房价指数",
+      "name_en": "Portugal hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Portugal",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_portugal_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 33,
+        "start": "1988-01-01",
+        "end": "2020-01-01",
+        "last_value": 279.016254,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_ireland_ltrate",
+      "name": "Ireland 长期利率",
+      "name_en": "Ireland ltrate (JST)",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Ireland",
+      "source": "jst",
+      "symbol": "ltrate",
+      "frequency": "annual",
+      "unit": "percent",
+      "csv": "csv/longrun/jst_ireland_ltrate.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 99,
+        "start": "1922-01-01",
+        "end": "2020-01-01",
+        "last_value": -0.060833,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_ireland_cpi",
+      "name": "Ireland CPI",
+      "name_en": "Ireland cpi (JST)",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Ireland",
+      "source": "jst",
+      "symbol": "cpi",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_ireland_cpi.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 99,
+        "start": "1922-01-01",
+        "end": "2020-01-01",
+        "last_value": 174.162358,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "jst_ireland_hpnom",
+      "name": "Ireland 名义房价指数",
+      "name_en": "Ireland hpnom (JST)",
+      "pillar": "real_estate",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "Ireland",
+      "source": "jst",
+      "symbol": "hpnom",
+      "frequency": "annual",
+      "unit": "index",
+      "csv": "csv/longrun/jst_ireland_hpnom.csv",
+      "notes": "JST Macrohistory R6 · 1870-2020",
+      "stats": {
+        "exists": true,
+        "rows": 76,
+        "start": "1945-01-01",
+        "end": "2020-01-01",
+        "last_value": 465.579607,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "commodity_idx_1975",
+      "name": "商品综合指数(1975权重)",
+      "name_en": "commodity_idx_1975",
+      "pillar": "commodity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "jacks",
+      "symbol": "idx_1975",
+      "frequency": "annual",
+      "unit": "real_price_index",
+      "csv": "csv/longrun/commodity_idx_1975.csv",
+      "notes": "David Jacks · 1850-2025 实际价格",
+      "stats": {
+        "exists": true,
+        "rows": 126,
+        "start": "1900-01-01",
+        "end": "2025-01-01",
+        "last_value": 128.22,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "commodity_idx_2019",
+      "name": "商品综合指数(2019权重)",
+      "name_en": "commodity_idx_2019",
+      "pillar": "commodity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "jacks",
+      "symbol": "idx_2019",
+      "frequency": "annual",
+      "unit": "real_price_index",
+      "csv": "csv/longrun/commodity_idx_2019.csv",
+      "notes": "David Jacks · 1850-2025 实际价格",
+      "stats": {
+        "exists": true,
+        "rows": 126,
+        "start": "1900-01-01",
+        "end": "2025-01-01",
+        "last_value": 161.51,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "commodity_idx_equal",
+      "name": "商品综合指数(等权)",
+      "name_en": "commodity_idx_equal",
+      "pillar": "commodity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "jacks",
+      "symbol": "idx_equal",
+      "frequency": "annual",
+      "unit": "real_price_index",
+      "csv": "csv/longrun/commodity_idx_equal.csv",
+      "notes": "David Jacks · 1850-2025 实际价格",
+      "stats": {
+        "exists": true,
+        "rows": 126,
+        "start": "1900-01-01",
+        "end": "2025-01-01",
+        "last_value": 84.83,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "commodity_grown",
+      "name": "农业商品子指数",
+      "name_en": "commodity_grown",
+      "pillar": "commodity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "jacks",
+      "symbol": "grown",
+      "frequency": "annual",
+      "unit": "real_price_index",
+      "csv": "csv/longrun/commodity_grown.csv",
+      "notes": "David Jacks · 1850-2025 实际价格",
+      "stats": {
+        "exists": true,
+        "rows": 126,
+        "start": "1900-01-01",
+        "end": "2025-01-01",
+        "last_value": 53.71,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "commodity_ground",
+      "name": "资源商品子指数",
+      "name_en": "commodity_ground",
+      "pillar": "commodity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "jacks",
+      "symbol": "ground",
+      "frequency": "annual",
+      "unit": "real_price_index",
+      "csv": "csv/longrun/commodity_ground.csv",
+      "notes": "David Jacks · 1850-2025 实际价格",
+      "stats": {
+        "exists": true,
+        "rows": 126,
+        "start": "1900-01-01",
+        "end": "2025-01-01",
+        "last_value": 196.49,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "commodity_ground_ex_energy",
+      "name": "资源商品(除能源)",
+      "name_en": "commodity_ground_ex_energy",
+      "pillar": "commodity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "jacks",
+      "symbol": "ground_ex_energy",
+      "frequency": "annual",
+      "unit": "real_price_index",
+      "csv": "csv/longrun/commodity_ground_ex_energy.csv",
+      "notes": "David Jacks · 1850-2025 实际价格",
+      "stats": {
+        "exists": true,
+        "rows": 126,
+        "start": "1900-01-01",
+        "end": "2025-01-01",
+        "last_value": 95.86,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "commodity_gold_real",
+      "name": "黄金实际价格",
+      "name_en": "commodity_gold_real",
+      "pillar": "precious_metal",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "jacks",
+      "symbol": "Gold",
+      "frequency": "annual",
+      "unit": "real_price_index",
+      "csv": "csv/longrun/commodity_gold_real.csv",
+      "notes": "David Jacks · 1850-2025 实际价格",
+      "stats": {
+        "exists": true,
+        "rows": 176,
+        "start": "1850-01-01",
+        "end": "2025-01-01",
+        "last_value": 420.98,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "commodity_silver_real",
+      "name": "白银实际价格",
+      "name_en": "commodity_silver_real",
+      "pillar": "precious_metal",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "jacks",
+      "symbol": "Silver",
+      "frequency": "annual",
+      "unit": "real_price_index",
+      "csv": "csv/longrun/commodity_silver_real.csv",
+      "notes": "David Jacks · 1850-2025 实际价格",
+      "stats": {
+        "exists": true,
+        "rows": 176,
+        "start": "1850-01-01",
+        "end": "2025-01-01",
+        "last_value": 155.3,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "commodity_copper_real",
+      "name": "铜实际价格",
+      "name_en": "commodity_copper_real",
+      "pillar": "commodity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "jacks",
+      "symbol": "Copper",
+      "frequency": "annual",
+      "unit": "real_price_index",
+      "csv": "csv/longrun/commodity_copper_real.csv",
+      "notes": "David Jacks · 1850-2025 实际价格",
+      "stats": {
+        "exists": true,
+        "rows": 176,
+        "start": "1850-01-01",
+        "end": "2025-01-01",
+        "last_value": 72.78,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "commodity_oil_real",
+      "name": "原油实际价格",
+      "name_en": "commodity_oil_real",
+      "pillar": "commodity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "jacks",
+      "symbol": "Petroleum",
+      "frequency": "annual",
+      "unit": "real_price_index",
+      "csv": "csv/longrun/commodity_oil_real.csv",
+      "notes": "David Jacks · 1850-2025 实际价格",
+      "stats": {
+        "exists": true,
+        "rows": 166,
+        "start": "1860-01-01",
+        "end": "2025-01-01",
+        "last_value": 299.91,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "commodity_wheat_real",
+      "name": "小麦实际价格",
+      "name_en": "commodity_wheat_real",
+      "pillar": "commodity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "GLOBAL",
+      "source": "jacks",
+      "symbol": "Wheat",
+      "frequency": "annual",
+      "unit": "real_price_index",
+      "csv": "csv/longrun/commodity_wheat_real.csv",
+      "notes": "David Jacks · 1850-2025 实际价格",
+      "stats": {
+        "exists": true,
+        "rows": 176,
+        "start": "1850-01-01",
+        "end": "2025-01-01",
+        "last_value": 20.46,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_tb3m",
+      "name": "美国3个月国库券",
+      "name_en": "TB3MS",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "US",
+      "source": "fred_extended",
+      "symbol": "TB3MS",
+      "frequency": "monthly",
+      "unit": "percent",
+      "csv": "csv/longrun/us_tb3m.csv",
+      "notes": "FRED 延伸序列，用于与 JST 交叉验证",
+      "stats": {
+        "exists": true,
+        "rows": 1110,
+        "start": "1934-01-01",
+        "end": "2026-06-01",
+        "last_value": 3.66,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_gs30_monthly",
+      "name": "美国30年国债(月度)",
+      "name_en": "GS30",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "US",
+      "source": "fred_extended",
+      "symbol": "GS30",
+      "frequency": "monthly",
+      "unit": "percent",
+      "csv": "csv/longrun/us_gs30_monthly.csv",
+      "notes": "FRED 延伸序列，用于与 JST 交叉验证",
+      "stats": {
+        "exists": true,
+        "rows": 593,
+        "start": "1977-02-01",
+        "end": "2026-06-01",
+        "last_value": 4.95,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_aaa_yield",
+      "name": "穆迪AAA公司债",
+      "name_en": "AAA",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "US",
+      "source": "fred_extended",
+      "symbol": "AAA",
+      "frequency": "monthly",
+      "unit": "percent",
+      "csv": "csv/longrun/us_aaa_yield.csv",
+      "notes": "FRED 延伸序列，用于与 JST 交叉验证",
+      "stats": {
+        "exists": true,
+        "rows": 1290,
+        "start": "1919-01-01",
+        "end": "2026-06-01",
+        "last_value": 5.52,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_baa_yield",
+      "name": "穆迪BAA公司债",
+      "name_en": "BAA",
+      "pillar": "bond",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "US",
+      "source": "fred_extended",
+      "symbol": "BAA",
+      "frequency": "monthly",
+      "unit": "percent",
+      "csv": "csv/longrun/us_baa_yield.csv",
+      "notes": "FRED 延伸序列，用于与 JST 交叉验证",
+      "stats": {
+        "exists": true,
+        "rows": 1290,
+        "start": "1919-01-01",
+        "end": "2026-06-01",
+        "last_value": 6.0,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_industrial_production",
+      "name": "美国工业产出",
+      "name_en": "INDPRO",
+      "pillar": "macro",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "US",
+      "source": "fred_extended",
+      "symbol": "INDPRO",
+      "frequency": "monthly",
+      "unit": "index_2017=100",
+      "csv": "csv/longrun/us_industrial_production.csv",
+      "notes": "FRED 延伸序列，用于与 JST 交叉验证",
+      "stats": {
+        "exists": true,
+        "rows": 1290,
+        "start": "1919-01-01",
+        "end": "2026-06-01",
+        "last_value": 102.6395,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    },
+    {
+      "id": "us_wti_spot_monthly",
+      "name": "WTI原油现货(月)",
+      "name_en": "POILWTIUSDM",
+      "pillar": "commodity",
+      "origin": "longrun",
+      "tier": "longrun",
+      "category": "longrun",
+      "subcategory": null,
+      "region": "US",
+      "source": "fred_extended",
+      "symbol": "POILWTIUSDM",
+      "frequency": "monthly",
+      "unit": "usd_per_barrel",
+      "csv": "csv/longrun/us_wti_spot_monthly.csv",
+      "notes": "FRED 延伸序列，用于与 JST 交叉验证",
+      "stats": {
+        "exists": true,
+        "rows": 414,
+        "start": "1992-01-01",
+        "end": "2026-06-01",
+        "last_value": 84.604545,
+        "value_field": "value",
+        "schema": [
+          "date",
+          "value"
+        ]
+      }
+    }
+  ]
+}

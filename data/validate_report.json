@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-07-20T14:37:17",
+  "pairs": [
+    {
+      "id": "validate_us_cpi_jst_fred",
+      "name": "美国CPI: JST vs FRED",
+      "method": "annual_mean",
+      "overlap_start": "1947-01-01",
+      "overlap_end": "2020-01-01",
+      "rows": 74,
+      "correlation": 0.9998,
+      "mean_abs_diff": 27.1716,
+      "csv": "csv/validate/validate_us_cpi_jst_fred.csv"
+    },
+    {
+      "id": "validate_us_10y_jst_fred",
+      "name": "美国10Y: JST vs FRED GS10",
+      "method": "annual_mean",
+      "overlap_start": "1953-01-01",
+      "overlap_end": "2020-01-01",
+      "rows": 68,
+      "correlation": 0.9999,
+      "mean_abs_diff": 0.0039,
+      "csv": "csv/validate/validate_us_10y_jst_fred.csv"
+    },
+    {
+      "id": "validate_us_cpi_fred_1913_1947",
+      "name": "美国CPI: CPIAUCNS vs CPIAUCSL",
+      "method": "monthly_overlap",
+      "overlap_start": "1947-01-01",
+      "overlap_end": "2026-06-01",
+      "rows": 953,
+      "correlation": 1.0,
+      "mean_abs_diff": 0.2703,
+      "csv": "csv/validate/validate_us_cpi_fred_1913_1947.csv"
+    },
+    {
+      "id": "validate_us_ppi_fred_jacks",
+      "name": "商品: Jacks综合 vs FRED PPI(年)",
+      "method": "annual_rebase_1975",
+      "overlap_start": "1913-01-01",
+      "overlap_end": "2025-01-01",
+      "rows": 113,
+      "correlation": 0.5436,
+      "mean_abs_diff": 85.8397,
+      "csv": "csv/validate/validate_us_ppi_fred_jacks.csv"
+    }
+  ]
+}

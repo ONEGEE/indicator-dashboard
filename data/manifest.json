@@ -1,0 +1,194 @@
+{
+  "version": 3,
+  "columns": ["date", "open", "high", "low", "close", "volume"],
+  "series": [
+    {
+      "id": "us_sp500",
+      "name": "标普500",
+      "name_en": "S&P 500",
+      "category": "index",
+      "region": "US",
+      "csv": "csv/us_sp500.csv",
+      "source": "yfinance",
+      "symbol": "^GSPC",
+      "frequency": "daily"
+    },
+    {
+      "id": "us_dji",
+      "name": "道琼斯",
+      "name_en": "Dow Jones Industrial Average",
+      "category": "index",
+      "region": "US",
+      "csv": "csv/us_dji.csv",
+      "source": "yfinance",
+      "symbol": "^DJI",
+      "frequency": "daily"
+    },
+    {
+      "id": "us_nasdaq",
+      "name": "纳斯达克",
+      "name_en": "Nasdaq Composite",
+      "category": "index",
+      "region": "US",
+      "csv": "csv/us_nasdaq.csv",
+      "source": "yfinance",
+      "symbol": "^IXIC",
+      "frequency": "daily"
+    },
+    {
+      "id": "cn_sse",
+      "name": "上证指数",
+      "name_en": "SSE Composite",
+      "category": "index",
+      "region": "CN",
+      "csv": "csv/cn_sse.csv",
+      "source": "akshare",
+      "symbol": "000001",
+      "frequency": "daily"
+    },
+    {
+      "id": "cn_csi300",
+      "name": "沪深300",
+      "name_en": "CSI 300",
+      "category": "index",
+      "region": "CN",
+      "csv": "csv/cn_csi300.csv",
+      "source": "akshare",
+      "symbol": "000300",
+      "frequency": "daily"
+    },
+    {
+      "id": "cn_csi500",
+      "name": "中证500",
+      "name_en": "CSI 500",
+      "category": "index",
+      "region": "CN",
+      "csv": "csv/cn_csi500.csv",
+      "source": "akshare",
+      "symbol": "000905",
+      "frequency": "daily"
+    },
+    {
+      "id": "cn_star50",
+      "name": "科创50",
+      "name_en": "STAR 50",
+      "category": "index",
+      "region": "CN",
+      "csv": "csv/cn_star50.csv",
+      "source": "akshare",
+      "symbol": "000688",
+      "frequency": "daily"
+    },
+    {
+      "id": "cn_chinext",
+      "name": "创业板指",
+      "name_en": "ChiNext",
+      "category": "index",
+      "region": "CN",
+      "csv": "csv/cn_chinext.csv",
+      "source": "akshare",
+      "symbol": "399006",
+      "frequency": "daily"
+    },
+    {
+      "id": "hk_hsi",
+      "name": "恒生指数",
+      "name_en": "Hang Seng Index",
+      "category": "index",
+      "region": "HK",
+      "csv": "csv/hk_hsi.csv",
+      "source": "yfinance",
+      "symbol": "^HSI",
+      "frequency": "daily"
+    },
+    {
+      "id": "hk_hstech",
+      "name": "恒生科技",
+      "name_en": "Hang Seng Tech",
+      "category": "index",
+      "region": "HK",
+      "csv": "csv/hk_hstech.csv",
+      "source": "akshare_hk",
+      "symbol": "HSTECH",
+      "frequency": "daily"
+    },
+    {
+      "id": "kr_kospi",
+      "name": "韩国综合",
+      "name_en": "KOSPI",
+      "category": "index",
+      "region": "KR",
+      "csv": "csv/kr_kospi.csv",
+      "source": "yfinance",
+      "symbol": "^KS11",
+      "frequency": "daily"
+    },
+    {
+      "id": "kr_kosdaq",
+      "name": "韩国科斯达克",
+      "name_en": "KOSDAQ",
+      "category": "index",
+      "region": "KR",
+      "csv": "csv/kr_kosdaq.csv",
+      "source": "yfinance",
+      "symbol": "^KQ11",
+      "frequency": "daily"
+    },
+    {
+      "id": "jp_nikkei",
+      "name": "日经225",
+      "name_en": "Nikkei 225",
+      "category": "index",
+      "region": "JP",
+      "csv": "csv/jp_nikkei.csv",
+      "source": "yfinance",
+      "symbol": "^N225",
+      "frequency": "daily"
+    },
+    {
+      "id": "jp_topix",
+      "name": "东证指数(ETF代理)",
+      "name_en": "TOPIX ETF Proxy",
+      "category": "index",
+      "region": "JP",
+      "csv": "csv/jp_topix.csv",
+      "source": "yfinance",
+      "symbol": "1306.T",
+      "frequency": "daily",
+      "notes": "Yahoo 无免费 TOPIX 指数代码，使用 NEXT FUNDS TOPIX ETF(1306.T) 作代理"
+    },
+    {
+      "id": "eu_dax",
+      "name": "德国DAX",
+      "name_en": "DAX",
+      "category": "index",
+      "region": "EU",
+      "csv": "csv/eu_dax.csv",
+      "source": "yfinance",
+      "symbol": "^GDAXI",
+      "frequency": "daily"
+    },
+    {
+      "id": "eu_stoxx50",
+      "name": "欧洲斯托克50",
+      "name_en": "EURO STOXX 50",
+      "category": "index",
+      "region": "EU",
+      "csv": "csv/eu_stoxx50.csv",
+      "source": "yfinance",
+      "symbol": "^STOXX50E",
+      "frequency": "daily"
+    },
+    {
+      "id": "uk_ftse",
+      "name": "英国富时100",
+      "name_en": "FTSE 100",
+      "category": "index",
+      "region": "UK",
+      "csv": "csv/uk_ftse.csv",
+      "source": "yfinance",
+      "symbol": "^FTSE",
+      "frequency": "daily"
+    }
+  ]
+}

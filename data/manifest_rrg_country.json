@@ -1,0 +1,705 @@
+{
+  "mode": "country",
+  "title": "主要国家指数轮动",
+  "description": "全球主要国家/地区股票指数相对强弱轮动（JdK RRG）。基准可在列表中任选；MSCI 系列在 Yahoo 无纯指数时使用对应 MSCI ETF 代理并标注。",
+  "taxonomy": "country_equity_index",
+  "rrg": {
+    "method": "jdk",
+    "base_frequency": "daily",
+    "frequency_options": [
+      "daily",
+      "weekly",
+      "monthly",
+      "yearly"
+    ],
+    "window": 14,
+    "roc_period": 10,
+    "trail_default": {
+      "daily": 20,
+      "weekly": 26,
+      "monthly": 12,
+      "yearly": 5
+    },
+    "notes": "按地区分组展示。标准 JdK 公式；JdK/ROC 随采样频率自动匹配。指数同类可比但各国周期不同步，顺时针弱于单一市场行业。",
+    "default_cycle": "nber"
+  },
+  "benchmarks": [
+    {
+      "id": "cn_sse",
+      "label": "上证指数"
+    },
+    {
+      "id": "cn_szse",
+      "label": "深证成指"
+    },
+    {
+      "id": "cn_csi300",
+      "label": "沪深300"
+    },
+    {
+      "id": "cn_csi500",
+      "label": "中证500"
+    },
+    {
+      "id": "us_sp500",
+      "label": "标普500"
+    },
+    {
+      "id": "us_djia",
+      "label": "道琼斯工业"
+    },
+    {
+      "id": "us_nasdaq",
+      "label": "纳斯达克综合"
+    },
+    {
+      "id": "us_ndx",
+      "label": "纳斯达克100"
+    },
+    {
+      "id": "ca_tsx",
+      "label": "加拿大TSX"
+    },
+    {
+      "id": "ca_msci",
+      "label": "MSCI加拿大"
+    },
+    {
+      "id": "mx_ipc",
+      "label": "墨西哥IPC"
+    },
+    {
+      "id": "br_ibovespa",
+      "label": "巴西IBOVESPA"
+    },
+    {
+      "id": "ar_merval",
+      "label": "阿根廷MERVAL"
+    },
+    {
+      "id": "cl_ipsa",
+      "label": "智利IPSA"
+    },
+    {
+      "id": "uk_ftse100",
+      "label": "英国富时100"
+    },
+    {
+      "id": "de_dax",
+      "label": "德国DAX"
+    },
+    {
+      "id": "fr_cac40",
+      "label": "法国CAC40"
+    },
+    {
+      "id": "eu_stoxx50",
+      "label": "欧洲斯托克50"
+    },
+    {
+      "id": "eu_stoxx600",
+      "label": "欧洲斯托克600"
+    },
+    {
+      "id": "es_ibex35",
+      "label": "西班牙IBEX35"
+    },
+    {
+      "id": "it_mib",
+      "label": "意大利富时MIB"
+    },
+    {
+      "id": "ch_smi",
+      "label": "瑞士SMI"
+    },
+    {
+      "id": "nl_aex",
+      "label": "荷兰AEX"
+    },
+    {
+      "id": "at_atx",
+      "label": "奥地利ATX"
+    },
+    {
+      "id": "no_oseax",
+      "label": "挪威OSEAX"
+    },
+    {
+      "id": "tr_bist100",
+      "label": "土耳其BIST100"
+    },
+    {
+      "id": "jp_nikkei225",
+      "label": "日经225"
+    },
+    {
+      "id": "kr_kospi",
+      "label": "韩国综合"
+    },
+    {
+      "id": "tw_taiex",
+      "label": "台湾加权"
+    },
+    {
+      "id": "hk_hsi",
+      "label": "恒生指数"
+    },
+    {
+      "id": "hk_hscei",
+      "label": "恒生国企"
+    },
+    {
+      "id": "in_sensex",
+      "label": "印度Sensex30"
+    },
+    {
+      "id": "in_nifty50",
+      "label": "印度Nifty50"
+    },
+    {
+      "id": "in_msci",
+      "label": "MSCI印度"
+    },
+    {
+      "id": "au_asx200",
+      "label": "澳洲标普200"
+    },
+    {
+      "id": "au_aord",
+      "label": "澳洲全普通"
+    },
+    {
+      "id": "sg_sti",
+      "label": "新加坡海峡时报"
+    },
+    {
+      "id": "id_jkse",
+      "label": "印尼雅加达综合"
+    },
+    {
+      "id": "th_set",
+      "label": "泰国SET"
+    },
+    {
+      "id": "my_klci",
+      "label": "马来西亚KLCI"
+    },
+    {
+      "id": "nz_nzx50",
+      "label": "新西兰NZX50"
+    },
+    {
+      "id": "sa_tasi",
+      "label": "沙特TASI"
+    },
+    {
+      "id": "il_ta125",
+      "label": "以色列TA125"
+    },
+    {
+      "id": "za_jse",
+      "label": "南非JSE全股"
+    },
+    {
+      "id": "af_msci_fm",
+      "label": "MSCI前沿非洲"
+    }
+  ],
+  "assets": [
+    {
+      "id": "cn_sse",
+      "name": "上证指数",
+      "name_en": "SSE Composite",
+      "group": "china",
+      "symbol": "sh000001",
+      "source": "akshare_zh_index",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "cn_szse",
+      "name": "深证成指",
+      "name_en": "SZSE Component",
+      "group": "china",
+      "symbol": "sz399001",
+      "source": "akshare_zh_index",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "cn_csi300",
+      "name": "沪深300",
+      "name_en": "CSI 300",
+      "group": "china",
+      "symbol": "sh000300",
+      "source": "akshare_zh_index",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "cn_csi500",
+      "name": "中证500",
+      "name_en": "CSI 500",
+      "group": "china",
+      "symbol": "sh000905",
+      "source": "akshare_zh_index",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "us_sp500",
+      "name": "标普500",
+      "name_en": "S&P 500",
+      "group": "north_america",
+      "symbol": "^GSPC",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "us_djia",
+      "name": "道琼斯工业",
+      "name_en": "Dow Jones",
+      "group": "north_america",
+      "symbol": "^DJI",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "us_nasdaq",
+      "name": "纳斯达克综合",
+      "name_en": "Nasdaq Composite",
+      "group": "north_america",
+      "symbol": "^IXIC",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "us_ndx",
+      "name": "纳斯达克100",
+      "name_en": "Nasdaq-100",
+      "group": "north_america",
+      "symbol": "^NDX",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "ca_tsx",
+      "name": "加拿大TSX",
+      "name_en": "S&P/TSX Composite",
+      "group": "north_america",
+      "symbol": "^GSPTSE",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "ca_msci",
+      "name": "MSCI加拿大",
+      "name_en": "MSCI Canada",
+      "group": "msci",
+      "symbol": "EWC",
+      "source": "yfinance",
+      "vehicle": "MSCI Index ETF",
+      "benchmark_candidate": true,
+      "notes": "MSCI 加拿大指数；Yahoo 无纯指数代码，使用 MSCI Canada ETF (EWC) 代理"
+    },
+    {
+      "id": "mx_ipc",
+      "name": "墨西哥IPC",
+      "name_en": "IPC Mexico",
+      "group": "latin_america",
+      "symbol": "^MXX",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "br_ibovespa",
+      "name": "巴西IBOVESPA",
+      "name_en": "Ibovespa",
+      "group": "latin_america",
+      "symbol": "^BVSP",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "ar_merval",
+      "name": "阿根廷MERVAL",
+      "name_en": "MERVAL",
+      "group": "latin_america",
+      "symbol": "^MERV",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "cl_ipsa",
+      "name": "智利IPSA",
+      "name_en": "IPSA",
+      "group": "latin_america",
+      "symbol": "^IPSA",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "uk_ftse100",
+      "name": "英国富时100",
+      "name_en": "FTSE 100",
+      "group": "europe",
+      "symbol": "^FTSE",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "de_dax",
+      "name": "德国DAX",
+      "name_en": "DAX",
+      "group": "europe",
+      "symbol": "^GDAXI",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "fr_cac40",
+      "name": "法国CAC40",
+      "name_en": "CAC 40",
+      "group": "europe",
+      "symbol": "^FCHI",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "eu_stoxx50",
+      "name": "欧洲斯托克50",
+      "name_en": "EURO STOXX 50",
+      "group": "europe",
+      "symbol": "^STOXX50E",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "eu_stoxx600",
+      "name": "欧洲斯托克600",
+      "name_en": "STOXX Europe 600",
+      "group": "europe",
+      "symbol": "^STOXX",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "es_ibex35",
+      "name": "西班牙IBEX35",
+      "name_en": "IBEX 35",
+      "group": "europe",
+      "symbol": "^IBEX",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "it_mib",
+      "name": "意大利富时MIB",
+      "name_en": "FTSE MIB",
+      "group": "europe",
+      "symbol": "FTSEMIB.MI",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "ch_smi",
+      "name": "瑞士SMI",
+      "name_en": "SMI",
+      "group": "europe",
+      "symbol": "^SSMI",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "nl_aex",
+      "name": "荷兰AEX",
+      "name_en": "AEX",
+      "group": "europe",
+      "symbol": "^AEX",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "at_atx",
+      "name": "奥地利ATX",
+      "name_en": "ATX",
+      "group": "europe",
+      "symbol": "^ATX",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "no_oseax",
+      "name": "挪威OSEAX",
+      "name_en": "OSE All Share",
+      "group": "europe",
+      "symbol": "^OSEAX",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "tr_bist100",
+      "name": "土耳其BIST100",
+      "name_en": "BIST 100",
+      "group": "europe",
+      "symbol": "XU100.IS",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "jp_nikkei225",
+      "name": "日经225",
+      "name_en": "Nikkei 225",
+      "group": "asia_pacific",
+      "symbol": "^N225",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "kr_kospi",
+      "name": "韩国综合",
+      "name_en": "KOSPI",
+      "group": "asia_pacific",
+      "symbol": "^KS11",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "tw_taiex",
+      "name": "台湾加权",
+      "name_en": "TAIEX",
+      "group": "asia_pacific",
+      "symbol": "^TWII",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "hk_hsi",
+      "name": "恒生指数",
+      "name_en": "Hang Seng",
+      "group": "asia_pacific",
+      "symbol": "^HSI",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "hk_hscei",
+      "name": "恒生国企",
+      "name_en": "HSCEI",
+      "group": "asia_pacific",
+      "symbol": "^HSCE",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "in_sensex",
+      "name": "印度Sensex30",
+      "name_en": "SENSEX",
+      "group": "asia_pacific",
+      "symbol": "^BSESN",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "in_nifty50",
+      "name": "印度Nifty50",
+      "name_en": "Nifty 50",
+      "group": "asia_pacific",
+      "symbol": "^NSEI",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "in_msci",
+      "name": "MSCI印度",
+      "name_en": "MSCI India",
+      "group": "msci",
+      "symbol": "INDA",
+      "source": "yfinance",
+      "vehicle": "MSCI Index ETF",
+      "benchmark_candidate": true,
+      "notes": "MSCI 印度指数；Yahoo 无纯指数代码，使用 MSCI India ETF (INDA) 代理"
+    },
+    {
+      "id": "au_asx200",
+      "name": "澳洲标普200",
+      "name_en": "S&P/ASX 200",
+      "group": "asia_pacific",
+      "symbol": "^AXJO",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "au_aord",
+      "name": "澳洲全普通",
+      "name_en": "All Ordinaries",
+      "group": "asia_pacific",
+      "symbol": "^AORD",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "sg_sti",
+      "name": "新加坡海峡时报",
+      "name_en": "STI",
+      "group": "asia_pacific",
+      "symbol": "^STI",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "id_jkse",
+      "name": "印尼雅加达综合",
+      "name_en": "Jakarta Composite",
+      "group": "asia_pacific",
+      "symbol": "^JKSE",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "th_set",
+      "name": "泰国SET",
+      "name_en": "SET Index",
+      "group": "asia_pacific",
+      "symbol": "^SET.BK",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "my_klci",
+      "name": "马来西亚KLCI",
+      "name_en": "FTSE Bursa KLCI",
+      "group": "asia_pacific",
+      "symbol": "^KLSE",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "nz_nzx50",
+      "name": "新西兰NZX50",
+      "name_en": "NZX 50",
+      "group": "asia_pacific",
+      "symbol": "^NZ50",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "sa_tasi",
+      "name": "沙特TASI",
+      "name_en": "Tadawul All Share",
+      "group": "mea",
+      "symbol": "^TASI.SR",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "il_ta125",
+      "name": "以色列TA125",
+      "name_en": "TA-125",
+      "group": "mea",
+      "symbol": "^TA125.TA",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "za_jse",
+      "name": "南非JSE全股",
+      "name_en": "JSE All Share",
+      "group": "mea",
+      "symbol": "^J203.JO",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true,
+      "notes": ""
+    },
+    {
+      "id": "af_msci_fm",
+      "name": "MSCI前沿非洲",
+      "name_en": "MSCI FM Africa",
+      "group": "msci",
+      "symbol": "FM",
+      "source": "yfinance",
+      "vehicle": "MSCI Index ETF",
+      "benchmark_candidate": true,
+      "notes": "MSCI 前沿市场（含非洲）指数；使用 MSCI Frontier Markets ETF (FM) 代理"
+    }
+  ]
+}

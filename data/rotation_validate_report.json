@@ -1,0 +1,60 @@
+{
+  "generated_at": "2026-07-22T11:23:51",
+  "pairs": [
+    {
+      "id": "validate_us_equity_wb_spy",
+      "name": "美股市值: World Bank 年度 vs 指数缩放",
+      "method": "annual_end",
+      "overlap_start": "1993-01-01",
+      "overlap_end": "2025-01-01",
+      "rows": 33,
+      "correlation": 1.0,
+      "mean_abs_diff": 0.0,
+      "csv": "csv/validate/validate_us_equity_wb_spy.csv"
+    },
+    {
+      "id": "validate_btc_blockchain_yfinance",
+      "name": "BTC市值: Blockchain.com vs 价格×流通量（组件）",
+      "method": "monthly_overlap",
+      "overlap_start": "2014-09-01",
+      "overlap_end": "2026-07-01",
+      "rows": 143,
+      "correlation": 0.998,
+      "mean_abs_diff": 47717771503.6502,
+      "csv": "csv/validate/validate_btc_blockchain_yfinance.csv"
+    },
+    {
+      "id": "validate_gold_stock_wgc_gld",
+      "name": "黄金存量价值: WGC法 vs GLD规模代理",
+      "method": "monthly_overlap",
+      "overlap_start": "2004-11-01",
+      "overlap_end": "2026-07-01",
+      "rows": 261,
+      "correlation": 0.9996,
+      "mean_abs_diff": 10322457938629.055,
+      "csv": "csv/validate/validate_gold_stock_wgc_gld.csv"
+    },
+    {
+      "id": "validate_us_housing_z1",
+      "name": "美国房地产市值: Fed Z.1 原始 vs 月度序列",
+      "method": "monthly_overlap",
+      "overlap_start": "1945-10-01",
+      "overlap_end": "2026-01-01",
+      "rows": 964,
+      "correlation": 1.0,
+      "mean_abs_diff": 0.0,
+      "csv": "csv/validate/validate_us_housing_z1.csv"
+    },
+    {
+      "id": "validate_cn_housing_zero_dep_anchor",
+      "name": "中国房价零折旧: 2024-12 人民币锚点附近",
+      "method": "monthly_variation",
+      "overlap_start": "2000-02-01",
+      "overlap_end": "2026-06-01",
+      "rows": 291,
+      "correlation": null,
+      "mean_abs_diff": 0.04416534871671095,
+      "csv": "csv/validate/validate_cn_housing_zero_dep_anchor.csv"
+    }
+  ]
+}

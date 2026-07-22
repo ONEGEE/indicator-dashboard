@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "columns_simple": ["date", "value"],
+  "sources": {
+    "jst": {
+      "name": "Jordà-Schularick-Taylor Macrohistory Database R6",
+      "url": "https://www.macrohistory.net/database/",
+      "coverage": "18国 · 1870-2020 · 年度",
+      "license": "CC BY-NC-SA 4.0"
+    },
+    "jacks": {
+      "name": "David Jacks Real Commodity Prices",
+      "url": "https://davidjacks.org/from-boom-to-bust/",
+      "coverage": "42商品 · 1850-2025 · 年度(实际价格)",
+      "license": "Academic use with citation"
+    },
+    "shiller": {
+      "name": "Robert Shiller Irrational Exuberance Data",
+      "url": "http://www.econ.yale.edu/~shiller/data.htm",
+      "coverage": "美国标普综合 · 1871-2023 · 月度",
+      "license": "Public research data"
+    },
+    "fred_extended": {
+      "name": "FRED (St. Louis Fed)",
+      "url": "https://fred.stlouisfed.org/",
+      "coverage": "美国宏观 · 1913+ · 日/月/年",
+      "license": "Public domain"
+    }
+  },
+  "jst_countries": [
+    "USA", "UK", "Germany", "France", "Japan", "Australia",
+    "Canada", "Italy", "Spain", "Netherlands", "Belgium", "Sweden",
+    "Switzerland", "Norway", "Denmark", "Finland", "Portugal", "Ireland"
+  ],
+  "jst_variables": [
+    {"id_suffix": "eq_tr", "column": "eq_tr", "name": "股票总回报", "pillar": "equity", "unit": "total_return_index"},
+    {"id_suffix": "housing_tr", "column": "housing_tr", "name": "住房总回报", "pillar": "real_estate", "unit": "total_return_index"},
+    {"id_suffix": "bond_tr", "column": "bond_tr", "name": "债券总回报", "pillar": "bond", "unit": "total_return_index"},
+    {"id_suffix": "risky_tr", "column": "risky_tr", "name": "风险资产总回报", "pillar": "equity", "unit": "total_return_index"},
+    {"id_suffix": "safe_tr", "column": "safe_tr", "name": "安全资产总回报", "pillar": "bond", "unit": "total_return_index"},
+    {"id_suffix": "capital_tr", "column": "capital_tr", "name": "资本利得回报", "pillar": "equity", "unit": "total_return_index"},
+    {"id_suffix": "ltrate", "column": "ltrate", "name": "长期利率", "pillar": "bond", "unit": "percent"},
+    {"id_suffix": "bill_rate", "column": "bill_rate", "name": "短期利率", "pillar": "bond", "unit": "percent"},
+    {"id_suffix": "cpi", "column": "cpi", "name": "CPI", "pillar": "macro", "unit": "index"},
+    {"id_suffix": "hpnom", "column": "hpnom", "name": "名义房价指数", "pillar": "real_estate", "unit": "index"}
+  ],
+  "jacks_series": [
+    {"id": "commodity_idx_1975", "sheet": "Indices", "column": "idx_1975", "name": "商品综合指数(1975权重)", "pillar": "commodity", "start_row": 1900},
+    {"id": "commodity_idx_2019", "sheet": "Indices", "column": "idx_2019", "name": "商品综合指数(2019权重)", "pillar": "commodity", "start_row": 1900},
+    {"id": "commodity_idx_equal", "sheet": "Indices", "column": "idx_equal", "name": "商品综合指数(等权)", "pillar": "commodity", "start_row": 1900},
+    {"id": "commodity_grown", "sheet": "Sub-indices", "column": "grown", "name": "农业商品子指数", "pillar": "commodity"},
+    {"id": "commodity_ground", "sheet": "Sub-indices", "column": "ground", "name": "资源商品子指数", "pillar": "commodity"},
+    {"id": "commodity_ground_ex_energy", "sheet": "Sub-indices", "column": "ground_ex_energy", "name": "资源商品(除能源)", "pillar": "commodity"},
+    {"id": "commodity_gold_real", "sheet": "Commodities", "column": "Gold", "name": "黄金实际价格", "pillar": "precious_metal"},
+    {"id": "commodity_silver_real", "sheet": "Commodities", "column": "Silver", "name": "白银实际价格", "pillar": "precious_metal"},
+    {"id": "commodity_copper_real", "sheet": "Commodities", "column": "Copper", "name": "铜实际价格", "pillar": "commodity"},
+    {"id": "commodity_oil_real", "sheet": "Commodities", "column": "Petroleum", "name": "原油实际价格", "pillar": "commodity"},
+    {"id": "commodity_wheat_real", "sheet": "Commodities", "column": "Wheat", "name": "小麦实际价格", "pillar": "commodity"}
+  ],
+  "fred_extended": [
+    {"id": "us_cpi_1913", "symbol": "CPIAUCNS", "name": "美国CPI(1913起)", "pillar": "macro", "frequency": "monthly", "unit": "index_1982_84=100", "component_of": "us_cpi"},
+    {"id": "us_tb3m", "symbol": "TB3MS", "name": "美国3个月国库券", "pillar": "bond", "frequency": "monthly", "unit": "percent"},
+    {"id": "us_gs10_monthly", "symbol": "GS10", "name": "美国10年国债(月度)", "pillar": "bond", "frequency": "monthly", "unit": "percent", "component_of": "us_bond_10y_monthly"},
+    {"id": "us_gs30_monthly", "symbol": "GS30", "name": "美国30年国债(月度)", "pillar": "bond", "frequency": "monthly", "unit": "percent"},
+    {"id": "us_aaa_yield", "symbol": "AAA", "name": "穆迪AAA公司债", "pillar": "bond", "frequency": "monthly", "unit": "percent"},
+    {"id": "us_baa_yield", "symbol": "BAA", "name": "穆迪BAA公司债", "pillar": "bond", "frequency": "monthly", "unit": "percent"},
+    {"id": "us_industrial_production", "symbol": "INDPRO", "name": "美国工业产出", "pillar": "macro", "frequency": "monthly", "unit": "index_2017=100"},
+    {"id": "us_wti_spot_monthly", "symbol": "POILWTIUSDM", "name": "WTI原油现货(月)", "pillar": "commodity", "frequency": "monthly", "unit": "usd_per_barrel"}
+  ],
+  "shiller_series": [
+    {"id": "us_sp500_shiller", "name": "标普综合(Shiller)", "pillar": "equity", "frequency": "monthly", "component_of": "us_sp500_monthly"}
+  ],
+  "cross_validation": [
+    {
+      "id": "validate_us_cpi_jst_fred",
+      "name": "美国CPI: JST vs FRED",
+      "a": {"source": "jst", "country": "USA", "column": "cpi"},
+      "b": {"source": "fred", "symbol": "CPIAUCSL"},
+      "method": "annual_mean"
+    },
+    {
+      "id": "validate_us_10y_jst_fred",
+      "name": "美国10Y: JST vs FRED GS10",
+      "a": {"source": "jst", "country": "USA", "column": "ltrate"},
+      "b": {"source": "fred", "symbol": "GS10"},
+      "method": "annual_mean"
+    },
+    {
+      "id": "validate_us_cpi_fred_1913_1947",
+      "name": "美国CPI: CPIAUCNS vs CPIAUCSL",
+      "a": {"source": "fred", "symbol": "CPIAUCNS"},
+      "b": {"source": "fred", "symbol": "CPIAUCSL"},
+      "method": "monthly_overlap"
+    },
+    {
+      "id": "validate_us_ppi_fred_jacks",
+      "name": "商品: Jacks综合 vs FRED PPI(年)",
+      "a": {"source": "csv", "path": "csv/longrun/commodity_idx_1975.csv"},
+      "b": {"source": "fred", "symbol": "PPIACO"},
+      "method": "annual_rebase_1975"
+    }
+  ]
+}

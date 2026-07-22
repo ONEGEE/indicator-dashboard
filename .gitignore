@@ -1,0 +1,27 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# Secrets — 切勿提交
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+
+# 本地缓存与原始抓取（不入库）
+data/cache/
+data/logs/
+data/raw/
+*.db
+
+# Node / Vite 开发产物
+web/node_modules/
+web/dist/
+
+# Streamlit 生产构建目录 static/ 需提交，供 Community Cloud 部署

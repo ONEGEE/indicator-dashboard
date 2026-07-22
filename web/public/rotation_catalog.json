@@ -1,0 +1,656 @@
+{
+  "generated_at": "2026-07-22T11:23:52",
+  "layer": "rotation",
+  "description": "全球资产轮动：月度回报 + 市值/存量（含指标说明）",
+  "validation": {
+    "generated_at": "2026-07-22T11:23:51",
+    "pairs": [
+      {
+        "id": "validate_us_equity_wb_spy",
+        "name": "美股市值: World Bank 年度 vs 指数缩放",
+        "method": "annual_end",
+        "overlap_start": "1993-01-01",
+        "overlap_end": "2025-01-01",
+        "rows": 33,
+        "correlation": 1.0,
+        "mean_abs_diff": 0.0,
+        "csv": "csv/validate/validate_us_equity_wb_spy.csv"
+      },
+      {
+        "id": "validate_btc_blockchain_yfinance",
+        "name": "BTC市值: Blockchain.com vs 价格×流通量（组件）",
+        "method": "monthly_overlap",
+        "overlap_start": "2014-09-01",
+        "overlap_end": "2026-07-01",
+        "rows": 143,
+        "correlation": 0.998,
+        "mean_abs_diff": 47717771503.6502,
+        "csv": "csv/validate/validate_btc_blockchain_yfinance.csv"
+      },
+      {
+        "id": "validate_gold_stock_wgc_gld",
+        "name": "黄金存量价值: WGC法 vs GLD规模代理",
+        "method": "monthly_overlap",
+        "overlap_start": "2004-11-01",
+        "overlap_end": "2026-07-01",
+        "rows": 261,
+        "correlation": 0.9996,
+        "mean_abs_diff": 10322457938629.055,
+        "csv": "csv/validate/validate_gold_stock_wgc_gld.csv"
+      },
+      {
+        "id": "validate_us_housing_z1",
+        "name": "美国房地产市值: Fed Z.1 原始 vs 月度序列",
+        "method": "monthly_overlap",
+        "overlap_start": "1945-10-01",
+        "overlap_end": "2026-01-01",
+        "rows": 964,
+        "correlation": 1.0,
+        "mean_abs_diff": 0.0,
+        "csv": "csv/validate/validate_us_housing_z1.csv"
+      },
+      {
+        "id": "validate_cn_housing_zero_dep_anchor",
+        "name": "中国房价零折旧: 2024-12 人民币锚点附近",
+        "method": "monthly_variation",
+        "overlap_start": "2000-02-01",
+        "overlap_end": "2026-06-01",
+        "rows": 291,
+        "correlation": null,
+        "mean_abs_diff": 0.04416534871671095,
+        "csv": "csv/validate/validate_cn_housing_zero_dep_anchor.csv"
+      }
+    ]
+  },
+  "counts": {
+    "total": 12,
+    "with_return_data": 12,
+    "with_marketcap_data": 12,
+    "by_pillar": {
+      "equity": 5,
+      "bond": 2,
+      "precious_metal": 1,
+      "commodity": 1,
+      "crypto": 1,
+      "real_estate": 2
+    }
+  },
+  "assets": [
+    {
+      "id": "us_equity",
+      "name": "美股",
+      "name_en": "US Equity",
+      "pillar": "equity",
+      "region": "US",
+      "return": {
+        "csv": "csv/rotation/returns/us_equity.csv",
+        "source": "yfinance",
+        "symbol": "SPY",
+        "frequency": "monthly",
+        "notes": "SPY 复权收盘价转月度",
+        "stats": {
+          "exists": true,
+          "rows": 403,
+          "start": "1993-01-01",
+          "end": "2026-07-01",
+          "last_value": 748.280029
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/us_equity.csv",
+        "method": "worldbank_scaled",
+        "unit": "usd",
+        "authority": "World Bank 市值（USA）+ 指数缩放",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 403,
+          "start": "1993-01-01",
+          "end": "2026-07-01",
+          "last_value_usd": 76048458010068.47
+        }
+      },
+      "documentation": {
+        "summary": "美国股票市场回报与上市股市值规模。",
+        "data_source": "回报：Yahoo Finance SPY；市值：世界银行 CM.MKT.LCAP.CD（美国），月度用标普500缩放。",
+        "methodology": "世界银行年度市值视为该年 12 月末存量；各月以上一年末锚点按价格指数向前缩放。新年度锚点落地时在 12 月对账，避免用当年年末回推整年造成的 1 月断层。",
+        "frequency": "monthly",
+        "update_rule": "monthly_market",
+        "notes": "World Bank 市值为上市公司总市值，与 SPY 成分并不完全一致，仅作规模代理。",
+        "last_data_date": "2026-07-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2026-09-01",
+        "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
+      }
+    },
+    {
+      "id": "cn_equity",
+      "name": "A股",
+      "name_en": "China A-Share",
+      "pillar": "equity",
+      "region": "CN",
+      "return": {
+        "csv": "csv/rotation/returns/cn_equity.csv",
+        "source": "akshare_index",
+        "symbol": "000300",
+        "frequency": "monthly",
+        "notes": "沪深300",
+        "stats": {
+          "exists": true,
+          "rows": 259,
+          "start": "2005-01-01",
+          "end": "2026-07-01",
+          "last_value": 4623.24
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/cn_equity.csv",
+        "method": "worldbank_scaled",
+        "unit": "usd",
+        "authority": "World Bank 市值（CHN）+ 指数缩放",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 259,
+          "start": "2005-01-01",
+          "end": "2026-07-01",
+          "last_value_usd": 15486415584551.85
+        }
+      },
+      "documentation": {
+        "summary": "中国A股（沪深300代理）回报与上市股市值。",
+        "data_source": "回报：AkShare 沪深300（失败时回退本地/yfinance）；市值：世界银行 CM.MKT.LCAP.CD（中国）。",
+        "methodology": "世界银行年度市值视为该年 12 月末存量；各月以上一年末锚点按沪深300向前缩放（非当年年末回推）。",
+        "frequency": "monthly",
+        "update_rule": "monthly_market",
+        "notes": "世界银行口径含沪深上市股票，与沪深300不完全等同。",
+        "last_data_date": "2026-07-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2026-09-01",
+        "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
+      }
+    },
+    {
+      "id": "hk_equity",
+      "name": "港股",
+      "name_en": "Hong Kong Equity",
+      "pillar": "equity",
+      "region": "HK",
+      "return": {
+        "csv": "csv/rotation/returns/hk_equity.csv",
+        "source": "yfinance",
+        "symbol": "^HSI",
+        "frequency": "monthly",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "rows": 439,
+          "start": "1990-01-01",
+          "end": "2026-07-01",
+          "last_value": 24974.070312
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/hk_equity.csv",
+        "method": "worldbank_scaled",
+        "unit": "usd",
+        "authority": "World Bank 市值（HKG）+ 指数缩放",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 439,
+          "start": "1990-01-01",
+          "end": "2026-07-01",
+          "last_value_usd": 5933264820678.3
+        }
+      },
+      "documentation": {
+        "summary": "香港股票市场回报与上市股市值。",
+        "data_source": "回报：Yahoo Finance 恒生指数；市值：世界银行 CM.MKT.LCAP.CD（香港）。",
+        "methodology": "世界银行年度市值视为该年 12 月末存量；各月以上一年末锚点按恒生指数向前缩放（非当年年末回推）。",
+        "frequency": "monthly",
+        "update_rule": "monthly_market",
+        "notes": "",
+        "last_data_date": "2026-07-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2026-09-01",
+        "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
+      }
+    },
+    {
+      "id": "jp_equity",
+      "name": "日股",
+      "name_en": "Japan Equity",
+      "pillar": "equity",
+      "region": "JP",
+      "return": {
+        "csv": "csv/rotation/returns/jp_equity.csv",
+        "source": "yfinance",
+        "symbol": "1306.T",
+        "frequency": "monthly",
+        "notes": "TOPIX ETF 代理",
+        "stats": {
+          "exists": true,
+          "rows": 211,
+          "start": "2009-01-01",
+          "end": "2026-07-01",
+          "last_value": 423.5
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/jp_equity.csv",
+        "method": "worldbank_scaled",
+        "unit": "usd",
+        "authority": "World Bank 市值（JPN）+ ETF缩放",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 211,
+          "start": "2009-01-01",
+          "end": "2026-07-01",
+          "last_value_usd": 9178504820399.64
+        }
+      },
+      "documentation": {
+        "summary": "日本股票市场回报与上市股市值。",
+        "data_source": "回报：Yahoo Finance 1306.T（TOPIX ETF）；市值：世界银行 CM.MKT.LCAP.CD（日本）。",
+        "methodology": "世界银行年度市值视为该年 12 月末存量；各月以上一年末锚点按 ETF 价格向前缩放（非当年年末回推）。",
+        "frequency": "monthly",
+        "update_rule": "monthly_market",
+        "notes": "",
+        "last_data_date": "2026-07-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2026-09-01",
+        "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
+      }
+    },
+    {
+      "id": "eu_equity",
+      "name": "欧股",
+      "name_en": "Europe Equity",
+      "pillar": "equity",
+      "region": "EU",
+      "return": {
+        "csv": "csv/rotation/returns/eu_equity.csv",
+        "source": "yfinance",
+        "symbol": "VGK",
+        "frequency": "monthly",
+        "notes": "Vanguard FTSE Europe ETF",
+        "stats": {
+          "exists": true,
+          "rows": 257,
+          "start": "2005-03-01",
+          "end": "2026-07-01",
+          "last_value": 88.760002
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/eu_equity.csv",
+        "method": "worldbank_sum_scaled",
+        "unit": "usd",
+        "authority": "欧洲主要国家 World Bank 市值之和 + ETF缩放",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 257,
+          "start": "2005-03-01",
+          "end": "2026-07-01",
+          "last_value_usd": 7254720235094.72
+        }
+      },
+      "documentation": {
+        "summary": "欧洲主要股市回报与上市股市值合计。",
+        "data_source": "回报：Yahoo Finance VGK；市值：德/法/英/意/西/荷/瑞/瑞典世界银行市值之和。",
+        "methodology": "多国世界银行年度市值加总视为 12 月末锚点；各月以上一年末锚点按 VGK 向前缩放（非当年年末回推）。",
+        "frequency": "monthly",
+        "update_rule": "monthly_market",
+        "notes": "未覆盖全部欧洲上市市场，属于主要经济体代理。",
+        "last_data_date": "2026-07-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2026-09-01",
+        "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
+      }
+    },
+    {
+      "id": "us_treasury",
+      "name": "美国国债",
+      "name_en": "US Treasury (Total)",
+      "pillar": "bond",
+      "region": "US",
+      "return": {
+        "csv": "csv/rotation/returns/us_treasury.csv",
+        "source": "yfinance",
+        "symbol": "GOVT",
+        "frequency": "monthly",
+        "notes": "iShares 美国国债 ETF（全期限价格代理）",
+        "stats": {
+          "exists": true,
+          "rows": 174,
+          "start": "2012-02-01",
+          "end": "2026-07-01",
+          "last_value": 22.525
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/us_treasury.csv",
+        "method": "fred_direct",
+        "unit": "usd",
+        "authority": "FRED 可流通国债市值（Market Value of Marketable Treasury Debt，十亿美元→美元）",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 1014,
+          "start": "1942-01-01",
+          "end": "2026-06-01",
+          "last_value_usd": 29386900000000.0
+        }
+      },
+      "documentation": {
+        "summary": "美国可流通国债总市值与全期限价格回报。",
+        "data_source": "回报：Yahoo Finance GOVT；市值：FRED MVMTD027MNFRBDAL（达拉斯联储编制的可流通国债市值）。",
+        "methodology": "直接采用月度市值序列（单位十亿美元 × 1e9 = 美元）；无季度缺口时无需填充。",
+        "frequency": "monthly",
+        "update_rule": "monthly_market",
+        "notes": "口径为可流通国债市值（含短中长期），体现美债整体规模；不含非市场化政府账户持有部分。",
+        "last_data_date": "2026-06-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2026-08-01",
+        "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
+      }
+    },
+    {
+      "id": "cn_treasury",
+      "name": "中国国债",
+      "name_en": "China Government Debt (Total)",
+      "pillar": "bond",
+      "region": "CN",
+      "return": {
+        "csv": "csv/rotation/returns/cn_treasury.csv",
+        "source": "yfinance",
+        "symbol": "511010.SS",
+        "frequency": "monthly",
+        "notes": "中国国债 ETF（价格代理）",
+        "stats": {
+          "exists": true,
+          "rows": 161,
+          "start": "2013-03-01",
+          "end": "2026-07-01",
+          "last_value": 140.854004
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/cn_treasury.csv",
+        "method": "fred_ratio_times_gdp_amount_scaled",
+        "unit": "usd",
+        "authority": "IMF 中国一般政府总债务/GDP（FRED GGGDTACNA188N）× 世界银行 GDP（美元）+ 国债 ETF 月度缩放",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 161,
+          "start": "2013-03-01",
+          "end": "2026-07-01",
+          "last_value_usd": 16915271836826.54
+        }
+      },
+      "documentation": {
+        "summary": "中国主权/一般政府债务总规模与国债价格回报（用于与美债横向对比整体债务体量）。",
+        "data_source": "回报：511010.SS；存量：FRED/IMF GGGDTACNA188N（一般政府总债务占 GDP%）× 世界银行中国现价美元 GDP。",
+        "methodology": "年度债务存量（美元）= 债务/GDP × GDP，视为该年 12 月末锚点；之后各月按国债 ETF 相对上一锚点向前缩放。",
+        "frequency": "monthly",
+        "update_rule": "annual_worldbank",
+        "notes": "中国缺乏与美债 MVMTD 完全同构的连续「国债市值」公开序列；采用 IMF 一般政府总债务反映整体政府债务规模。含中央+地方等一般政府口径，宽于狭义记账式国债余额。",
+        "last_data_date": "2026-07-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2027-12-31",
+        "update_schedule": "世界银行年度指标通常滞后 1–2 年，年内用价格指数外推"
+      }
+    },
+    {
+      "id": "gold",
+      "name": "黄金",
+      "name_en": "Gold",
+      "pillar": "precious_metal",
+      "region": "GLOBAL",
+      "return": {
+        "csv": "csv/rotation/returns/gold.csv",
+        "source": "yfinance",
+        "symbol": "GC=F",
+        "frequency": "monthly",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "rows": 312,
+          "start": "2000-08-01",
+          "end": "2026-07-01",
+          "last_value": 4135.700195
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/gold.csv",
+        "method": "gold_stock_value",
+        "unit": "usd",
+        "authority": "WGC 地上黄金存量 × 金价",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 312,
+          "start": "2000-08-01",
+          "end": "2026-07-01",
+          "last_value_usd": 28266146110643.25
+        }
+      },
+      "documentation": {
+        "summary": "黄金价格与地上存量市值。",
+        "data_source": "价格：COMEX GC=F；存量吨数：世界黄金协会（WGC）地上存量近似。",
+        "methodology": "市值 = 金价(美元/盎司) × 吨数 × 32150.75 盎司/吨。",
+        "frequency": "monthly",
+        "update_rule": "monthly_market",
+        "notes": "存量吨数为阶段性常数，未随年度 WGC 更新自动变动。",
+        "last_data_date": "2026-07-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2026-09-01",
+        "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
+      }
+    },
+    {
+      "id": "oil",
+      "name": "原油",
+      "name_en": "Crude Oil",
+      "pillar": "commodity",
+      "region": "GLOBAL",
+      "return": {
+        "csv": "csv/rotation/returns/oil.csv",
+        "source": "yfinance",
+        "symbol": "CL=F",
+        "frequency": "monthly",
+        "notes": "WTI 期货价格（回报）",
+        "stats": {
+          "exists": true,
+          "rows": 312,
+          "start": "2000-08-01",
+          "end": "2026-07-01",
+          "last_value": 85.07
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/oil.csv",
+        "method": "oil_trade_usd",
+        "unit": "usd",
+        "authority": "EIA STEO 全球液体燃料消费量 × (0.5×WTI+0.5×Brent) 月度美元交易额",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 438,
+          "start": "1990-01-01",
+          "end": "2026-06-01",
+          "last_value_usd": 258907689788.05
+        }
+      },
+      "documentation": {
+        "summary": "原油价格回报，以及全球液体燃料消费对应的月度美元交易总额代理。",
+        "data_source": "回报：Yahoo Finance CL=F；消费量：EIA STEO PATC_WORLD（全球液体燃料消费，百万桶/日）；油价：FRED MCOILWTICO（WTI）、MCOILBRENTEU（Brent）。原始分量保存在 marketcap/_components/oil_*。",
+        "methodology": "月度交易额(美元)=消费量(百万桶/日)×1e6×当月天数×加权均价；加权均价=0.5×WTI+0.5×Brent。用于刻画石油市场美元周转规模，非地下存量市值。",
+        "frequency": "monthly",
+        "update_rule": "monthly_market",
+        "notes": "优先 EIA STEO 月度消费；若 API 限流则回退 OWID 年消费量月度化。可选环境变量 EIA_API_KEY。",
+        "last_data_date": "2026-06-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2026-08-01",
+        "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
+      }
+    },
+    {
+      "id": "btc",
+      "name": "比特币",
+      "name_en": "Bitcoin",
+      "pillar": "crypto",
+      "region": "GLOBAL",
+      "return": {
+        "csv": "csv/rotation/returns/btc.csv",
+        "source": "yfinance",
+        "symbol": "BTC-USD",
+        "frequency": "monthly",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "rows": 143,
+          "start": "2014-09-01",
+          "end": "2026-07-01",
+          "last_value": 66175.34375
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/btc.csv",
+        "method": "blockchain_info",
+        "unit": "usd",
+        "authority": "Blockchain.com 流通市值",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 211,
+          "start": "2009-01-01",
+          "end": "2026-07-01",
+          "last_value_usd": 1284513319375.0
+        }
+      },
+      "documentation": {
+        "summary": "比特币价格与流通市值。",
+        "data_source": "价格：Yahoo Finance BTC-USD；市值：Blockchain.com market-cap 图表接口。",
+        "methodology": "直接采用公开流通市值时间序列（美元）。",
+        "frequency": "monthly",
+        "update_rule": "monthly_market",
+        "notes": "",
+        "last_data_date": "2026-07-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2026-09-01",
+        "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
+      }
+    },
+    {
+      "id": "us_housing",
+      "name": "美国房价",
+      "name_en": "US Housing",
+      "pillar": "real_estate",
+      "region": "US",
+      "return": {
+        "csv": "csv/rotation/returns/us_housing.csv",
+        "source": "fred",
+        "symbol": "CSUSHPISA",
+        "frequency": "monthly",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "rows": 472,
+          "start": "1987-01-01",
+          "end": "2026-04-01",
+          "last_value": 330.873
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/us_housing.csv",
+        "method": "fred_direct",
+        "unit": "usd",
+        "authority": "Fed Z.1 家庭自住房地产市值（季度，百万美元→美元；月度前向填充）",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 969,
+          "start": "1945-10-01",
+          "end": "2026-06-01",
+          "last_value_usd": 48549903894131.99
+        }
+      },
+      "documentation": {
+        "summary": "美国房价指数与家庭自住房地产市值。",
+        "data_source": "回报：FRED CSUSHPISA（Case-Shiller）；市值：FRED BOGZ1FL155035015Q（Fed Z.1）。",
+        "methodology": "Z.1 季度市值（百万美元×1e6）前向填充为月度；单位美元。Z.1 滞后时，用 Case-Shiller 指数趋势外推至展示截止月（临时估算）。",
+        "frequency": "monthly",
+        "update_rule": "quarterly_fred",
+        "notes": "口径为家庭部门自住房地产市值（含空地/移动房屋）。Z.1 未更新月份按 CSUSHPISA 环比趋势估算，正式数据发布后自动替换。",
+        "last_data_date": "2026-06-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2026-09-30",
+        "update_schedule": "美联储 Z.1 等季度序列通常滞后约 1 个季度发布"
+      }
+    },
+    {
+      "id": "cn_housing",
+      "name": "中国房价",
+      "name_en": "China Housing",
+      "pillar": "real_estate",
+      "region": "CN",
+      "return": {
+        "csv": "csv/rotation/returns/cn_housing.csv",
+        "source": "akshare_house",
+        "symbol": "macro_china_new_house_price",
+        "frequency": "monthly",
+        "notes": "70城新建商品住宅价格指数环比链式水平指数",
+        "stats": {
+          "exists": true,
+          "rows": 186,
+          "start": "2011-01-01",
+          "end": "2026-06-01",
+          "last_value": 219.107602
+        }
+      },
+      "marketcap": {
+        "csv": "csv/rotation/marketcap/cn_housing.csv",
+        "method": "cn_housing_zero_dep",
+        "unit": "usd",
+        "authority": "NBS 商品住宅销售面积/销售额 + 零折旧市场法（对齐中信建投 2024 年末约 395.6 万亿元锚点）→ 美元",
+        "notes": null,
+        "stats": {
+          "exists": true,
+          "applicable": true,
+          "rows": 317,
+          "start": "2000-02-01",
+          "end": "2026-06-01",
+          "last_value_usd": 57446530657416.2
+        }
+      },
+      "documentation": {
+        "summary": "中国住宅价格与居民住宅存量市值（零折旧市场法）。",
+        "data_source": "回报：AkShare/东财 70城新建商品住宅价格指数环比；市值原始序列：国家统计局「商品住宅销售面积累计值」「商品住宅销售额累计值」（月度）；汇率：FRED DEXCHUS（回退 CNY=X）。",
+        "methodology": "零折旧市场法（参考中信建投《中国地产财富模式的过去和未来》）：(1) 将销售面积累计值差分得到当月销售面积；(2) 对历史销售面积累加、不做物理折旧，得到存量面积；(3) 当期均价=销售额累计/面积累计；(4) 市值=存量面积×当期均价；(5) 用报告给出的 2024 年末约 395.6 万亿元人民币校准样本起点前的存量基数；(6) 按月汇率换算为美元。原始累计值保存在 marketcap/_components/。",
+        "frequency": "monthly",
+        "update_rule": "monthly_nbs",
+        "notes": "强调地产金融属性：存量按当期市场化均价重估、不做实体折旧。国家统计局不单列 1 月（1–2 月合并发布），市值序列对缺月做前向填充，避免规模占比池在 1 月突然少掉中国住房。交叉验证量级参考报告约 395–405 万亿元人民币。",
+        "last_data_date": "2026-06-01",
+        "last_updated": "2026-07-22T11:23:52",
+        "expected_next_update": "2026-08-15",
+        "update_schedule": "国家统计局月度数据通常于次月中旬左右发布，预计下次更新为数据截止月+1个月的15日前后"
+      }
+    }
+  ]
+}

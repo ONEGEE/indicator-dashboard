@@ -1,0 +1,462 @@
+{
+  "mode": "us_gics",
+  "title": "美股轮动",
+  "description": "S&P 500 GICS 一级行业（Sector）与二级行业组（Industry Group）相对强弱轮动（JdK RRG）。跟踪标准指数，不使用 ETF。",
+  "taxonomy": "gics",
+  "rrg": {
+    "method": "jdk",
+    "base_frequency": "daily",
+    "frequency_options": [
+      "daily",
+      "weekly",
+      "monthly",
+      "yearly"
+    ],
+    "window": 14,
+    "roc_period": 10,
+    "trail_default": {
+      "daily": 20,
+      "weekly": 26,
+      "monthly": 12,
+      "yearly": 5
+    },
+    "notes": "GICS 一级默认展示；二级需先选一级行业再下钻。标准 JdK：动量由 RS-Ratio 变化率推导；JdK/ROC 随采样频率自动匹配（月 12/3）。同质行业组合易见顺时针轮动。",
+    "default_level": "L1",
+    "require_parent_for_l2": true,
+    "default_cycle": "nber"
+  },
+  "benchmarks": [
+    {
+      "id": "us_sp500",
+      "label": "标普500"
+    },
+    {
+      "id": "us_djia",
+      "label": "道琼斯"
+    },
+    {
+      "id": "us_nasdaq",
+      "label": "纳斯达克"
+    }
+  ],
+  "assets": [
+    {
+      "id": "us_sp500",
+      "name": "标普500",
+      "name_en": "S&P 500",
+      "group": "benchmark",
+      "level": "bench",
+      "symbol": "^GSPC",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true
+    },
+    {
+      "id": "us_djia",
+      "name": "道琼斯",
+      "name_en": "Dow Jones Industrial Average",
+      "group": "benchmark",
+      "level": "bench",
+      "symbol": "^DJI",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true
+    },
+    {
+      "id": "us_nasdaq",
+      "name": "纳斯达克综合",
+      "name_en": "Nasdaq Composite",
+      "group": "benchmark",
+      "level": "bench",
+      "symbol": "^IXIC",
+      "source": "yfinance",
+      "vehicle": "Index",
+      "benchmark_candidate": true
+    },
+    {
+      "id": "gics_l1_10",
+      "name": "能源",
+      "name_en": "Energy",
+      "group": "gics_10",
+      "level": "L1",
+      "parent_id": null,
+      "symbol": "^GSPE",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l1_15",
+      "name": "原材料",
+      "name_en": "Materials",
+      "group": "gics_15",
+      "level": "L1",
+      "parent_id": null,
+      "symbol": "^SP500-15",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l1_20",
+      "name": "工业",
+      "name_en": "Industrials",
+      "group": "gics_20",
+      "level": "L1",
+      "parent_id": null,
+      "symbol": "^SP500-20",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l1_25",
+      "name": "可选消费",
+      "name_en": "Consumer Discretionary",
+      "group": "gics_25",
+      "level": "L1",
+      "parent_id": null,
+      "symbol": "^SP500-25",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l1_30",
+      "name": "必需消费",
+      "name_en": "Consumer Staples",
+      "group": "gics_30",
+      "level": "L1",
+      "parent_id": null,
+      "symbol": "^SP500-30",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l1_35",
+      "name": "医疗保健",
+      "name_en": "Health Care",
+      "group": "gics_35",
+      "level": "L1",
+      "parent_id": null,
+      "symbol": "^SP500-35",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l1_40",
+      "name": "金融",
+      "name_en": "Financials",
+      "group": "gics_40",
+      "level": "L1",
+      "parent_id": null,
+      "symbol": "^SP500-40",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l1_45",
+      "name": "信息技术",
+      "name_en": "Information Technology",
+      "group": "gics_45",
+      "level": "L1",
+      "parent_id": null,
+      "symbol": "^SP500-45",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l1_50",
+      "name": "通信服务",
+      "name_en": "Communication Services",
+      "group": "gics_50",
+      "level": "L1",
+      "parent_id": null,
+      "symbol": "^SP500-50",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l1_55",
+      "name": "公用事业",
+      "name_en": "Utilities",
+      "group": "gics_55",
+      "level": "L1",
+      "parent_id": null,
+      "symbol": "^SP500-55",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l1_60",
+      "name": "房地产",
+      "name_en": "Real Estate",
+      "group": "gics_60",
+      "level": "L1",
+      "parent_id": null,
+      "symbol": "^SP500-60",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_1010",
+      "name": "能源",
+      "name_en": "Energy",
+      "group": "gics_10",
+      "level": "L2",
+      "parent_id": "gics_l1_10",
+      "symbol": "^SP500-1010",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_1510",
+      "name": "原材料",
+      "name_en": "Materials",
+      "group": "gics_15",
+      "level": "L2",
+      "parent_id": "gics_l1_15",
+      "symbol": "^SP500-1510",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_2010",
+      "name": "资本货物",
+      "name_en": "Capital Goods",
+      "group": "gics_20",
+      "level": "L2",
+      "parent_id": "gics_l1_20",
+      "symbol": "^SP500-2010",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_2020",
+      "name": "商业与专业服务",
+      "name_en": "Commercial & Professional Services",
+      "group": "gics_20",
+      "level": "L2",
+      "parent_id": "gics_l1_20",
+      "symbol": "^SP500-2020",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_2030",
+      "name": "运输",
+      "name_en": "Transportation",
+      "group": "gics_20",
+      "level": "L2",
+      "parent_id": "gics_l1_20",
+      "symbol": "^SP500-2030",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_2510",
+      "name": "汽车与零部件",
+      "name_en": "Automobiles & Components",
+      "group": "gics_25",
+      "level": "L2",
+      "parent_id": "gics_l1_25",
+      "symbol": "^SP500-2510",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_2520",
+      "name": "耐用消费品与服装",
+      "name_en": "Consumer Durables & Apparel",
+      "group": "gics_25",
+      "level": "L2",
+      "parent_id": "gics_l1_25",
+      "symbol": "^SP500-2520",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_2530",
+      "name": "消费者服务",
+      "name_en": "Consumer Services",
+      "group": "gics_25",
+      "level": "L2",
+      "parent_id": "gics_l1_25",
+      "symbol": "^SP500-2530",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_2550",
+      "name": "零售业",
+      "name_en": "Retailing",
+      "group": "gics_25",
+      "level": "L2",
+      "parent_id": "gics_l1_25",
+      "symbol": "^SP500-2550",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_3010",
+      "name": "食品与必需品零售",
+      "name_en": "Food & Staples Retailing",
+      "group": "gics_30",
+      "level": "L2",
+      "parent_id": "gics_l1_30",
+      "symbol": "^SP500-3010",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_3020",
+      "name": "食品饮料与烟草",
+      "name_en": "Food, Beverage & Tobacco",
+      "group": "gics_30",
+      "level": "L2",
+      "parent_id": "gics_l1_30",
+      "symbol": "^SP500-3020",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_3030",
+      "name": "家居与个人用品",
+      "name_en": "Household & Personal Products",
+      "group": "gics_30",
+      "level": "L2",
+      "parent_id": "gics_l1_30",
+      "symbol": "^SP500-3030",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_3510",
+      "name": "医疗设备与服务",
+      "name_en": "Health Care Equipment & Services",
+      "group": "gics_35",
+      "level": "L2",
+      "parent_id": "gics_l1_35",
+      "symbol": "^SP500-3510",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_3520",
+      "name": "制药生物科技与生命科学",
+      "name_en": "Pharmaceuticals, Biotechnology & Life Sciences",
+      "group": "gics_35",
+      "level": "L2",
+      "parent_id": "gics_l1_35",
+      "symbol": "^SP500-3520",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_4010",
+      "name": "银行",
+      "name_en": "Banks",
+      "group": "gics_40",
+      "level": "L2",
+      "parent_id": "gics_l1_40",
+      "symbol": "^SP500-4010",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_4020",
+      "name": "多元金融",
+      "name_en": "Diversified Financials",
+      "group": "gics_40",
+      "level": "L2",
+      "parent_id": "gics_l1_40",
+      "symbol": "^SP500-4020",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_4030",
+      "name": "保险",
+      "name_en": "Insurance",
+      "group": "gics_40",
+      "level": "L2",
+      "parent_id": "gics_l1_40",
+      "symbol": "^SP500-4030",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_4510",
+      "name": "软件与服务",
+      "name_en": "Software & Services",
+      "group": "gics_45",
+      "level": "L2",
+      "parent_id": "gics_l1_45",
+      "symbol": "^SP500-4510",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_4520",
+      "name": "技术硬件与设备",
+      "name_en": "Technology Hardware & Equipment",
+      "group": "gics_45",
+      "level": "L2",
+      "parent_id": "gics_l1_45",
+      "symbol": "^SP500-4520",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_4530",
+      "name": "半导体与设备",
+      "name_en": "Semiconductors & Semiconductor Equipment",
+      "group": "gics_45",
+      "level": "L2",
+      "parent_id": "gics_l1_45",
+      "symbol": "^SP500-4530",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_5010",
+      "name": "电信服务",
+      "name_en": "Telecommunication Services",
+      "group": "gics_50",
+      "level": "L2",
+      "parent_id": "gics_l1_50",
+      "symbol": "^SP500-5010",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_5020",
+      "name": "媒体与娱乐",
+      "name_en": "Media & Entertainment",
+      "group": "gics_50",
+      "level": "L2",
+      "parent_id": "gics_l1_50",
+      "symbol": "^SP500-5020",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_5510",
+      "name": "公用事业",
+      "name_en": "Utilities",
+      "group": "gics_55",
+      "level": "L2",
+      "parent_id": "gics_l1_55",
+      "symbol": "^SP500-5510",
+      "source": "yfinance",
+      "vehicle": "Index"
+    },
+    {
+      "id": "gics_l2_6010",
+      "name": "房地产",
+      "name_en": "Real Estate",
+      "group": "gics_60",
+      "level": "L2",
+      "parent_id": "gics_l1_60",
+      "symbol": "^SP500-6010",
+      "source": "yfinance",
+      "vehicle": "Index"
+    }
+  ]
+}

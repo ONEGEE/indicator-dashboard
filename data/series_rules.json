@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "description": "数据去重与拼接规则。deprecated 序列不再进入 catalog，仅保留原始文件供拼接或交叉验证。",
+  "stitched": [
+    {
+      "id": "us_cpi",
+      "name": "美国CPI",
+      "output": "csv/macro/us_cpi.csv",
+      "method": "stitch_us_cpi",
+      "components": [
+        "csv/longrun/us_cpi_1913.csv (<1947, CPIAUCNS)",
+        "fred CPIAUCSL (>=1947)"
+      ],
+      "notes": "1913年起完整月度 CPI；1947年后以 CPIAUCSL 为准"
+    },
+    {
+      "id": "us_sp500_monthly",
+      "name": "标普500(月度长历史)",
+      "output": "csv/us_sp500_monthly.csv",
+      "method": "stitch_us_sp500_monthly",
+      "components": [
+        "csv/longrun/us_sp500_shiller.csv (<2023-10)",
+        "csv/us_sp500.csv 月末收盘 (>=2023-10)"
+      ],
+      "notes": "1871年起月度价格；日频交易请用 us_sp500"
+    },
+    {
+      "id": "us_bond_10y_monthly",
+      "name": "美国10年期国债收益率(月度长历史)",
+      "output": "csv/macro/us_bond_10y_monthly.csv",
+      "method": "stitch_us_bond_10y_monthly",
+      "components": [
+        "csv/longrun/jst_usa_ltrate.csv (<1953-04, 年度)",
+        "csv/longrun/us_gs10_monthly.csv (>=1953-04)"
+      ],
+      "notes": "1870年起；日频请用 us_treasury_10y (DGS10, 1962+)"
+    }
+  ],
+  "deprecated": [
+    {
+      "id": "us_cpi_1913",
+      "reason": "已拼接进 us_cpi，仅保留组件文件",
+      "keep_file": "csv/longrun/us_cpi_1913.csv"
+    },
+    {
+      "id": "us_yield_10y_spot",
+      "reason": "与 us_treasury_10y (FRED DGS10) 重复，已删除",
+      "keep_file": null
+    },
+    {
+      "id": "us_sp500_shiller",
+      "reason": "已拼接进 us_sp500_monthly，仅保留组件文件",
+      "keep_file": "csv/longrun/us_sp500_shiller.csv"
+    },
+    {
+      "id": "us_gs10_monthly",
+      "reason": "已拼接进 us_bond_10y_monthly，仅保留组件文件",
+      "keep_file": "csv/longrun/us_gs10_monthly.csv"
+    }
+  ],
+  "kept_overlap_notes": [
+    {
+      "ids": ["jst_usa_cpi", "us_cpi"],
+      "reason": "JST 为 18 国年度面板；us_cpi 为美国月度官方序列，用途不同，均保留"
+    },
+    {
+      "ids": ["commodity_gold_real", "metal_gold"],
+      "reason": "Jacks 年度实际价格 vs 期货日频，口径不同，均保留"
+    },
+    {
+      "ids": ["us_treasury_10y", "us_bond_10y_monthly"],
+      "reason": "日频 DGS10(1962+) vs 月度长历史(1870+)，互补而非重复"
+    }
+  ]
+}

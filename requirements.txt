@@ -1,0 +1,2 @@
+# Streamlit Community Cloud 运行时依赖
+streamlit>=1.36.0
