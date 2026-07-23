@@ -24,4 +24,4 @@ data/raw/
 web/node_modules/
 web/dist/
 
-# Streamlit 生产构建目录 static/ 需提交，供 Community Cloud 部署
+# static/ 由 build 生成；GitHub Pages / 本地预览需要时可提交
