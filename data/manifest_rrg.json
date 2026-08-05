@@ -138,6 +138,16 @@
       "vehicle": "ETF"
     },
     {
+      "id": "btc",
+      "name": "比特币",
+      "name_en": "Bitcoin",
+      "group": "commodity",
+      "symbol": "BTC-USD",
+      "source": "yfinance",
+      "vehicle": "Spot",
+      "notes": "比特币现货（Yahoo BTC-USD）；归入商品大类，作另类风险资产参照"
+    },
+    {
       "id": "hk_hsi",
       "name": "恒生指数",
       "name_en": "Hang Seng",
