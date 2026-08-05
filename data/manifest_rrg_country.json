@@ -1,7 +1,7 @@
 {
   "mode": "country",
   "title": "主要国家指数轮动",
-  "description": "全球主要国家/地区股票指数相对强弱轮动（JdK RRG）。基准可在列表中任选；MSCI 系列在 Yahoo 无纯指数时使用对应 MSCI ETF 代理并标注。",
+  "description": "全球主要国家/地区股票指数相对强弱轮动（JdK RRG）。默认基准为 MSCI 全球（ACWI）；也可在列表中任选其它指数。MSCI 系列在 Yahoo 无纯指数时使用对应 ETF 代理并标注。",
   "taxonomy": "country_equity_index",
   "rrg": {
     "method": "jdk",
@@ -20,10 +20,15 @@
       "monthly": 12,
       "yearly": 5
     },
-    "notes": "按地区分组展示。标准 JdK 公式；JdK/ROC 随采样频率自动匹配。指数同类可比但各国周期不同步，顺时针弱于单一市场行业。",
-    "default_cycle": "nber"
+    "notes": "按地区分组展示。默认相对 MSCI 全球（ACWI）衡量各国强弱。标准 JdK 公式；JdK/ROC 随采样频率自动匹配。指数同类可比但各国周期不同步，顺时针弱于单一市场行业。",
+    "default_cycle": "nber",
+    "default_benchmark": "msci_acwi"
   },
   "benchmarks": [
+    {
+      "id": "msci_acwi",
+      "label": "MSCI全球"
+    },
     {
       "id": "cn_sse",
       "label": "上证指数"
@@ -206,6 +211,17 @@
     }
   ],
   "assets": [
+    {
+      "id": "msci_acwi",
+      "name": "MSCI全球",
+      "name_en": "MSCI ACWI",
+      "group": "global",
+      "symbol": "ACWI",
+      "source": "yfinance",
+      "vehicle": "MSCI Index ETF",
+      "benchmark_candidate": true,
+      "notes": "MSCI All Country World Index（含发达+新兴）；Yahoo 无纯指数代码，使用 iShares ACWI ETF 代理"
+    },
     {
       "id": "cn_sse",
       "name": "上证指数",

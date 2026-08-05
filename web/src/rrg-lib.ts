@@ -56,6 +56,7 @@ export type RrgData = {
     default_level?: 'L1' | 'L2'
     require_parent_for_l2?: boolean
     default_cycle?: string
+    default_benchmark?: string
   }
   benchmarks?: { id: string; label: string }[]
   counts: { assets: number }
@@ -136,8 +137,9 @@ export const RRG_MODE_GUIDES: Record<RrgMode, RrgModeGuide> = {
   country: {
     rotation: 'medium',
     summary:
-      '全球主要国家/地区宽基指数相对 MSCI ACWI 或自选基准。指数同类可比，但各国宏观周期不同步，顺时针形态通常弱于单一市场行业。',
+      '全球主要国家/地区宽基指数相对 MSCI 全球（ACWI，默认）或自选基准。指数同类可比，但各国宏观周期不同步，顺时针形态通常弱于单一市场行业。',
     tips: [
+      '默认基准为 MSCI 全球（ACWI ETF 代理），衡量各国相对全球的强弱',
       '按地区分组勾选，同图保持 8 条以内更易读',
       '部分 MSCI 指数使用 ETF 代理，已在数据中标注',
       '与美股行业模式共用同一套标准 JdK 公式',
@@ -171,6 +173,7 @@ export const GROUP_COLORS: Record<string, string> = {
   asia_pacific: '#0f766e',
   mea: '#b45309',
   msci: '#7c3aed',
+  global: '#0f5c4c',
 }
 
 /** 同大类内多标的时用相近色区分轨迹 */
@@ -187,9 +190,11 @@ export const GROUP_SERIES_COLORS: Record<string, string[]> = {
   asia_pacific: ['#0f766e', '#14b8a6', '#115e59', '#0d9488', '#134e4a'],
   mea: ['#b45309', '#d97706', '#92400e', '#c2410c', '#9a3412'],
   msci: ['#7c3aed', '#8b5cf6', '#6d28d9', '#a78bfa', '#5b21b6'],
+  global: ['#0f5c4c', '#14806a', '#115e59', '#047857'],
 }
 
 export const GROUP_ORDER = [
+  'global',
   'china',
   'north_america',
   'latin_america',
@@ -210,6 +215,7 @@ export const GROUP_LABELS: Record<string, string> = {
   commodity: '商品',
   cash: '货币',
   fx: '外汇',
+  global: '全球',
   china: '中国',
   north_america: '北美',
   latin_america: '拉美',
@@ -482,8 +488,15 @@ export function sectorDefaultBenchmark(
 
 export function defaultBenchmarkForMode(mode: RrgMode, data: RrgData | null): string {
   if (!data) return ''
+  const preferred = data.rrg?.default_benchmark
+  if (preferred && data.series.some((s) => s.id === preferred)) return preferred
   if (mode === 'country') {
-    return data.benchmarks?.find((b) => b.id === 'cn_csi300')?.id ?? data.benchmarks?.[0]?.id ?? ''
+    return (
+      data.benchmarks?.find((b) => b.id === 'msci_acwi')?.id ??
+      data.benchmarks?.find((b) => b.id === 'cn_csi300')?.id ??
+      data.benchmarks?.[0]?.id ??
+      ''
+    )
   }
   if (mode === 'cn_sw') {
     return data.benchmarks?.find((b) => b.id === 'cn_sw_a')?.id ?? data.benchmarks?.[0]?.id ?? ''
