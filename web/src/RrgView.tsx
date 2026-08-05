@@ -29,7 +29,8 @@ import {
   jdkParamsFor,
   sectorDefaultBenchmark,
   defaultBenchmarkForMode,
-  colorForSeries,
+  colorForRrgSeries,
+  colorForSectorGroup,
   computeJdkRrg,
   quadrantOf,
   resamplePrices,
@@ -614,12 +615,8 @@ export default function RrgView() {
     }
   }, [mode, modeMeta.url])
 
-  const colorOf = (s: RrgSeriesMeta) => {
-    const g = s.group ?? ''
-    const peers = data?.series.filter((x) => (x.group ?? '') === g) ?? []
-    const idx = Math.max(0, peers.findIndex((x) => x.id === s.id))
-    return colorForSeries(g, idx)
-  }
+  const colorOf = (s: RrgSeriesMeta) => colorForRrgSeries(s, data?.series ?? [])
+  const groupColor = (group: string) => colorForSectorGroup(group, data?.series ?? []) || GROUP_COLORS[group] || 'var(--accent)'
   const seriesById = useMemo(() => {
     const m = new Map<string, RrgSeriesMeta>()
     data?.series.forEach((s) => m.set(s.id, s))
@@ -1624,7 +1621,7 @@ export default function RrgView() {
                   key={group}
                   type="button"
                   className={`rrg-group-chip ${state}`}
-                  style={{ ['--group-color' as string]: GROUP_COLORS[group] ?? 'var(--accent)' }}
+                  style={{ ['--group-color' as string]: groupColor(group) }}
                   onClick={() => toggleGroup(group)}
                   onDoubleClick={() => selectOnlyGroup(group)}
                   title={`单击切换 ${label}；双击仅看 ${label}`}
@@ -1640,7 +1637,7 @@ export default function RrgView() {
             {groupedSeries.map(({ group, label, items }) => (
               <div className="rrg-assets-group" key={group}>
                 <span className="rrg-assets-group-label">
-                  <span className="rrg-group-dot" style={{ background: GROUP_COLORS[group] ?? 'var(--muted)' }} />
+                  <span className="rrg-group-dot" style={{ background: groupColor(group) }} />
                   {label}
                 </span>
                 <div className="rrg-assets-chips">
@@ -1911,8 +1908,8 @@ export default function RrgView() {
                     {row.isBench ? <span>基准</span> : null}
                   </td>
                   <td>
-                    <span className="badge" style={{ borderColor: GROUP_COLORS[row.group] ?? 'var(--line)' }}>
-                      <span className="rrg-group-dot" style={{ background: GROUP_COLORS[row.group] ?? 'var(--muted)' }} />
+                    <span className="badge" style={{ borderColor: groupColor(row.group) }}>
+                      <span className="rrg-group-dot" style={{ background: groupColor(row.group) }} />
                       {row.groupLabel}
                     </span>
                   </td>

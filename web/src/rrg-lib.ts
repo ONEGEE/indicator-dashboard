@@ -230,6 +230,101 @@ export function colorForSeries(group: string | undefined, indexInGroup: number):
   return palette[indexInGroup % palette.length] ?? GROUP_COLORS[group ?? ''] ?? SERIES_PALETTE[0]
 }
 
+/** 行业轮动（GICS / 申万）用：一级行业足够多，需独立长调色板 */
+export const SECTOR_PALETTE = [
+  '#0f5c4c',
+  '#1d4ed8',
+  '#be123c',
+  '#b45309',
+  '#6d28d9',
+  '#0e7490',
+  '#166534',
+  '#c2410c',
+  '#7c3aed',
+  '#0369a1',
+  '#a16207',
+  '#9f1239',
+  '#0f766e',
+  '#4338ca',
+  '#ea580c',
+  '#15803d',
+  '#db2777',
+  '#0284c7',
+  '#854d0e',
+  '#4c1d95',
+  '#115e59',
+  '#b91c1c',
+  '#1e40af',
+  '#ca8a04',
+  '#5b21b6',
+  '#155e75',
+  '#9a3412',
+  '#065f46',
+  '#7e22ce',
+  '#9f2d00',
+  '#1e3a8a',
+  '#3f6212',
+]
+
+function isSectorGroup(group: string | undefined): boolean {
+  const g = group ?? ''
+  return g.startsWith('gics_') || g.startsWith('sw_')
+}
+
+/** 行业组在一级列表中的稳定序号（按 L1 出现顺序） */
+export function sectorGroupIndex(group: string | undefined, allSeries: RrgSeriesMeta[]): number {
+  if (!group || !isSectorGroup(group)) return -1
+  const seen: string[] = []
+  for (const s of allSeries) {
+    if (s.level !== 'L1') continue
+    const g = s.group ?? ''
+    if (!g || seen.includes(g)) continue
+    seen.push(g)
+  }
+  return seen.indexOf(group)
+}
+
+export function colorForSectorGroup(group: string | undefined, allSeries: RrgSeriesMeta[]): string {
+  const idx = sectorGroupIndex(group, allSeries)
+  if (idx < 0) return GROUP_COLORS[group ?? ''] ?? 'var(--accent)'
+  return SECTOR_PALETTE[idx % SECTOR_PALETTE.length]
+}
+
+/** 混入亮度，区分同一一级下的二级行业 */
+function mixHex(hex: string, toward: '#000000' | '#ffffff', amount: number): string {
+  const h = hex.replace('#', '')
+  if (h.length !== 6) return hex
+  const t = toward === '#ffffff' ? 255 : 0
+  const mix = (c: number) => Math.round(c + (t - c) * amount)
+  const r = mix(parseInt(h.slice(0, 2), 16))
+  const g = mix(parseInt(h.slice(2, 4), 16))
+  const b = mix(parseInt(h.slice(4, 6), 16))
+  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
+}
+
+/**
+ * RRG 轨迹着色：
+ * - 行业模式：一级行业各用不同色；二级在同组内用深浅变化区分
+ * - 其它模式：沿用大类调色板 + 组内序号
+ */
+export function colorForRrgSeries(series: RrgSeriesMeta, allSeries: RrgSeriesMeta[]): string {
+  const g = series.group ?? ''
+  if (isSectorGroup(g)) {
+    const base = colorForSectorGroup(g, allSeries)
+    if (series.level === 'L2') {
+      const siblings = allSeries.filter((x) => x.group === g && x.level === 'L2')
+      const sibIdx = Math.max(0, siblings.findIndex((x) => x.id === series.id))
+      // 在基色上交替加深/变亮，避免二级互相撞色
+      const step = 0.12 + (sibIdx % 5) * 0.1
+      return mixHex(base, sibIdx % 2 === 0 ? '#ffffff' : '#000000', Math.min(step, 0.45))
+    }
+    return base
+  }
+  const peers = allSeries.filter((x) => (x.group ?? '') === g)
+  const idx = Math.max(0, peers.findIndex((x) => x.id === series.id))
+  return colorForSeries(g, idx)
+}
+
 export const SERIES_PALETTE = [
   '#0f5c4c',
   '#3d6b8c',
