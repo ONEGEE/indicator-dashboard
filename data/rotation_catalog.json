@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-22T11:23:52",
+  "generated_at": "2026-08-05T10:24:23",
   "layer": "rotation",
   "description": "全球资产轮动：月度回报 + 市值/存量（含指标说明）",
   "validation": {
-    "generated_at": "2026-07-22T11:23:51",
+    "generated_at": "2026-08-05T09:52:17",
     "pairs": [
       {
         "id": "validate_us_equity_wb_spy",
@@ -21,10 +21,10 @@
         "name": "BTC市值: Blockchain.com vs 价格×流通量（组件）",
         "method": "monthly_overlap",
         "overlap_start": "2014-09-01",
-        "overlap_end": "2026-07-01",
-        "rows": 143,
-        "correlation": 0.998,
-        "mean_abs_diff": 47717771503.6502,
+        "overlap_end": "2026-08-01",
+        "rows": 144,
+        "correlation": 0.9987,
+        "mean_abs_diff": 44952989686.7899,
         "csv": "csv/validate/validate_btc_blockchain_yfinance.csv"
       },
       {
@@ -32,10 +32,10 @@
         "name": "黄金存量价值: WGC法 vs GLD规模代理",
         "method": "monthly_overlap",
         "overlap_start": "2004-11-01",
-        "overlap_end": "2026-07-01",
-        "rows": 261,
+        "overlap_end": "2026-08-01",
+        "rows": 262,
         "correlation": 0.9996,
-        "mean_abs_diff": 10322457938629.055,
+        "mean_abs_diff": 10388323427815.043,
         "csv": "csv/validate/validate_gold_stock_wgc_gld.csv"
       },
       {
@@ -90,10 +90,10 @@
         "notes": "SPY 复权收盘价转月度",
         "stats": {
           "exists": true,
-          "rows": 403,
+          "rows": 404,
           "start": "1993-01-01",
-          "end": "2026-07-01",
-          "last_value": 748.280029
+          "end": "2026-08-01",
+          "last_value": 771.330017
         }
       },
       "marketcap": {
@@ -105,10 +105,10 @@
         "stats": {
           "exists": true,
           "applicable": true,
-          "rows": 403,
+          "rows": 404,
           "start": "1993-01-01",
-          "end": "2026-07-01",
-          "last_value_usd": 76048458010068.47
+          "end": "2026-08-01",
+          "last_value_usd": 78391051638356.69
         }
       },
       "documentation": {
@@ -118,9 +118,9 @@
         "frequency": "monthly",
         "update_rule": "monthly_market",
         "notes": "World Bank 市值为上市公司总市值，与 SPY 成分并不完全一致，仅作规模代理。",
-        "last_data_date": "2026-07-01",
-        "last_updated": "2026-07-22T11:23:52",
-        "expected_next_update": "2026-09-01",
+        "last_data_date": "2026-08-01",
+        "last_updated": "2026-08-05T10:24:23",
+        "expected_next_update": "2026-10-01",
         "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
       }
     },
@@ -167,7 +167,7 @@
         "update_rule": "monthly_market",
         "notes": "世界银行口径含沪深上市股票，与沪深300不完全等同。",
         "last_data_date": "2026-07-01",
-        "last_updated": "2026-07-22T11:23:52",
+        "last_updated": "2026-08-05T10:24:23",
         "expected_next_update": "2026-09-01",
         "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
       }
@@ -186,10 +186,10 @@
         "notes": null,
         "stats": {
           "exists": true,
-          "rows": 439,
+          "rows": 440,
           "start": "1990-01-01",
-          "end": "2026-07-01",
-          "last_value": 24974.070312
+          "end": "2026-08-01",
+          "last_value": 25805.650391
         }
       },
       "marketcap": {
@@ -201,10 +201,10 @@
         "stats": {
           "exists": true,
           "applicable": true,
-          "rows": 439,
+          "rows": 440,
           "start": "1990-01-01",
-          "end": "2026-07-01",
-          "last_value_usd": 5933264820678.3
+          "end": "2026-08-01",
+          "last_value_usd": 6130829124829.66
         }
       },
       "documentation": {
@@ -214,9 +214,9 @@
         "frequency": "monthly",
         "update_rule": "monthly_market",
         "notes": "",
-        "last_data_date": "2026-07-01",
-        "last_updated": "2026-07-22T11:23:52",
-        "expected_next_update": "2026-09-01",
+        "last_data_date": "2026-08-01",
+        "last_updated": "2026-08-05T10:24:23",
+        "expected_next_update": "2026-10-01",
         "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
       }
     },
@@ -234,10 +234,10 @@
         "notes": "TOPIX ETF 代理",
         "stats": {
           "exists": true,
-          "rows": 211,
+          "rows": 212,
           "start": "2009-01-01",
-          "end": "2026-07-01",
-          "last_value": 423.5
+          "end": "2026-08-01",
+          "last_value": 419.700012
         }
       },
       "marketcap": {
@@ -249,10 +249,10 @@
         "stats": {
           "exists": true,
           "applicable": true,
-          "rows": 211,
+          "rows": 212,
           "start": "2009-01-01",
-          "end": "2026-07-01",
-          "last_value_usd": 9178504820399.64
+          "end": "2026-08-01",
+          "last_value_usd": 9096147780788.72
         }
       },
       "documentation": {
@@ -262,9 +262,9 @@
         "frequency": "monthly",
         "update_rule": "monthly_market",
         "notes": "",
-        "last_data_date": "2026-07-01",
-        "last_updated": "2026-07-22T11:23:52",
-        "expected_next_update": "2026-09-01",
+        "last_data_date": "2026-08-01",
+        "last_updated": "2026-08-05T10:24:23",
+        "expected_next_update": "2026-10-01",
         "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
       }
     },
@@ -282,10 +282,10 @@
         "notes": "Vanguard FTSE Europe ETF",
         "stats": {
           "exists": true,
-          "rows": 257,
+          "rows": 258,
           "start": "2005-03-01",
-          "end": "2026-07-01",
-          "last_value": 88.760002
+          "end": "2026-08-01",
+          "last_value": 91.839996
         }
       },
       "marketcap": {
@@ -297,10 +297,10 @@
         "stats": {
           "exists": true,
           "applicable": true,
-          "rows": 257,
+          "rows": 258,
           "start": "2005-03-01",
-          "end": "2026-07-01",
-          "last_value_usd": 7254720235094.72
+          "end": "2026-08-01",
+          "last_value_usd": 7506460835826.83
         }
       },
       "documentation": {
@@ -310,9 +310,9 @@
         "frequency": "monthly",
         "update_rule": "monthly_market",
         "notes": "未覆盖全部欧洲上市市场，属于主要经济体代理。",
-        "last_data_date": "2026-07-01",
-        "last_updated": "2026-07-22T11:23:52",
-        "expected_next_update": "2026-09-01",
+        "last_data_date": "2026-08-01",
+        "last_updated": "2026-08-05T10:24:23",
+        "expected_next_update": "2026-10-01",
         "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
       }
     },
@@ -330,10 +330,10 @@
         "notes": "iShares 美国国债 ETF（全期限价格代理）",
         "stats": {
           "exists": true,
-          "rows": 174,
+          "rows": 175,
           "start": "2012-02-01",
-          "end": "2026-07-01",
-          "last_value": 22.525
+          "end": "2026-08-01",
+          "last_value": 22.49
         }
       },
       "marketcap": {
@@ -359,7 +359,7 @@
         "update_rule": "monthly_market",
         "notes": "口径为可流通国债市值（含短中长期），体现美债整体规模；不含非市场化政府账户持有部分。",
         "last_data_date": "2026-06-01",
-        "last_updated": "2026-07-22T11:23:52",
+        "last_updated": "2026-08-05T10:24:23",
         "expected_next_update": "2026-08-01",
         "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
       }
@@ -378,10 +378,10 @@
         "notes": "中国国债 ETF（价格代理）",
         "stats": {
           "exists": true,
-          "rows": 161,
+          "rows": 162,
           "start": "2013-03-01",
-          "end": "2026-07-01",
-          "last_value": 140.854004
+          "end": "2026-08-01",
+          "last_value": 141.018005
         }
       },
       "marketcap": {
@@ -393,10 +393,10 @@
         "stats": {
           "exists": true,
           "applicable": true,
-          "rows": 161,
+          "rows": 162,
           "start": "2013-03-01",
-          "end": "2026-07-01",
-          "last_value_usd": 16915271836826.54
+          "end": "2026-08-01",
+          "last_value_usd": 16934966906065.16
         }
       },
       "documentation": {
@@ -406,8 +406,8 @@
         "frequency": "monthly",
         "update_rule": "annual_worldbank",
         "notes": "中国缺乏与美债 MVMTD 完全同构的连续「国债市值」公开序列；采用 IMF 一般政府总债务反映整体政府债务规模。含中央+地方等一般政府口径，宽于狭义记账式国债余额。",
-        "last_data_date": "2026-07-01",
-        "last_updated": "2026-07-22T11:23:52",
+        "last_data_date": "2026-08-01",
+        "last_updated": "2026-08-05T10:24:23",
         "expected_next_update": "2027-12-31",
         "update_schedule": "世界银行年度指标通常滞后 1–2 年，年内用价格指数外推"
       }
@@ -426,10 +426,10 @@
         "notes": null,
         "stats": {
           "exists": true,
-          "rows": 312,
+          "rows": 313,
           "start": "2000-08-01",
-          "end": "2026-07-01",
-          "last_value": 4135.700195
+          "end": "2026-08-01",
+          "last_value": 4143.5
         }
       },
       "marketcap": {
@@ -441,10 +441,10 @@
         "stats": {
           "exists": true,
           "applicable": true,
-          "rows": 312,
+          "rows": 313,
           "start": "2000-08-01",
-          "end": "2026-07-01",
-          "last_value_usd": 28266146110643.25
+          "end": "2026-08-01",
+          "last_value_usd": 28319455201853.79
         }
       },
       "documentation": {
@@ -454,9 +454,9 @@
         "frequency": "monthly",
         "update_rule": "monthly_market",
         "notes": "存量吨数为阶段性常数，未随年度 WGC 更新自动变动。",
-        "last_data_date": "2026-07-01",
-        "last_updated": "2026-07-22T11:23:52",
-        "expected_next_update": "2026-09-01",
+        "last_data_date": "2026-08-01",
+        "last_updated": "2026-08-05T10:24:23",
+        "expected_next_update": "2026-10-01",
         "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
       }
     },
@@ -474,10 +474,10 @@
         "notes": "WTI 期货价格（回报）",
         "stats": {
           "exists": true,
-          "rows": 312,
+          "rows": 313,
           "start": "2000-08-01",
-          "end": "2026-07-01",
-          "last_value": 85.07
+          "end": "2026-08-01",
+          "last_value": 76.0
         }
       },
       "marketcap": {
@@ -503,7 +503,7 @@
         "update_rule": "monthly_market",
         "notes": "优先 EIA STEO 月度消费；若 API 限流则回退 OWID 年消费量月度化。可选环境变量 EIA_API_KEY。",
         "last_data_date": "2026-06-01",
-        "last_updated": "2026-07-22T11:23:52",
+        "last_updated": "2026-08-05T10:24:23",
         "expected_next_update": "2026-08-01",
         "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
       }
@@ -522,10 +522,10 @@
         "notes": null,
         "stats": {
           "exists": true,
-          "rows": 143,
+          "rows": 144,
           "start": "2014-09-01",
-          "end": "2026-07-01",
-          "last_value": 66175.34375
+          "end": "2026-08-01",
+          "last_value": 64169.25
         }
       },
       "marketcap": {
@@ -537,10 +537,10 @@
         "stats": {
           "exists": true,
           "applicable": true,
-          "rows": 211,
+          "rows": 212,
           "start": "2009-01-01",
-          "end": "2026-07-01",
-          "last_value_usd": 1284513319375.0
+          "end": "2026-08-01",
+          "last_value_usd": 1265267333806.25
         }
       },
       "documentation": {
@@ -550,9 +550,9 @@
         "frequency": "monthly",
         "update_rule": "monthly_market",
         "notes": "",
-        "last_data_date": "2026-07-01",
-        "last_updated": "2026-07-22T11:23:52",
-        "expected_next_update": "2026-09-01",
+        "last_data_date": "2026-08-01",
+        "last_updated": "2026-08-05T10:24:23",
+        "expected_next_update": "2026-10-01",
         "update_schedule": "交易所/行情类月度序列随日频更新，月末收盘后即可刷新；脚本按需拉取"
       }
     },
@@ -570,10 +570,10 @@
         "notes": null,
         "stats": {
           "exists": true,
-          "rows": 472,
+          "rows": 473,
           "start": "1987-01-01",
-          "end": "2026-04-01",
-          "last_value": 330.873
+          "end": "2026-05-01",
+          "last_value": 331.02
         }
       },
       "marketcap": {
@@ -585,10 +585,10 @@
         "stats": {
           "exists": true,
           "applicable": true,
-          "rows": 969,
+          "rows": 970,
           "start": "1945-10-01",
-          "end": "2026-06-01",
-          "last_value_usd": 48549903894131.99
+          "end": "2026-07-01",
+          "last_value_usd": 48564160939582.36
         }
       },
       "documentation": {
@@ -598,9 +598,9 @@
         "frequency": "monthly",
         "update_rule": "quarterly_fred",
         "notes": "口径为家庭部门自住房地产市值（含空地/移动房屋）。Z.1 未更新月份按 CSUSHPISA 环比趋势估算，正式数据发布后自动替换。",
-        "last_data_date": "2026-06-01",
-        "last_updated": "2026-07-22T11:23:52",
-        "expected_next_update": "2026-09-30",
+        "last_data_date": "2026-07-01",
+        "last_updated": "2026-08-05T10:24:23",
+        "expected_next_update": "2026-12-31",
         "update_schedule": "美联储 Z.1 等季度序列通常滞后约 1 个季度发布"
       }
     },
@@ -647,7 +647,7 @@
         "update_rule": "monthly_nbs",
         "notes": "强调地产金融属性：存量按当期市场化均价重估、不做实体折旧。国家统计局不单列 1 月（1–2 月合并发布），市值序列对缺月做前向填充，避免规模占比池在 1 月突然少掉中国住房。交叉验证量级参考报告约 395–405 万亿元人民币。",
         "last_data_date": "2026-06-01",
-        "last_updated": "2026-07-22T11:23:52",
+        "last_updated": "2026-08-05T10:24:23",
         "expected_next_update": "2026-08-15",
         "update_schedule": "国家统计局月度数据通常于次月中旬左右发布，预计下次更新为数据截止月+1个月的15日前后"
       }

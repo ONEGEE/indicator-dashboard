@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T15:56:21",
+  "generated_at": "2026-08-05T10:24:25",
   "framework": {
     "title": "全球大类资产配置数据台",
     "reference": "中金《资产配置手册：全球资产100年》",
@@ -77,7 +77,7 @@
     }
   },
   "validation": {
-    "generated_at": "2026-07-20T14:37:17",
+    "generated_at": "2026-08-05T09:36:19",
     "pairs": [
       {
         "id": "validate_us_cpi_jst_fred",
@@ -242,10 +242,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 24752,
+        "rows": 24764,
         "start": "1927-12-30",
-        "end": "2026-07-17",
-        "last_value": 7457.6899,
+        "end": "2026-08-04",
+        "last_value": 7736.52,
         "value_field": "close",
         "schema": [
           "date",
@@ -275,10 +275,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 8696,
+        "rows": 8708,
         "start": "1992-01-02",
-        "end": "2026-07-17",
-        "last_value": 52146.4219,
+        "end": "2026-08-04",
+        "last_value": 54085.8789,
         "value_field": "close",
         "schema": [
           "date",
@@ -308,10 +308,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 13978,
+        "rows": 13990,
         "start": "1971-02-05",
-        "end": "2026-07-17",
-        "last_value": 25520.2402,
+        "end": "2026-08-04",
+        "last_value": 26584.9922,
         "value_field": "close",
         "schema": [
           "date",
@@ -506,10 +506,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 9758,
+        "rows": 9768,
         "start": "1986-12-31",
-        "end": "2026-07-20",
-        "last_value": 25079.9102,
+        "end": "2026-08-03",
+        "last_value": 26009.4004,
         "value_field": "close",
         "schema": [
           "date",
@@ -572,10 +572,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 7286,
+        "rows": 7297,
         "start": "1996-12-11",
-        "end": "2026-07-20",
-        "last_value": 6599.6401,
+        "end": "2026-08-05",
+        "last_value": 6598.3198,
         "value_field": "close",
         "schema": [
           "date",
@@ -605,10 +605,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6346,
+        "rows": 6357,
         "start": "2000-10-16",
-        "end": "2026-07-20",
-        "last_value": 754.61,
+        "end": "2026-08-05",
+        "last_value": 799.0,
         "value_field": "close",
         "schema": [
           "date",
@@ -638,10 +638,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 15128,
+        "rows": 15139,
         "start": "1965-01-05",
-        "end": "2026-07-17",
-        "last_value": 64141.1211,
+        "end": "2026-08-05",
+        "last_value": 65756.0781,
         "value_field": "close",
         "schema": [
           "date",
@@ -671,10 +671,10 @@
       "notes": "Yahoo 无免费 TOPIX 指数代码，使用 NEXT FUNDS TOPIX ETF(1306.T) 作代理",
       "stats": {
         "exists": true,
-        "rows": 4307,
+        "rows": 4319,
         "start": "2009-01-05",
-        "end": "2026-07-17",
-        "last_value": 407.9,
+        "end": "2026-08-05",
+        "last_value": 418.5,
         "value_field": "close",
         "schema": [
           "date",
@@ -704,10 +704,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 9747,
+        "rows": 9758,
         "start": "1987-12-30",
-        "end": "2026-07-17",
-        "last_value": 24830.9805,
+        "end": "2026-08-03",
+        "last_value": 26001.3105,
         "value_field": "close",
         "schema": [
           "date",
@@ -737,10 +737,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 4836,
+        "rows": 4847,
         "start": "2007-03-30",
-        "end": "2026-07-17",
-        "last_value": 6230.8701,
+        "end": "2026-08-03",
+        "last_value": 6426.5,
         "value_field": "close",
         "schema": [
           "date",
@@ -770,10 +770,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 10746,
+        "rows": 10757,
         "start": "1984-01-03",
-        "end": "2026-07-17",
-        "last_value": 10600.4004,
+        "end": "2026-08-03",
+        "last_value": 10857.7002,
         "value_field": "close",
         "schema": [
           "date",
@@ -832,10 +832,10 @@
       "notes": "1870起；JST ltrate(至1953) + FRED GS10(1953+)；日频见 us_treasury_10y",
       "stats": {
         "exists": true,
-        "rows": 963,
+        "rows": 964,
         "start": "1870-01-01",
-        "end": "2026-06-01",
-        "last_value": 4.47,
+        "end": "2026-07-01",
+        "last_value": 4.6,
         "value_field": "value",
         "schema": [
           "date",
@@ -948,9 +948,9 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 864,
+        "rows": 865,
         "start": "1954-07-01",
-        "end": "2026-06-01",
+        "end": "2026-07-01",
         "last_value": 3.63,
         "value_field": "value",
         "schema": [
@@ -977,10 +977,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 2886,
+        "rows": 2888,
         "start": "1971-04-02",
-        "end": "2026-07-16",
-        "last_value": 6.55,
+        "end": "2026-07-30",
+        "last_value": 6.66,
         "value_field": "value",
         "schema": [
           "date",
@@ -1006,10 +1006,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 472,
+        "rows": 473,
         "start": "1987-01-01",
-        "end": "2026-04-01",
-        "last_value": 330.873,
+        "end": "2026-05-01",
+        "last_value": 331.02,
         "value_field": "value",
         "schema": [
           "date",
@@ -1035,10 +1035,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 424,
+        "rows": 425,
         "start": "1991-01-01",
-        "end": "2026-04-01",
-        "last_value": 441.4,
+        "end": "2026-05-01",
+        "last_value": 442.42,
         "value_field": "value",
         "schema": [
           "date",
@@ -1096,7 +1096,7 @@
         "rows": 798,
         "start": "1960-01-01",
         "end": "2026-06-01",
-        "last_value": 1367.0,
+        "last_value": 1374.0,
         "value_field": "value",
         "schema": [
           "date",
@@ -1122,10 +1122,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 761,
+        "rows": 762,
         "start": "1963-01-01",
-        "end": "2026-05-01",
-        "last_value": 580.0,
+        "end": "2026-06-01",
+        "last_value": 628.0,
         "value_field": "value",
         "schema": [
           "date",
@@ -1151,10 +1151,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 761,
+        "rows": 762,
         "start": "1963-01-01",
-        "end": "2026-05-01",
-        "last_value": 10.3,
+        "end": "2026-06-01",
+        "last_value": 9.3,
         "value_field": "value",
         "schema": [
           "date",
@@ -1180,10 +1180,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 253,
+        "rows": 254,
         "start": "1963-01-01",
-        "end": "2026-01-01",
-        "last_value": 403200.0,
+        "end": "2026-04-01",
+        "last_value": 410700.0,
         "value_field": "value",
         "schema": [
           "date",
@@ -1209,10 +1209,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 253,
+        "rows": 254,
         "start": "1963-01-01",
-        "end": "2026-01-01",
-        "last_value": 514600.0,
+        "end": "2026-04-01",
+        "last_value": 502700.0,
         "value_field": "value",
         "schema": [
           "date",
@@ -1238,10 +1238,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 317,
+        "rows": 318,
         "start": "1947-01-01",
-        "end": "2026-01-01",
-        "last_value": 31865.721,
+        "end": "2026-04-01",
+        "last_value": 32475.21,
         "value_field": "value",
         "schema": [
           "date",
@@ -1267,10 +1267,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 317,
+        "rows": 318,
         "start": "1947-01-01",
-        "end": "2026-01-01",
-        "last_value": 24180.419,
+        "end": "2026-04-01",
+        "last_value": 24270.599,
         "value_field": "value",
         "schema": [
           "date",
@@ -1296,10 +1296,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 809,
+        "rows": 810,
         "start": "1959-01-01",
-        "end": "2026-05-01",
-        "last_value": 23052.3,
+        "end": "2026-06-01",
+        "last_value": 23155.2,
         "value_field": "value",
         "schema": [
           "date",
@@ -1325,10 +1325,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 16119,
+        "rows": 16131,
         "start": "1962-01-02",
-        "end": "2026-07-16",
-        "last_value": 4.57,
+        "end": "2026-08-03",
+        "last_value": 4.7,
         "value_field": "value",
         "schema": [
           "date",
@@ -1354,10 +1354,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 12528,
+        "rows": 12540,
         "start": "1976-06-01",
-        "end": "2026-07-17",
-        "last_value": 0.37,
+        "end": "2026-08-04",
+        "last_value": 0.43,
         "value_field": "value",
         "schema": [
           "date",
@@ -1564,10 +1564,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 8899,
+        "rows": 8911,
         "start": "1990-12-19",
-        "end": "2026-07-17",
-        "last_value": 4.18,
+        "end": "2026-08-04",
+        "last_value": 4.2,
         "value_field": "value",
         "schema": [
           "date",
@@ -1593,10 +1593,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 12380,
+        "rows": 12392,
         "start": "1977-02-15",
-        "end": "2026-07-17",
-        "last_value": 5.064,
+        "end": "2026-08-04",
+        "last_value": 5.19,
         "value_field": "close",
         "schema": [
           "date",
@@ -1626,10 +1626,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6030,
+        "rows": 6042,
         "start": "2002-07-30",
-        "end": "2026-07-17",
-        "last_value": 84.519997,
+        "end": "2026-08-04",
+        "last_value": 82.82,
         "value_field": "close",
         "schema": [
           "date",
@@ -1659,10 +1659,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6030,
+        "rows": 6042,
         "start": "2002-07-30",
-        "end": "2026-07-17",
-        "last_value": 93.839996,
+        "end": "2026-08-04",
+        "last_value": 93.25,
         "value_field": "close",
         "schema": [
           "date",
@@ -1692,10 +1692,10 @@
       "notes": "对标 Bloomberg US Aggregate，中金文中美债夏普分析常用指数代理",
       "stats": {
         "exists": true,
-        "rows": 5736,
+        "rows": 5748,
         "start": "2003-09-29",
-        "end": "2026-07-17",
-        "last_value": 98.199997,
+        "end": "2026-08-04",
+        "last_value": 97.660004,
         "value_field": "close",
         "schema": [
           "date",
@@ -1725,10 +1725,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6129,
+        "rows": 6141,
         "start": "2002-01-04",
-        "end": "2026-07-17",
-        "last_value": 1.2645,
+        "end": "2026-08-04",
+        "last_value": 1.2617,
         "value_field": "value",
         "schema": [
           "date",
@@ -1754,10 +1754,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6129,
+        "rows": 6141,
         "start": "2002-01-04",
-        "end": "2026-07-17",
-        "last_value": 1.7404,
+        "end": "2026-08-04",
+        "last_value": 1.7126,
         "value_field": "value",
         "schema": [
           "date",
@@ -1783,10 +1783,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6129,
+        "rows": 6141,
         "start": "2002-01-04",
-        "end": "2026-07-17",
-        "last_value": 2.2425,
+        "end": "2026-08-04",
+        "last_value": 2.1841,
         "value_field": "value",
         "schema": [
           "date",
@@ -1812,10 +1812,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 3237,
+        "rows": 3247,
         "start": "2013-03-05",
-        "end": "2026-07-20",
-        "last_value": 140.798996,
+        "end": "2026-08-03",
+        "last_value": 140.957001,
         "value_field": "close",
         "schema": [
           "date",
@@ -1845,10 +1845,10 @@
       "notes": "广义商品期货总回报代理，对应中金文中商品配置口径",
       "stats": {
         "exists": true,
-        "rows": 5143,
+        "rows": 5155,
         "start": "2006-02-06",
-        "end": "2026-07-17",
-        "last_value": 28.98,
+        "end": "2026-08-04",
+        "last_value": 28.309999,
         "value_field": "close",
         "schema": [
           "date",
@@ -1878,10 +1878,10 @@
       "notes": "接近中金文中 SPGS / S&P GSCI 商品指数",
       "stats": {
         "exists": true,
-        "rows": 5028,
+        "rows": 5040,
         "start": "2006-07-21",
-        "end": "2026-07-17",
-        "last_value": 31.4,
+        "end": "2026-08-04",
+        "last_value": 30.450001,
         "value_field": "close",
         "schema": [
           "date",
@@ -1911,10 +1911,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6503,
+        "rows": 6514,
         "start": "2000-08-23",
-        "end": "2026-07-20",
-        "last_value": 83.919998,
+        "end": "2026-08-04",
+        "last_value": 75.940002,
         "value_field": "close",
         "schema": [
           "date",
@@ -1944,10 +1944,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6499,
+        "rows": 6510,
         "start": "2000-08-30",
-        "end": "2026-07-20",
-        "last_value": 6.2755,
+        "end": "2026-08-04",
+        "last_value": 6.6125,
         "value_field": "close",
         "schema": [
           "date",
@@ -1977,10 +1977,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6500,
+        "rows": 6511,
         "start": "2000-08-30",
-        "end": "2026-07-20",
-        "last_value": 2.882,
+        "end": "2026-08-04",
+        "last_value": 2.697,
         "value_field": "close",
         "schema": [
           "date",
@@ -2010,10 +2010,10 @@
       "notes": "中金文中黄金配置核心标的",
       "stats": {
         "exists": true,
-        "rows": 6494,
+        "rows": 6505,
         "start": "2000-08-30",
-        "end": "2026-07-20",
-        "last_value": 4015.699951,
+        "end": "2026-08-04",
+        "last_value": 4140.5,
         "value_field": "close",
         "schema": [
           "date",
@@ -2043,10 +2043,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6496,
+        "rows": 6507,
         "start": "2000-08-30",
-        "end": "2026-07-20",
-        "last_value": 56.919998,
+        "end": "2026-08-04",
+        "last_value": 59.779999,
         "value_field": "close",
         "schema": [
           "date",
@@ -2076,10 +2076,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6522,
+        "rows": 6533,
         "start": "1997-10-29",
-        "end": "2026-07-20",
-        "last_value": 1598.599976,
+        "end": "2026-08-04",
+        "last_value": 1736.599976,
         "value_field": "close",
         "schema": [
           "date",
@@ -2109,10 +2109,10 @@
       "notes": null,
       "stats": {
         "exists": true,
-        "rows": 6533,
+        "rows": 6544,
         "start": "1998-09-28",
-        "end": "2026-07-20",
-        "last_value": 1240.0,
+        "end": "2026-08-04",
+        "last_value": 1341.5,
         "value_field": "close",
         "schema": [
           "date",
@@ -2142,10 +2142,10 @@
       "notes": "Shiller 1871-2023 + yfinance 月末收盘；日频见 us_sp500",
       "stats": {
         "exists": true,
-        "rows": 1867,
+        "rows": 1868,
         "start": "1871-01-01",
-        "end": "2026-07-01",
-        "last_value": 7457.6899,
+        "end": "2026-08-01",
+        "last_value": 7736.52,
         "value_field": "value",
         "schema": [
           "date",
@@ -7304,10 +7304,10 @@
       "notes": "FRED 延伸序列，用于与 JST 交叉验证",
       "stats": {
         "exists": true,
-        "rows": 1110,
+        "rows": 1111,
         "start": "1934-01-01",
-        "end": "2026-06-01",
-        "last_value": 3.66,
+        "end": "2026-07-01",
+        "last_value": 3.73,
         "value_field": "value",
         "schema": [
           "date",
@@ -7333,10 +7333,10 @@
       "notes": "FRED 延伸序列，用于与 JST 交叉验证",
       "stats": {
         "exists": true,
-        "rows": 593,
+        "rows": 594,
         "start": "1977-02-01",
-        "end": "2026-06-01",
-        "last_value": 4.95,
+        "end": "2026-07-01",
+        "last_value": 5.1,
         "value_field": "value",
         "schema": [
           "date",
@@ -7362,10 +7362,10 @@
       "notes": "FRED 延伸序列，用于与 JST 交叉验证",
       "stats": {
         "exists": true,
-        "rows": 1290,
+        "rows": 1291,
         "start": "1919-01-01",
-        "end": "2026-06-01",
-        "last_value": 5.52,
+        "end": "2026-07-01",
+        "last_value": 5.76,
         "value_field": "value",
         "schema": [
           "date",
@@ -7391,10 +7391,10 @@
       "notes": "FRED 延伸序列，用于与 JST 交叉验证",
       "stats": {
         "exists": true,
-        "rows": 1290,
+        "rows": 1291,
         "start": "1919-01-01",
-        "end": "2026-06-01",
-        "last_value": 6.0,
+        "end": "2026-07-01",
+        "last_value": 6.19,
         "value_field": "value",
         "schema": [
           "date",
