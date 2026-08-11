@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T09:52:17",
+  "generated_at": "2026-08-11T16:57:43",
   "pairs": [
     {
       "id": "validate_us_equity_wb_spy",
@@ -19,8 +19,8 @@
       "overlap_start": "2014-09-01",
       "overlap_end": "2026-08-01",
       "rows": 144,
-      "correlation": 0.9987,
-      "mean_abs_diff": 44952989686.7899,
+      "correlation": 0.9982,
+      "mean_abs_diff": 46394991639.0835,
       "csv": "csv/validate/validate_btc_blockchain_yfinance.csv"
     },
     {
@@ -31,7 +31,7 @@
       "overlap_end": "2026-08-01",
       "rows": 262,
       "correlation": 0.9996,
-      "mean_abs_diff": 10388323427815.043,
+      "mean_abs_diff": 10395743457419.703,
       "csv": "csv/validate/validate_gold_stock_wgc_gld.csv"
     },
     {
