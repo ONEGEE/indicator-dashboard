@@ -7,7 +7,7 @@
   python scripts/fetch_rrg.py --mode us_gics
   python scripts/fetch_rrg.py --mode cn_sw
   python scripts/fetch_rrg.py --mode country
-  python scripts/fetch_rrg.py --mode all
+  python scripts/fetch_rrg.py --mode all   # 不推荐：易超时，请用 scripts/update_all.sh
   python scripts/fetch_rrg.py --manifest data/manifest_rrg_us_gics.json --out rrg_prices_us_gics.json
 """
 
@@ -307,6 +307,12 @@ def main() -> int:
         )
 
     mode = args.mode or "cross_asset"
+    if mode == "all":
+        print(
+            "提示: --mode all 可能因申万 167 项拉取时间过长而超时；"
+            "推荐 ./scripts/update_all.sh 分模式更新。",
+            file=sys.stderr,
+        )
     modes = list(MODE_DEFAULTS.keys()) if mode == "all" else [mode]
     code = 0
     for m in modes:

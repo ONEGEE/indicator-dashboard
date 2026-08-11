@@ -8,9 +8,12 @@ from __future__ import annotations
 
 import asyncio
 import re
+import sys
 from typing import Any
 
 import pandas as pd
+
+from scripts.ensure_playwright import ensure_chromium
 
 API_BASE = "https://data.stats.gov.cn/dg/website/publicrelease/web/external"
 ROOT_MONTHLY = "fc982599aa684be7969d7b90b1bd0e84"
@@ -152,7 +155,21 @@ def fetch_cn_residential_sales_ytd(
     dts: str = "200001MM-203012MM",
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """返回 (面积累计, 销售额累计) 两个 DataFrame：date, value。"""
-    area, sales = asyncio.run(_fetch_housing_pair_async(dts))
+    try:
+        area, sales = asyncio.run(_fetch_housing_pair_async(dts))
+    except Exception as exc:
+        # Playwright 包已装但浏览器可执行文件缺失时，自动安装 chromium 后重试一次。
+        msg = str(exc)
+        if (
+            "Executable doesn't exist" in msg
+            or "playwright install" in msg
+            or "chrome-headless-shell" in msg
+        ):
+            ensure_chromium()
+            area, sales = asyncio.run(_fetch_housing_pair_async(dts))
+        else:
+            raise
+
     area_df = pd.DataFrame({"date": area.index, "value": area.values})
     sales_df = pd.DataFrame({"date": sales.index, "value": sales.values})
     return area_df, sales_df

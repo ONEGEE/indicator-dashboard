@@ -48,18 +48,28 @@ npm run dev
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+python scripts/ensure_playwright.py   # 首次：安装 Chromium（cn_housing 需要）
 cp .env.example .env   # 填入 FRED_API_KEY
 ```
 
-常用命令：
+**推荐一键更新**（分阶段执行，避免 `fetch_rrg --mode all` 单次过长超时）：
+
+```bash
+./scripts/update_all.sh
+```
+
+常用命令（分步）：
 
 ```bash
 # 轮动规模占比
 python scripts/fetch_rotation.py
 python scripts/build_rotation_catalog.py
 
-# RRG 价格序列（四类模式）
-python scripts/fetch_rrg.py --mode all
+# RRG 价格序列（建议分模式，不要一次 --mode all）
+python scripts/fetch_rrg.py --mode cross_asset
+python scripts/fetch_rrg.py --mode us_gics
+python scripts/fetch_rrg.py --mode cn_sw
+python scripts/fetch_rrg.py --mode country
 
 # 宏观/指数目录
 python scripts/build_catalog.py
