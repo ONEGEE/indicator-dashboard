@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import { publicUrl } from './assets'
 import MarketCapView from './MarketCapView'
+import RrgRightLongView from './RrgRightLongView'
 import RrgView from './RrgView'
 import ThemeToggle from './ThemeToggle'
 import type { Catalog, SeriesItem } from './types'
 
-type Page = 'catalog' | 'marketcap' | 'rrg'
+type Page = 'catalog' | 'marketcap' | 'rrg' | 'rrg-right-long'
 
 function formatValue(item: SeriesItem): string {
   const v = item.stats.last_value
@@ -85,6 +86,13 @@ export default function App() {
       >
         资本轮动
       </button>
+      <button
+        type="button"
+        className={`app-nav-btn ${page === 'rrg-right-long' ? 'active' : ''}`}
+        onClick={() => setPage('rrg-right-long')}
+      >
+        RRG右多策略
+      </button>
       <ThemeToggle />
     </nav>
   )
@@ -103,6 +111,15 @@ export default function App() {
       <div className="app app-rrg">
         {nav}
         <RrgView />
+      </div>
+    )
+  }
+
+  if (page === 'rrg-right-long') {
+    return (
+      <div className="app app-rrg">
+        {nav}
+        <RrgRightLongView />
       </div>
     )
   }

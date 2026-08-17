@@ -1,0 +1,483 @@
+{
+  "modes": {
+    "us_gics": {
+      "mode": "us_gics",
+      "stages": {
+        "利": {
+          "full_sample_best": {
+            "li_mom_months": 3,
+            "li_mom_min_in_window": 3,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "train_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "full_stats_3m": {
+            "stage": "利",
+            "n": 910,
+            "assets": 11,
+            "n_3m": 900,
+            "mean_3m": -0.0033717987985620785,
+            "win_3m": 0.47333333333333333
+          },
+          "train_stats_3m": {
+            "stage": "利",
+            "n": 639,
+            "assets": 11,
+            "n_3m": 639,
+            "mean_3m": -0.002072330642795494,
+            "win_3m": 0.47730829420970267
+          },
+          "test_stats_3m": {
+            "stage": "利",
+            "n": 490,
+            "assets": 11,
+            "n_3m": 477,
+            "mean_3m": -0.0027129258959936353,
+            "win_3m": 0.4612159329140461
+          },
+          "train_test_same_best": false
+        },
+        "得": {
+          "full_sample_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "train_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "full_stats_3m": {
+            "stage": "得",
+            "n": 86,
+            "assets": 11,
+            "n_3m": 86,
+            "mean_3m": 0.004399203183152262,
+            "win_3m": 0.5348837209302325
+          },
+          "train_stats_3m": {
+            "stage": "得",
+            "n": 51,
+            "assets": 11,
+            "n_3m": 51,
+            "mean_3m": 0.015023890949935325,
+            "win_3m": 0.6274509803921569
+          },
+          "test_stats_3m": {
+            "stage": "得",
+            "n": 34,
+            "assets": 11,
+            "n_3m": 34,
+            "mean_3m": -0.007538072476807471,
+            "win_3m": 0.4117647058823529
+          },
+          "train_test_same_best": true
+        },
+        "旺": {
+          "full_sample_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.75,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "train_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.75,
+            "wang_ratio_min": 102.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "full_stats_3m": {
+            "stage": "旺",
+            "n": 747,
+            "assets": 11,
+            "n_3m": 740,
+            "mean_3m": 0.00048670681842709286,
+            "win_3m": 0.518918918918919
+          },
+          "train_stats_3m": {
+            "stage": "旺",
+            "n": 438,
+            "assets": 11,
+            "n_3m": 438,
+            "mean_3m": 0.004920117165228667,
+            "win_3m": 0.5502283105022832
+          },
+          "test_stats_3m": {
+            "stage": "旺",
+            "n": 255,
+            "assets": 11,
+            "n_3m": 248,
+            "mean_3m": -0.007549372457016527,
+            "win_3m": 0.4475806451612903
+          },
+          "train_test_same_best": false
+        },
+        "庙": {
+          "full_sample_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "train_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "full_stats_3m": {
+            "stage": "庙",
+            "n": 399,
+            "assets": 11,
+            "n_3m": 395,
+            "mean_3m": 0.0002950910740654864,
+            "win_3m": 0.5164556962025316
+          },
+          "train_stats_3m": {
+            "stage": "庙",
+            "n": 232,
+            "assets": 11,
+            "n_3m": 232,
+            "mean_3m": 0.005859128349529731,
+            "win_3m": 0.5474137931034483
+          },
+          "test_stats_3m": {
+            "stage": "庙",
+            "n": 141,
+            "assets": 11,
+            "n_3m": 137,
+            "mean_3m": -0.009375503768668126,
+            "win_3m": 0.44525547445255476
+          },
+          "train_test_same_best": true
+        }
+      },
+      "hardcode": {
+        "li": {
+          "li_mom_months": 2,
+          "li_mom_min_in_window": 2,
+          "de_hold_months": 1,
+          "wang_dist_pct": 0.65,
+          "wang_ratio_min": 101.0,
+          "miao_leading_months": 4,
+          "review_cap_months": 12
+        },
+        "de": {
+          "li_mom_months": 2,
+          "li_mom_min_in_window": 2,
+          "de_hold_months": 1,
+          "wang_dist_pct": 0.65,
+          "wang_ratio_min": 101.0,
+          "miao_leading_months": 4,
+          "review_cap_months": 12
+        },
+        "wang": {
+          "li_mom_months": 2,
+          "li_mom_min_in_window": 2,
+          "de_hold_months": 1,
+          "wang_dist_pct": 0.75,
+          "wang_ratio_min": 102.0,
+          "miao_leading_months": 4,
+          "review_cap_months": 12
+        },
+        "miao": {
+          "li_mom_months": 2,
+          "li_mom_min_in_window": 2,
+          "de_hold_months": 1,
+          "wang_dist_pct": 0.65,
+          "wang_ratio_min": 101.0,
+          "miao_leading_months": 4,
+          "review_cap_months": 12
+        }
+      },
+      "customizable": []
+    },
+    "cn_sw": {
+      "mode": "cn_sw",
+      "stages": {
+        "利": {
+          "full_sample_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "train_best": {
+            "li_mom_months": 3,
+            "li_mom_min_in_window": 3,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "full_stats_3m": {
+            "stage": "利",
+            "n": 1774,
+            "assets": 31,
+            "n_3m": 1732,
+            "mean_3m": -0.005692227575156531,
+            "win_3m": 0.43071593533487296
+          },
+          "train_stats_3m": {
+            "stage": "利",
+            "n": 542,
+            "assets": 16,
+            "n_3m": 542,
+            "mean_3m": -0.00378240149704143,
+            "win_3m": 0.43357933579335795
+          },
+          "test_stats_3m": {
+            "stage": "利",
+            "n": 869,
+            "assets": 31,
+            "n_3m": 838,
+            "mean_3m": -0.00974894636520904,
+            "win_3m": 0.4236276849642005
+          },
+          "train_test_same_best": false
+        },
+        "得": {
+          "full_sample_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "train_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "full_stats_3m": {
+            "stage": "得",
+            "n": 123,
+            "assets": 30,
+            "n_3m": 123,
+            "mean_3m": 0.012205760719637825,
+            "win_3m": 0.5040650406504065
+          },
+          "train_stats_3m": {
+            "stage": "得",
+            "n": 49,
+            "assets": 16,
+            "n_3m": 49,
+            "mean_3m": 0.014915215380749986,
+            "win_3m": 0.5510204081632653
+          },
+          "test_stats_3m": {
+            "stage": "得",
+            "n": 74,
+            "assets": 30,
+            "n_3m": 74,
+            "mean_3m": 0.010411662362955446,
+            "win_3m": 0.47297297297297297
+          },
+          "train_test_same_best": true
+        },
+        "旺": {
+          "full_sample_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 102.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "train_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 102.0,
+            "miao_leading_months": 4,
+            "review_cap_months": 12
+          },
+          "full_stats_3m": {
+            "stage": "旺",
+            "n": 1100,
+            "assets": 30,
+            "n_3m": 1093,
+            "mean_3m": 0.006104487998170129,
+            "win_3m": 0.4977127172918573
+          },
+          "train_stats_3m": {
+            "stage": "旺",
+            "n": 417,
+            "assets": 16,
+            "n_3m": 417,
+            "mean_3m": 0.004353478138335929,
+            "win_3m": 0.5155875299760192
+          },
+          "test_stats_3m": {
+            "stage": "旺",
+            "n": 630,
+            "assets": 30,
+            "n_3m": 623,
+            "mean_3m": 0.0067541287725994634,
+            "win_3m": 0.4799357945425361
+          },
+          "train_test_same_best": true
+        },
+        "庙": {
+          "full_sample_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 6,
+            "review_cap_months": 12
+          },
+          "train_best": {
+            "li_mom_months": 2,
+            "li_mom_min_in_window": 2,
+            "de_hold_months": 1,
+            "wang_dist_pct": 0.65,
+            "wang_ratio_min": 101.0,
+            "miao_leading_months": 6,
+            "review_cap_months": 12
+          },
+          "full_stats_3m": {
+            "stage": "庙",
+            "n": 286,
+            "assets": 28,
+            "n_3m": 285,
+            "mean_3m": 0.018871110141965148,
+            "win_3m": 0.5719298245614035
+          },
+          "train_stats_3m": {
+            "stage": "庙",
+            "n": 108,
+            "assets": 15,
+            "n_3m": 108,
+            "mean_3m": 0.025937626230457127,
+            "win_3m": 0.6203703703703703
+          },
+          "test_stats_3m": {
+            "stage": "庙",
+            "n": 163,
+            "assets": 28,
+            "n_3m": 162,
+            "mean_3m": 0.013589538137760657,
+            "win_3m": 0.5370370370370371
+          },
+          "train_test_same_best": true
+        }
+      },
+      "hardcode": {
+        "li": {
+          "li_mom_months": 3,
+          "li_mom_min_in_window": 3,
+          "de_hold_months": 1,
+          "wang_dist_pct": 0.65,
+          "wang_ratio_min": 101.0,
+          "miao_leading_months": 4,
+          "review_cap_months": 12
+        },
+        "de": {
+          "li_mom_months": 2,
+          "li_mom_min_in_window": 2,
+          "de_hold_months": 1,
+          "wang_dist_pct": 0.65,
+          "wang_ratio_min": 101.0,
+          "miao_leading_months": 4,
+          "review_cap_months": 12
+        },
+        "wang": {
+          "li_mom_months": 2,
+          "li_mom_min_in_window": 2,
+          "de_hold_months": 1,
+          "wang_dist_pct": 0.65,
+          "wang_ratio_min": 102.0,
+          "miao_leading_months": 4,
+          "review_cap_months": 12
+        },
+        "miao": {
+          "li_mom_months": 2,
+          "li_mom_min_in_window": 2,
+          "de_hold_months": 1,
+          "wang_dist_pct": 0.65,
+          "wang_ratio_min": 101.0,
+          "miao_leading_months": 6,
+          "review_cap_months": 12
+        }
+      },
+      "customizable": []
+    }
+  },
+  "h6_baseline": {
+    "us_gics": {
+      "stage": "利_H6基准",
+      "n": 910,
+      "assets": 11,
+      "n_1m": 908,
+      "mean_1m": -0.0012429804347055895,
+      "win_1m": 0.473568281938326,
+      "n_3m": 900,
+      "mean_3m": -0.0033717987985620785,
+      "win_3m": 0.47333333333333333,
+      "n_6m": 891,
+      "mean_6m": -0.002317023740494235,
+      "win_6m": 0.4904601571268238
+    },
+    "cn_sw": {
+      "stage": "利_H6基准",
+      "n": 1411,
+      "assets": 31,
+      "n_1m": 1400,
+      "mean_1m": -0.0017945178416421384,
+      "win_1m": 0.4471428571428571,
+      "n_3m": 1380,
+      "mean_3m": -0.007405564250320023,
+      "win_3m": 0.427536231884058,
+      "n_6m": 1356,
+      "mean_6m": -0.01064576736509123,
+      "win_6m": 0.4166666666666667
+    }
+  },
+  "notes": []
+}

@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-08-17",
+  "method": "Monthly JdK 12/3, L1 sectors, relative excess vs benchmark. Grid + train(<2015)/test(2015+) on panel_us_gics & panel_cn_sw.",
+  "script": "scripts/backtest_rrg_right_long.py",
+  "key_findings": [
+    "利(含H6)的后续3m超额胜率均<50%，不能作为高胜率买点；价值在观察名单与Ratio上穿概率(~15–17%)，不是即时alpha。",
+    "得是右侧第一枪：全样本美股3m≈53.5%、申万≈50.4%；申万样本外(2015+)仍≈47–49%，美股样本外得/旺/庙均明显走弱。",
+    "庙胜率最高主要在申万：全样本3m≈57%、样本外≈54%；美股庙全样本≈48–52%、样本外≈39%，不宜与A股同等权重。",
+    "旺/庙对 wang_dist、wang_ratio 不敏感(中位胜率差<0.5pp)；可统一硬编码。",
+    "得站住月数：美股1月更优(3m胜率)；申万2月更优(6m胜率61.9% vs 52.5%)。",
+    "庙持续月数：美股4月全样本最优；申万6月全样本与样本外均最优；8月样本过少且OOS变差。"
+  ],
+  "hardcode": {
+    "shared": {
+      "frequency": "monthly",
+      "jdk_window": 12,
+      "jdk_roc": 3,
+      "wang_dist_pct": 0.70,
+      "wang_ratio_min": 102.0,
+      "wang_rule": "dist_pct >= wang_dist_pct OR rs_ratio >= wang_ratio_min",
+      "review_cap_months": 12,
+      "falsify_ratio_break_months": 1
+    },
+    "us_gics": {
+      "li_mom_months": 3,
+      "li_mom_min_in_window": 3,
+      "de_hold_months": 1,
+      "miao_leading_months": 4
+    },
+    "cn_sw": {
+      "li_mom_months": 2,
+      "li_mom_min_in_window": 2,
+      "de_hold_months": 2,
+      "miao_leading_months": 6
+    }
+  },
+  "advanced_options": {
+    "description": "回测敏感度较高或样本外分歧的参数，开放给高级用户；默认值见 hardcode。",
+    "params": []
+  },
+  "trade_policy_from_backtest": {
+    "利": "仅观察清单；禁止因利直接主仓",
+    "得": "右侧首次可跟进（申万样本外仍有效；美股2015后需降期望）",
+    "旺": "持有/相对超配",
+    "庙": "持有；申万为高胜率区；美股样本外不保证",
+    "primary_horizon": "3m_for_entry, 6m_for_hold"
+  }
+}

@@ -1,0 +1,2066 @@
+{
+  "modes": {
+    "us_gics": {
+      "mode": "us_gics",
+      "total_journeys": 170,
+      "active": 6,
+      "review": 0,
+      "falsified": 164,
+      "reached_de": 102,
+      "reached_de_pct": 60.0,
+      "reached_miao": 88,
+      "reached_miao_pct": 51.8,
+      "falsified_before_de": 66,
+      "falsified_before_de_pct": 38.8,
+      "concurrent_active_median": 0.0,
+      "concurrent_active_p90": 1.8000000000000114,
+      "concurrent_active_max": 6,
+      "de_plus_active_now": 4,
+      "avg_segments": 2.99
+    },
+    "cn_sw": {
+      "mode": "cn_sw",
+      "total_journeys": 282,
+      "active": 21,
+      "review": 0,
+      "falsified": 261,
+      "reached_de": 151,
+      "reached_de_pct": 53.5,
+      "reached_miao": 116,
+      "reached_miao_pct": 41.1,
+      "falsified_before_de": 118,
+      "falsified_before_de_pct": 41.8,
+      "concurrent_active_median": 0.0,
+      "concurrent_active_p90": 1.0,
+      "concurrent_active_max": 21,
+      "de_plus_active_now": 8,
+      "avg_segments": 2.71
+    }
+  },
+  "journeys_sample": {
+    "us_gics": [
+      {
+        "journeyId": 160,
+        "assetId": "gics_l1_55",
+        "assetName": "公用事业",
+        "openedAt": "2026-05-01",
+        "closedAt": "2026-06-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2026-06-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-05-01",
+            "end": "2026-06-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 19,
+        "assetId": "gics_l1_10",
+        "assetName": "能源",
+        "openedAt": "2026-03-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "庙",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2026-03-01",
+            "end": "2026-05-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2026-06-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 37,
+        "assetId": "gics_l1_15",
+        "assetName": "原材料",
+        "openedAt": "2026-03-01",
+        "closedAt": "2026-07-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2026-07-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-03-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 54,
+        "assetId": "gics_l1_20",
+        "assetName": "工业",
+        "openedAt": "2026-03-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "庙",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2026-03-01",
+            "end": "2026-05-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2026-06-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 86,
+        "assetId": "gics_l1_30",
+        "assetName": "必需消费",
+        "openedAt": "2026-03-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-03-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 170,
+        "assetId": "gics_l1_60",
+        "assetName": "房地产",
+        "openedAt": "2026-03-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-03-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 101,
+        "assetId": "gics_l1_35",
+        "assetName": "医疗保健",
+        "openedAt": "2026-01-01",
+        "closedAt": "2026-06-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2026-06-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-01-01",
+            "end": "2026-06-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 36,
+        "assetId": "gics_l1_15",
+        "assetName": "原材料",
+        "openedAt": "2025-05-01",
+        "closedAt": "2025-11-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-11-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-05-01",
+            "end": "2025-11-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 100,
+        "assetId": "gics_l1_35",
+        "assetName": "医疗保健",
+        "openedAt": "2025-04-01",
+        "closedAt": "2025-07-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-07-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-04-01",
+            "end": "2025-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 159,
+        "assetId": "gics_l1_55",
+        "assetName": "公用事业",
+        "openedAt": "2025-04-01",
+        "closedAt": "2025-08-01",
+        "status": "falsified",
+        "currentStage": "庙",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2025-08-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2025-04-01",
+            "end": "2025-06-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2025-07-01",
+            "end": "2025-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 69,
+        "assetId": "gics_l1_25",
+        "assetName": "可选消费",
+        "openedAt": "2024-12-01",
+        "closedAt": "2025-10-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2025-10-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2024-12-01",
+            "end": "2025-02-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2025-03-01",
+            "end": "2025-06-01"
+          },
+          {
+            "stage": "得",
+            "start": "2025-07-01",
+            "end": "2025-09-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 53,
+        "assetId": "gics_l1_20",
+        "assetName": "工业",
+        "openedAt": "2024-11-01",
+        "closedAt": "2025-10-01",
+        "status": "falsified",
+        "currentStage": "庙",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2025-10-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-11-01",
+            "end": "2025-04-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2025-05-01",
+            "end": "2025-07-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2025-08-01",
+            "end": "2025-10-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 117,
+        "assetId": "gics_l1_40",
+        "assetName": "金融",
+        "openedAt": "2024-10-01",
+        "closedAt": "2025-10-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2025-10-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2024-10-01",
+            "end": "2024-12-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2025-01-01",
+            "end": "2025-04-01"
+          },
+          {
+            "stage": "得",
+            "start": "2025-05-01",
+            "end": "2025-09-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 169,
+        "assetId": "gics_l1_60",
+        "assetName": "房地产",
+        "openedAt": "2024-10-01",
+        "closedAt": "2025-01-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-01-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-10-01",
+            "end": "2025-01-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 18,
+        "assetId": "gics_l1_10",
+        "assetName": "能源",
+        "openedAt": "2024-07-01",
+        "closedAt": "2025-11-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-11-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-07-01",
+            "end": "2025-11-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 52,
+        "assetId": "gics_l1_20",
+        "assetName": "工业",
+        "openedAt": "2024-06-01",
+        "closedAt": "2024-07-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2024-07-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-06-01",
+            "end": "2024-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 35,
+        "assetId": "gics_l1_15",
+        "assetName": "原材料",
+        "openedAt": "2024-05-01",
+        "closedAt": "2025-01-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-01-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-05-01",
+            "end": "2025-01-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 85,
+        "assetId": "gics_l1_30",
+        "assetName": "必需消费",
+        "openedAt": "2024-04-01",
+        "closedAt": "2025-08-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-08-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-04-01",
+            "end": "2025-08-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 99,
+        "assetId": "gics_l1_35",
+        "assetName": "医疗保健",
+        "openedAt": "2024-04-01",
+        "closedAt": "2025-01-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-01-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-04-01",
+            "end": "2025-01-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 68,
+        "assetId": "gics_l1_25",
+        "assetName": "可选消费",
+        "openedAt": "2024-02-01",
+        "closedAt": "2024-03-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2024-03-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-02-01",
+            "end": "2024-03-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 116,
+        "assetId": "gics_l1_40",
+        "assetName": "金融",
+        "openedAt": "2024-02-01",
+        "closedAt": "2024-08-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2024-08-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-02-01",
+            "end": "2024-08-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 158,
+        "assetId": "gics_l1_55",
+        "assetName": "公用事业",
+        "openedAt": "2024-02-01",
+        "closedAt": "2025-02-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-02-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-02-01",
+            "end": "2025-02-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 168,
+        "assetId": "gics_l1_60",
+        "assetName": "房地产",
+        "openedAt": "2023-08-01",
+        "closedAt": "2024-07-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2024-07-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2023-08-01",
+            "end": "2024-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 126,
+        "assetId": "gics_l1_45",
+        "assetName": "信息技术",
+        "openedAt": "2023-04-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "旺",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2023-04-01",
+            "end": "2023-06-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2023-07-01",
+            "end": "2023-11-01"
+          },
+          {
+            "stage": "得",
+            "start": "2023-12-01",
+            "end": "2025-06-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2025-07-01",
+            "end": "2025-09-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2025-10-01",
+            "end": "2025-12-01"
+          },
+          {
+            "stage": "得",
+            "start": "2026-01-01",
+            "end": "2026-06-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2026-07-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 115,
+        "assetId": "gics_l1_40",
+        "assetName": "金融",
+        "openedAt": "2022-11-01",
+        "closedAt": "2023-04-01",
+        "status": "falsified",
+        "currentStage": "庙",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2023-04-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2022-11-01",
+            "end": "2023-01-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2023-02-01",
+            "end": "2023-03-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 67,
+        "assetId": "gics_l1_25",
+        "assetName": "可选消费",
+        "openedAt": "2022-10-01",
+        "closedAt": "2024-01-01",
+        "status": "falsified",
+        "currentStage": "旺",
+        "reachedDe": true,
+        "reachedMiao": false,
+        "falsifiedAt": "2024-01-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2022-10-01",
+            "end": "2023-11-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2023-12-01",
+            "end": "2024-01-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 142,
+        "assetId": "gics_l1_50",
+        "assetName": "通信服务",
+        "openedAt": "2022-09-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2022-09-01",
+            "end": "2023-07-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2023-08-01",
+            "end": "2023-10-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2023-11-01",
+            "end": "2024-02-01"
+          },
+          {
+            "stage": "得",
+            "start": "2024-03-01",
+            "end": "2025-02-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2025-03-01",
+            "end": "2025-03-01"
+          },
+          {
+            "stage": "得",
+            "start": "2025-04-01",
+            "end": "2025-12-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2026-01-01",
+            "end": "2026-01-01"
+          },
+          {
+            "stage": "得",
+            "start": "2026-02-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 51,
+        "assetId": "gics_l1_20",
+        "assetName": "工业",
+        "openedAt": "2022-08-01",
+        "closedAt": "2023-10-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2023-10-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2022-08-01",
+            "end": "2022-08-01"
+          },
+          {
+            "stage": "得",
+            "start": "2022-09-01",
+            "end": "2022-09-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2022-10-01",
+            "end": "2022-11-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2022-12-01",
+            "end": "2023-03-01"
+          },
+          {
+            "stage": "得",
+            "start": "2023-04-01",
+            "end": "2023-09-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 34,
+        "assetId": "gics_l1_15",
+        "assetName": "原材料",
+        "openedAt": "2022-04-01",
+        "closedAt": "2023-05-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2023-05-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2022-04-01",
+            "end": "2022-06-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2022-07-01",
+            "end": "2023-03-01"
+          },
+          {
+            "stage": "得",
+            "start": "2023-04-01",
+            "end": "2023-04-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 66,
+        "assetId": "gics_l1_25",
+        "assetName": "可选消费",
+        "openedAt": "2022-02-01",
+        "closedAt": "2022-03-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2022-03-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2022-02-01",
+            "end": "2022-03-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 17,
+        "assetId": "gics_l1_10",
+        "assetName": "能源",
+        "openedAt": "2022-01-01",
+        "closedAt": "2023-11-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2023-11-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2022-01-01",
+            "end": "2022-03-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2022-04-01",
+            "end": "2022-06-01"
+          },
+          {
+            "stage": "得",
+            "start": "2022-07-01",
+            "end": "2023-10-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 98,
+        "assetId": "gics_l1_35",
+        "assetName": "医疗保健",
+        "openedAt": "2021-09-01",
+        "closedAt": "2023-06-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2023-06-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2021-09-01",
+            "end": "2022-03-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2022-04-01",
+            "end": "2022-06-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2022-07-01",
+            "end": "2022-11-01"
+          },
+          {
+            "stage": "得",
+            "start": "2022-12-01",
+            "end": "2023-05-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 84,
+        "assetId": "gics_l1_30",
+        "assetName": "必需消费",
+        "openedAt": "2021-02-01",
+        "closedAt": "2023-06-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2023-06-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2021-02-01",
+            "end": "2022-03-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2022-04-01",
+            "end": "2022-06-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2022-07-01",
+            "end": "2022-10-01"
+          },
+          {
+            "stage": "得",
+            "start": "2022-11-01",
+            "end": "2023-05-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 157,
+        "assetId": "gics_l1_55",
+        "assetName": "公用事业",
+        "openedAt": "2021-02-01",
+        "closedAt": "2023-04-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2023-04-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2021-02-01",
+            "end": "2022-04-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2022-05-01",
+            "end": "2022-07-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2022-08-01",
+            "end": "2022-10-01"
+          },
+          {
+            "stage": "得",
+            "start": "2022-11-01",
+            "end": "2023-03-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 167,
+        "assetId": "gics_l1_60",
+        "assetName": "房地产",
+        "openedAt": "2021-01-01",
+        "closedAt": "2022-10-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2022-10-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2021-01-01",
+            "end": "2021-11-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2021-12-01",
+            "end": "2022-02-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2022-03-01",
+            "end": "2022-06-01"
+          },
+          {
+            "stage": "得",
+            "start": "2022-07-01",
+            "end": "2022-09-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 114,
+        "assetId": "gics_l1_40",
+        "assetName": "金融",
+        "openedAt": "2020-10-01",
+        "closedAt": "2022-07-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2022-07-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2020-10-01",
+            "end": "2021-03-01"
+          },
+          {
+            "stage": "得",
+            "start": "2021-04-01",
+            "end": "2021-04-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2021-05-01",
+            "end": "2021-06-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2021-07-01",
+            "end": "2021-10-01"
+          },
+          {
+            "stage": "得",
+            "start": "2021-11-01",
+            "end": "2022-06-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 16,
+        "assetId": "gics_l1_10",
+        "assetName": "能源",
+        "openedAt": "2020-09-01",
+        "closedAt": "2021-09-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2021-09-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2020-09-01",
+            "end": "2021-09-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 50,
+        "assetId": "gics_l1_20",
+        "assetName": "工业",
+        "openedAt": "2020-09-01",
+        "closedAt": "2021-09-01",
+        "status": "falsified",
+        "currentStage": "庙",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2021-09-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2020-09-01",
+            "end": "2021-03-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2021-04-01",
+            "end": "2021-06-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2021-07-01",
+            "end": "2021-08-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 33,
+        "assetId": "gics_l1_15",
+        "assetName": "原材料",
+        "openedAt": "2020-08-01",
+        "closedAt": "2021-10-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2021-10-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2020-08-01",
+            "end": "2020-10-01"
+          },
+          {
+            "stage": "得",
+            "start": "2020-11-01",
+            "end": "2020-11-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2020-12-01",
+            "end": "2021-01-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2021-02-01",
+            "end": "2021-06-01"
+          },
+          {
+            "stage": "得",
+            "start": "2021-07-01",
+            "end": "2021-09-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 65,
+        "assetId": "gics_l1_25",
+        "assetName": "可选消费",
+        "openedAt": "2020-05-01",
+        "closedAt": "2021-07-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2021-07-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2020-05-01",
+            "end": "2020-07-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2020-08-01",
+            "end": "2020-12-01"
+          },
+          {
+            "stage": "得",
+            "start": "2021-01-01",
+            "end": "2021-06-01"
+          }
+        ]
+      }
+    ],
+    "cn_sw": [
+      {
+        "journeyId": 129,
+        "assetId": "sw_l1_801150",
+        "assetName": "医药生物",
+        "openedAt": "2026-07-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-07-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 276,
+        "assetId": "sw_l1_801960",
+        "assetName": "石油石化",
+        "openedAt": "2026-07-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-07-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 256,
+        "assetId": "sw_l1_801780",
+        "assetName": "银行",
+        "openedAt": "2026-06-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-06-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 38,
+        "assetId": "sw_l1_801040",
+        "assetName": "钢铁",
+        "openedAt": "2026-05-01",
+        "closedAt": "2026-06-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2026-06-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-05-01",
+            "end": "2026-06-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 260,
+        "assetId": "sw_l1_801790",
+        "assetName": "非银金融",
+        "openedAt": "2026-05-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-05-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 280,
+        "assetId": "sw_l1_801970",
+        "assetName": "环保",
+        "openedAt": "2026-05-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-05-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 282,
+        "assetId": "sw_l1_801980",
+        "assetName": "美容护理",
+        "openedAt": "2026-05-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-05-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 84,
+        "assetId": "sw_l1_801120",
+        "assetName": "食品饮料",
+        "openedAt": "2026-04-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-04-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 73,
+        "assetId": "sw_l1_801110",
+        "assetName": "家用电器",
+        "openedAt": "2026-03-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-03-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 196,
+        "assetId": "sw_l1_801210",
+        "assetName": "社会服务",
+        "openedAt": "2026-03-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-03-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 99,
+        "assetId": "sw_l1_801130",
+        "assetName": "纺织服饰",
+        "openedAt": "2026-02-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-02-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 115,
+        "assetId": "sw_l1_801140",
+        "assetName": "轻工制造",
+        "openedAt": "2026-02-01",
+        "closedAt": "2026-07-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2026-07-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-02-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 217,
+        "assetId": "sw_l1_801710",
+        "assetName": "建筑材料",
+        "openedAt": "2026-02-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "旺",
+        "reachedDe": true,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-02-01",
+            "end": "2026-03-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2026-04-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 235,
+        "assetId": "sw_l1_801740",
+        "assetName": "国防军工",
+        "openedAt": "2026-02-01",
+        "closedAt": "2026-05-01",
+        "status": "falsified",
+        "currentStage": "旺",
+        "reachedDe": true,
+        "reachedMiao": false,
+        "falsifiedAt": "2026-05-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2026-02-01",
+            "end": "2026-05-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 37,
+        "assetId": "sw_l1_801040",
+        "assetName": "钢铁",
+        "openedAt": "2026-01-01",
+        "closedAt": "2026-04-01",
+        "status": "falsified",
+        "currentStage": "旺",
+        "reachedDe": true,
+        "reachedMiao": false,
+        "falsifiedAt": "2026-04-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2026-01-01",
+            "end": "2026-02-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2026-03-01",
+            "end": "2026-04-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 157,
+        "assetId": "sw_l1_801170",
+        "assetName": "交通运输",
+        "openedAt": "2025-12-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-12-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 172,
+        "assetId": "sw_l1_801180",
+        "assetName": "房地产",
+        "openedAt": "2025-11-01",
+        "closedAt": "2026-06-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2026-06-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-11-01",
+            "end": "2026-06-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 143,
+        "assetId": "sw_l1_801160",
+        "assetName": "公用事业",
+        "openedAt": "2025-10-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-10-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 227,
+        "assetId": "sw_l1_801730",
+        "assetName": "电力设备",
+        "openedAt": "2025-10-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2025-10-01",
+            "end": "2026-02-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2026-03-01",
+            "end": "2026-04-01"
+          },
+          {
+            "stage": "得",
+            "start": "2026-05-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 279,
+        "assetId": "sw_l1_801970",
+        "assetName": "环保",
+        "openedAt": "2025-09-01",
+        "closedAt": "2025-10-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-10-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-09-01",
+            "end": "2025-10-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 273,
+        "assetId": "sw_l1_801950",
+        "assetName": "煤炭",
+        "openedAt": "2025-08-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-08-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 275,
+        "assetId": "sw_l1_801960",
+        "assetName": "石油石化",
+        "openedAt": "2025-08-01",
+        "closedAt": "2026-06-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": false,
+        "falsifiedAt": "2026-06-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-08-01",
+            "end": "2026-04-01"
+          },
+          {
+            "stage": "得",
+            "start": "2026-05-01",
+            "end": "2026-06-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 51,
+        "assetId": "sw_l1_801050",
+        "assetName": "有色金属",
+        "openedAt": "2025-07-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2025-07-01",
+            "end": "2025-11-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2025-12-01",
+            "end": "2026-03-01"
+          },
+          {
+            "stage": "得",
+            "start": "2026-04-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 234,
+        "assetId": "sw_l1_801740",
+        "assetName": "国防军工",
+        "openedAt": "2025-07-01",
+        "closedAt": "2025-11-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-11-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2025-07-01",
+            "end": "2025-09-01"
+          },
+          {
+            "stage": "得",
+            "start": "2025-10-01",
+            "end": "2025-10-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 216,
+        "assetId": "sw_l1_801710",
+        "assetName": "建筑材料",
+        "openedAt": "2025-05-01",
+        "closedAt": "2025-12-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-12-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-05-01",
+            "end": "2025-12-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 36,
+        "assetId": "sw_l1_801040",
+        "assetName": "钢铁",
+        "openedAt": "2025-04-01",
+        "closedAt": "2025-11-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-11-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-04-01",
+            "end": "2025-11-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 12,
+        "assetId": "sw_l1_801010",
+        "assetName": "农林牧渔",
+        "openedAt": "2025-03-01",
+        "closedAt": "2025-12-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-12-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-03-01",
+            "end": "2025-12-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 26,
+        "assetId": "sw_l1_801030",
+        "assetName": "基础化工",
+        "openedAt": "2025-03-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-03-01",
+            "end": "2026-01-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2026-02-01",
+            "end": "2026-05-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2026-06-01",
+            "end": "2026-06-01"
+          },
+          {
+            "stage": "得",
+            "start": "2026-07-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 98,
+        "assetId": "sw_l1_801130",
+        "assetName": "纺织服饰",
+        "openedAt": "2025-03-01",
+        "closedAt": "2025-11-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-11-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-03-01",
+            "end": "2025-11-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 233,
+        "assetId": "sw_l1_801740",
+        "assetName": "国防军工",
+        "openedAt": "2025-03-01",
+        "closedAt": "2025-04-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-04-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-03-01",
+            "end": "2025-04-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 128,
+        "assetId": "sw_l1_801150",
+        "assetName": "医药生物",
+        "openedAt": "2025-02-01",
+        "closedAt": "2025-12-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-12-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2025-02-01",
+            "end": "2025-12-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 270,
+        "assetId": "sw_l1_801890",
+        "assetName": "机械设备",
+        "openedAt": "2025-01-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2025-01-01",
+            "end": "2025-05-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2025-06-01",
+            "end": "2025-08-01"
+          },
+          {
+            "stage": "得",
+            "start": "2025-09-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 114,
+        "assetId": "sw_l1_801140",
+        "assetName": "轻工制造",
+        "openedAt": "2024-12-01",
+        "closedAt": "2025-10-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-10-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-12-01",
+            "end": "2025-10-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 222,
+        "assetId": "sw_l1_801720",
+        "assetName": "建筑装饰",
+        "openedAt": "2024-12-01",
+        "closedAt": "2026-07-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2026-07-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-12-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 246,
+        "assetId": "sw_l1_801760",
+        "assetName": "传媒",
+        "openedAt": "2024-12-01",
+        "closedAt": "2026-04-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2026-04-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-12-01",
+            "end": "2025-02-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2025-03-01",
+            "end": "2025-06-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2025-07-01",
+            "end": "2025-09-01"
+          },
+          {
+            "stage": "得",
+            "start": "2025-10-01",
+            "end": "2026-03-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 83,
+        "assetId": "sw_l1_801120",
+        "assetName": "食品饮料",
+        "openedAt": "2024-11-01",
+        "closedAt": "2025-10-01",
+        "status": "falsified",
+        "currentStage": "利",
+        "reachedDe": false,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-10-01",
+        "falsifiedReason": "利：动能回落，未出现得",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-11-01",
+            "end": "2025-10-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 240,
+        "assetId": "sw_l1_801750",
+        "assetName": "计算机",
+        "openedAt": "2024-11-01",
+        "closedAt": "2025-12-01",
+        "status": "falsified",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": "2025-12-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-11-01",
+            "end": "2024-12-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2025-01-01",
+            "end": "2025-04-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2025-05-01",
+            "end": "2025-07-01"
+          },
+          {
+            "stage": "得",
+            "start": "2025-08-01",
+            "end": "2025-11-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 210,
+        "assetId": "sw_l1_801230",
+        "assetName": "综合",
+        "openedAt": "2024-10-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "得",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-10-01",
+            "end": "2025-01-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2025-02-01",
+            "end": "2025-05-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2025-06-01",
+            "end": "2025-10-01"
+          },
+          {
+            "stage": "得",
+            "start": "2025-11-01",
+            "end": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 278,
+        "assetId": "sw_l1_801970",
+        "assetName": "环保",
+        "openedAt": "2024-09-01",
+        "closedAt": "2025-08-01",
+        "status": "falsified",
+        "currentStage": "旺",
+        "reachedDe": true,
+        "reachedMiao": false,
+        "falsifiedAt": "2025-08-01",
+        "falsifiedReason": "Ratio 跌破 100",
+        "segments": [
+          {
+            "stage": "利",
+            "start": "2024-09-01",
+            "end": "2025-05-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2025-06-01",
+            "end": "2025-08-01"
+          }
+        ]
+      },
+      {
+        "journeyId": 61,
+        "assetId": "sw_l1_801080",
+        "assetName": "电子",
+        "openedAt": "2024-08-01",
+        "closedAt": null,
+        "status": "active",
+        "currentStage": "旺",
+        "reachedDe": true,
+        "reachedMiao": true,
+        "falsifiedAt": null,
+        "falsifiedReason": null,
+        "segments": [
+          {
+            "stage": "旺",
+            "start": "2024-08-01",
+            "end": "2024-12-01"
+          },
+          {
+            "stage": "庙",
+            "start": "2025-01-01",
+            "end": "2025-01-01"
+          },
+          {
+            "stage": "得",
+            "start": "2025-02-01",
+            "end": "2025-09-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2025-10-01",
+            "end": "2025-12-01"
+          },
+          {
+            "stage": "得",
+            "start": "2026-01-01",
+            "end": "2026-05-01"
+          },
+          {
+            "stage": "旺",
+            "start": "2026-06-01",
+            "end": "2026-07-01"
+          }
+        ]
+      }
+    ]
+  }
+}
