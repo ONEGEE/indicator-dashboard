@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T09:51:44",
+  "generated_at": "2026-08-28T15:57:12",
   "pairs": [
     {
       "id": "validate_us_equity_wb_spy",
@@ -19,8 +19,8 @@
       "overlap_start": "2014-09-01",
       "overlap_end": "2026-08-01",
       "rows": 144,
-      "correlation": 0.9982,
-      "mean_abs_diff": 46263773473.9853,
+      "correlation": 0.9983,
+      "mean_abs_diff": 45067455297.0415,
       "csv": "csv/validate/validate_btc_blockchain_yfinance.csv"
     },
     {
@@ -31,7 +31,7 @@
       "overlap_end": "2026-08-01",
       "rows": 262,
       "correlation": 0.9996,
-      "mean_abs_diff": 10396449411959.375,
+      "mean_abs_diff": 10401785769806.246,
       "csv": "csv/validate/validate_gold_stock_wgc_gld.csv"
     },
     {
@@ -50,10 +50,10 @@
       "name": "中国房价零折旧: 2024-12 人民币锚点附近",
       "method": "monthly_variation",
       "overlap_start": "2000-02-01",
-      "overlap_end": "2026-06-01",
-      "rows": 291,
+      "overlap_end": "2026-07-01",
+      "rows": 292,
       "correlation": null,
-      "mean_abs_diff": 0.04416534871671095,
+      "mean_abs_diff": 0.04408968849524752,
       "csv": "csv/validate/validate_cn_housing_zero_dep_anchor.csv"
     }
   ]
